@@ -4,7 +4,6 @@ import * as serviceWorker from './serviceWorker'
 import { createBrowserHistory } from 'history'
 import { Router, Route, Switch } from 'react-router-dom'
 
-//import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './components/scss/main.scss'
 
@@ -25,4 +24,7 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister()
+console.log(process.env.REACT_APP_WEBSITE_NAME)
+console.log(process.env.PUBLIC_URL)
+process.env.NODE_ENV === 'production' ? 
+serviceWorker.register() : serviceWorker.unregister()

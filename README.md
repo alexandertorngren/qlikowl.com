@@ -1,4 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Qlik Owl
+
+***Visit  [qlikowl.com](https://qlikowl.com)***
+
+[![Netlify Status][netlify-status-img]][netlify-status-url]
+![xxx][npm-image]
+[![Github Tag][github-tag-image]][github-tag-url]
+[![Build Status][travis-image]][travis-url]
+[![Dependency Status][david_img]][david_site]
+
+<div align="center">
+
+[![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)[![forthebadge](https://forthebadge.com/images/badges/powered-by-netflix.svg)](https://forthebadge.com)
+
+</div>
+
+```bash 
+$ npm install
+
+# running test...
+```
 
 ## Available Scripts
 
@@ -66,3 +86,26 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+## License
+
+[![MIT][github-license-img]](https://github.com/alexandertorngren)
+
+[github-license-img]: https://img.shields.io/github/license/alexandertorngren/qlikowl.com
+
+[github-tag-image]: https://img.shields.io/github/package-json/v/alexandertorngren/qlikowl.com
+[github-tag-url]: https://github.com/alexandertorngren/qlikowl.com
+
+[david_img]: https://img.shields.io/david/chentsulin/electron-react-boilerplate.svg
+[david_site]: https://david-dm.org/chentsulin/electron-react-boilerplate
+
+[david_img2]: https://david-dm.org/alexandertorngren/qlikowl.com.svg
+
+[travis-image]: https://img.shields.io/travis/com/alexandertorngren/qlikowl.com
+[travis-url]: https://travis-ci.org/alexandertorngren/qlikowl.com
+
+[npm-image]: https://img.shields.io/npm/v/electron-react-boilerplate.svg?style=flat-square
+
+[netlify-status-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status
+[netlify-status-url]: https://app.netlify.com/sites/qlikowl/deploys
