@@ -2,11 +2,21 @@
 
 ***Visit  [qlikowl.com](https://qlikowl.com)***
 
+Built with [REACT](https://create-react-app.dev/) 
+
+[![Create React App @ NPM][npm-image]][npm-url]
+
+___
+
+<div align="center">
+
 [![Netlify Status][netlify-status-img]][netlify-status-url]
-![xxx][npm-image]
 [![Github Tag][github-tag-image]][github-tag-url]
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][david_img]][david_site]
+[![Website Status][url-status-img]][url-status-url]
+
+</div>
 
 <div align="center">
 
@@ -90,22 +100,26 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ## License
 
-[![MIT][github-license-img]](https://github.com/alexandertorngren)
+[![MIT][github-license-img]](https://github.com/alexandertorngren) @ Alexander Torngren
 
 [github-license-img]: https://img.shields.io/github/license/alexandertorngren/qlikowl.com
 
 [github-tag-image]: https://img.shields.io/github/package-json/v/alexandertorngren/qlikowl.com
 [github-tag-url]: https://github.com/alexandertorngren/qlikowl.com
 
-[david_img]: https://img.shields.io/david/chentsulin/electron-react-boilerplate.svg
-[david_site]: https://david-dm.org/chentsulin/electron-react-boilerplate
+[david_img]: https://img.shields.io/david/alexandertorngren/qlikowl.com
+[david_site]: https://david-dm.org/alexandertorngren/qlikowl.com
 
-[david_img2]: https://david-dm.org/alexandertorngren/qlikowl.com.svg
+[david_img]: https://david-dm.org/alexandertorngren/qlikowl.com.svg
 
 [travis-image]: https://img.shields.io/travis/com/alexandertorngren/qlikowl.com
 [travis-url]: https://travis-ci.org/alexandertorngren/qlikowl.com
 
-[npm-image]: https://img.shields.io/npm/v/electron-react-boilerplate.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/create-react-app?style=flat-square
+[npm-url]: https://www.npmjs.com/package/create-react-app
 
 [netlify-status-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status
 [netlify-status-url]: https://app.netlify.com/sites/qlikowl/deploys
+
+[url-status-img]: https://img.shields.io/website/http/qlikowl.netlify.com?down_color=lightgrey&down_message=offline&style=flat-square&up_color=blue&up_message=online
+[url-status-url]: http://qlikowl.netlify.com
