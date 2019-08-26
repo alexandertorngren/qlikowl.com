@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 
-import logo from '../media/logotype/Group 1@0,25x.png'
+import logo from '../media/logotype/qlikowl.com@0,15x.png'
 
 class Navigation extends React.Component {
   constructor(props) {
