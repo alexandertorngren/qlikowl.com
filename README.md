@@ -1,12 +1,12 @@
 # Qlik Owl
 
-***Visit  [qlikowl.com](https://qlikowl.com)***
+<div align="center">
 
-Built with [REACT](https://create-react-app.dev/) 
+## ***Powered*** by <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" height="50"> ***React*** using `create-react-app` [![Create React App @ NPM][npm-image]][npm-url]
 
-[![Create React App @ NPM][npm-image]][npm-url]
+</div>
 
-___
+____
 
 <div align="center">
 
@@ -20,7 +20,7 @@ ___
 
 <div align="center">
 
-[![forthebadge](https://forthebadge.com/images/badges/check-it-out.svg)](https://forthebadge.com)[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)[![forthebadge](https://forthebadge.com/images/badges/powered-by-netflix.svg)](https://forthebadge.com)
+[![Check It Out][check-it-out]][url-status-url][![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)[![forthebadge](https://forthebadge.com/images/badges/powered-by-netflix.svg)](https://forthebadge.com)
 
 </div>
 
@@ -41,6 +41,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
+### `npm format`
+
+Runs Prettier to clean the code.
 
 ### `npm test`
 
@@ -67,59 +71,31 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-
 ## License
 
-[![MIT][github-license-img]](https://github.com/alexandertorngren) @ Alexander Torngren
+[![MIT][github-license-img]][github-license-url] @ [Alexander Torngren](mailto:alexander.torngren@drakeanalytics.se?subject=[GitRepo][qlikowl.com])
 
-[github-license-img]: https://img.shields.io/github/license/alexandertorngren/qlikowl.com
+[github-commit-img]: https://img.shields.io/github/last-commit/alexandertorngren/qlikowl.com?style=flat-square
 
-[github-tag-image]: https://img.shields.io/github/package-json/v/alexandertorngren/qlikowl.com
+[github-license-img]: https://img.shields.io/github/license/alexandertorngren/qlikowl.com?style=flat-square
+[github-license-url]: https://github.com/alexandertorngren/qlikowl.com/blob/master/LICENSE
+
+[github-tag-image]: https://img.shields.io/github/package-json/v/alexandertorngren/qlikowl.com?style=flat-square
 [github-tag-url]: https://github.com/alexandertorngren/qlikowl.com
 
-[david_img]: https://img.shields.io/david/alexandertorngren/qlikowl.com
+[david_img]: https://img.shields.io/david/alexandertorngren/qlikowl.com?style=flat-square
 [david_site]: https://david-dm.org/alexandertorngren/qlikowl.com
 
-[david_img]: https://david-dm.org/alexandertorngren/qlikowl.com.svg
-
-[travis-image]: https://img.shields.io/travis/com/alexandertorngren/qlikowl.com
+[travis-image]: https://img.shields.io/travis/com/alexandertorngren/qlikowl.com?style=flat-square
 [travis-url]: https://travis-ci.org/alexandertorngren/qlikowl.com
 
 [npm-image]: https://img.shields.io/npm/v/create-react-app?style=flat-square
 [npm-url]: https://www.npmjs.com/package/create-react-app
 
-[netlify-status-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status
+[netlify-status-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status?style=flat-square
 [netlify-status-url]: https://app.netlify.com/sites/qlikowl/deploys
 
 [url-status-img]: https://img.shields.io/website/http/qlikowl.netlify.com?down_color=lightgrey&down_message=offline&style=flat-square&up_color=blue&up_message=online
 [url-status-url]: http://qlikowl.netlify.com
+
+[check-it-out]: https://forthebadge.com/images/badges/check-it-out.svg
