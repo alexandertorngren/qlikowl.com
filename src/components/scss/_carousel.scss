@@ -1,9 +1,12 @@
 .carousel {
   .carousel-inner {
     max-height: 700px;
+    min-height: 500px;
     .carousel-item {
+      min-height: 500px;
       position: static;
       img {
+        min-height: 500px;
         object-fit: cover;
         object-position: top;
       }

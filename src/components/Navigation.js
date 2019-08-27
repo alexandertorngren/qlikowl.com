@@ -3,7 +3,8 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 
-import logo from '../media/logotype/qlikowl.com@0,15x.png'
+import logo_lg from '../media/logotype/qlikowl.com@0,15x.png'
+import logo_sm from '../media/logotype/qlikowl.com@0,12x.png'
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class Navigation extends React.Component {
 
     this.navToggler = this.navToggler.bind(this)
     this.state = {
-      isToggleOpen: false
+      isToggleOpen: false,
+      width: 250
     }
   }
 
@@ -22,12 +24,17 @@ class Navigation extends React.Component {
     })
   }
 
+  componentWillMount() {
+    this.setState({ width: window.innerWidth })
+    console.log(window.innerWidth)
+  }
+
   render() {
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
         <Container>
           <Navbar.Brand href="#home" className="mr-auto mr-lg-0">
-            <img src={logo} alt="QlikOwl" className="img-fluid" />
+            <img src={this.state.width>992 ? logo_lg : logo_sm} alt="QlikOwl" className="img-fluid" />
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="navbar-offcanvas-collapse"

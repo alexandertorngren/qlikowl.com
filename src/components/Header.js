@@ -1,12 +1,12 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
-import bg from '../media/layout/LandingPage.jpg'
+import bg from '../media/layout/bg3.jpg'
 
 const Header = props => {
   return (
     <Carousel controls={false} indicators={false}>
       <Carousel.Item>
-        <img className="md-block w-100" src={bg} alt="QlikOwl.com" />
+        <img className="sm-block w-100" src={bg} alt="QlikOwl.com" />
         <Carousel.Caption>
           <div className="d-flex align-items-center flex-column caption-container">
             <div className="d-flex align-items-center flex-column my-auto p-2 p-lg-4 caption-color">
