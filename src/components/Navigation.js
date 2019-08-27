@@ -34,7 +34,11 @@ class Navigation extends React.Component {
       <Navbar variant="dark" expand="lg" fixed="top">
         <Container>
           <Navbar.Brand href="#home" className="mr-auto mr-lg-0">
-            <img src={this.state.width>992 ? logo_lg : logo_sm} alt="QlikOwl" className="img-fluid" />
+            <img
+              src={this.state.width > 992 ? logo_lg : logo_sm}
+              alt="QlikOwl"
+              className="img-fluid"
+            />
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="navbar-offcanvas-collapse"
