@@ -1,5 +1,5 @@
 import React from 'react'
-import { Nav, Button } from 'reactstrap'
+import { Nav, Button } from 'react-bootstrap'
 
 const Pagination = props => {
   return (

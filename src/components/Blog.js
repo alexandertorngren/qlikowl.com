@@ -1,19 +1,20 @@
 import React from 'react'
 import BlogPost from './subs/BlogPost'
-import API from '../services/api'
+import { initClient, getClient } from '../services/contentfulClient'
 import Pagination from './subs/Pagination'
+
+initClient()
+const client = getClient()
+client.getContentTypes().then(response => {
+  console.log(response)
+})
 
 class Blog extends React.Component {
   state = {
     blogPosts: []
   }
 
-  componentDidMount() {
-    API.get('/article').then(res => {
-      const blogPosts = res.data
-      this.setState({ blogPosts })
-    })
-  }
+  componentDidMount() {}
 
   componentWillUnmount() {
     this.setState({ articles: [] })
