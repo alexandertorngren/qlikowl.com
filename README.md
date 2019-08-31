@@ -73,7 +73,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## License
 
-[![MIT][github-license-img]][github-license-url] @ [Alexander Torngren](mailto:alexander.torngren@drakeanalytics.se?subject=[GitRepo][qlikowl.com])
+&copy; Copyright 2019 | QlikOwl by [Alexander Torngren](mailto:alexander.torngren@drakeanalytics.se?subject=[GitRepo][qlikowl.com]) | All Right Reserved
 
 [github-commit-img]: https://img.shields.io/github/last-commit/alexandertorngren/qlikowl.com?style=flat-square
 
