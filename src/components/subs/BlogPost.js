@@ -31,7 +31,6 @@ class BlogPost extends React.Component {
         {this.state.toggle ? this.props.body : this.props.summary}
         <p className="mt-4">
           <a href={'#' + this.props.key} onClick={this.toggle}>
-            <i class="material-icons md-24">face</i>
             {this.state.toggle ? 'Close reading' : 'Continue reading'}
           </a>
         </p>
