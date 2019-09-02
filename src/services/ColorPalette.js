@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ColorPalette = () => {
+export const colorPalette = () => {
   return {
     amber: {
       A100: '#FFE57F',
