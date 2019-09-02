@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col'
 import initClient from '../services/contentfulClient'
 
 //import Pagination from './subs/Pagination'
-
+console.log(process.env.REACT_APP_SPACE_ID);
 const client = initClient(process.env.REACT_APP_SPACE_ID, process.env.REACT_APP_ACCESS_TOKEN);
 
 class Blog extends React.Component {
