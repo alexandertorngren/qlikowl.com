@@ -85,20 +85,6 @@ class Blog extends React.Component {
       </Template>
     )
   }
-
-/*
-  
-
-  render() {
-    return (
-      <div>
-        {this.createPosts()}
-        <Pagination />
-      </div>
-    )
-  }
-
-  */
 }
 
 export default Blog
