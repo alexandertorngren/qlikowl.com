@@ -1,23 +1,51 @@
 import React from 'react'
+import Template from '../templates/base'
+import Heading from './Header'
+import SideBar from './SideBar'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 import BlogPost from './subs/BlogPost'
-import { initClient, getClient } from '../services/contentfulClient'
-import Pagination from './subs/Pagination'
+import initClient from '../services/contentfulClient'
 
-initClient()
-const client = getClient()
-client.getContentTypes().then(response => {
-  console.log(response)
-})
+//import Pagination from './subs/Pagination'
+const client = initClient(process.env.REACT_APP_SPACE_ID, process.env.REACT_APP_ACCESS_TOKEN);
 
 class Blog extends React.Component {
   state = {
+    contentTypes: [],
     blogPosts: []
   }
 
-  componentDidMount() {}
+  componentDidMount() {  
+    this.getContents()
+      .then(response =>
+        this.setState({
+          contentTypes: response
+        })
+      )
+      .then(
+        this.getEntries().then(response =>
+          this.setState({
+            blogPosts: response
+          })
+        )
+      )
+  }
 
-  componentWillUnmount() {
-    this.setState({ articles: [] })
+  async getContents() {
+    return await client
+      .getContentTypes()
+      .then(response => response.items)
+      .catch(error => console.error(error));
+  }
+
+  async getEntries() {
+    return await client
+      .getEntries({ 'content_type': 'blogPost' })
+      .then(response => response.items)
+      .catch(error => console.error(error));
   }
 
   createPosts() {
@@ -25,11 +53,11 @@ class Blog extends React.Component {
       return (
         <div key={key}>
           <BlogPost
-            title={item.title}
-            date={item.date}
-            author={item.author}
-            summary={item.summary}
-            body={item.body}
+            title={item.fields.title}
+            date={item.fields.publishDate}
+            author={item.fields.author.fields.name}
+            summary={item.fields.body.substr(0,250) + '...'}
+            body={item.fields.body}
           />
         </div>
       )
@@ -39,11 +67,25 @@ class Blog extends React.Component {
   }
 
   render() {
+    const { blogPosts } = this.state;
+    console.log(blogPosts);
+
     return (
-      <div>
-        {this.createPosts()}
-        <Pagination />
-      </div>
+      <Template>
+        <Heading />
+        <Container>
+          <Card body style={{marginTop: "-50px"}}>
+          <Row>
+            <Col lg="8" sm="12">
+              {this.createPosts()}
+            </Col>
+            <Col lg="4" sm="12">
+              <SideBar />
+            </Col>
+          </Row>
+          </Card>
+        </Container>
+      </Template>
     )
   }
 }

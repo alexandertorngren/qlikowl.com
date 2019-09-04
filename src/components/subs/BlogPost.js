@@ -21,17 +21,16 @@ class BlogPost extends React.Component {
   render() {
     return (
       <div className="blog-post" id={this.props.key}>
-        <h2 className="blog-post-title" onClick={this.toggle}>
+        <h2 className="blog-post-title">
           {this.props.title}
         </h2>
         <p className="blog-post-meta">
           <FormatDate date={this.props.date} /> by{' '}
-          <a href="http://localhost:3000">{this.props.author}</a>
+          <a href={process.env.PUBLIC_URL}>{this.props.author}</a>
         </p>
         {this.state.toggle ? this.props.body : this.props.summary}
         <p className="mt-4">
           <a href={'#' + this.props.key} onClick={this.toggle}>
-            <i class="material-icons md-24">face</i>
             {this.state.toggle ? 'Close reading' : 'Continue reading'}
           </a>
         </p>

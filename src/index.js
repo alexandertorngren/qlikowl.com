@@ -1,23 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
 import * as serviceWorker from './serviceWorker'
-import { createBrowserHistory } from 'history'
-import { Router, Route, Switch } from 'react-router-dom'
-
+import Routes from './components/Routes'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './components/scss/main.scss'
+import './scss/main.scss'
 
-// Pages
-import Home from './views/Home'
 
-var hist = createBrowserHistory()
 
 ReactDOM.render(
-  <Router history={hist}>
-    <Switch>
-      <Route path="/" component={Home} />
-    </Switch>
-  </Router>,
+  <Routes />,
   document.getElementById('root')
 )
 
