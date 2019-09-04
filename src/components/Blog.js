@@ -5,6 +5,7 @@ import SideBar from './SideBar'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 import BlogPost from './subs/BlogPost'
 import initClient from '../services/contentfulClient'
 
@@ -55,7 +56,7 @@ class Blog extends React.Component {
             title={item.fields.title}
             date={item.fields.publishDate}
             author={item.fields.author.fields.name}
-            summary={item.fields.body}
+            summary={item.fields.body.substr(0,250) + '...'}
             body={item.fields.body}
           />
         </div>
@@ -73,6 +74,7 @@ class Blog extends React.Component {
       <Template>
         <Heading />
         <Container>
+          <Card body style={{marginTop: "-50px"}}>
           <Row>
             <Col lg="8" sm="12">
               {this.createPosts()}
@@ -81,6 +83,7 @@ class Blog extends React.Component {
               <SideBar />
             </Col>
           </Row>
+          </Card>
         </Container>
       </Template>
     )
