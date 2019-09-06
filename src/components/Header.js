@@ -1,30 +1,29 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
-import { getEntries, getFeatured } from '../services/contentfulClient'
+import { getEntries } from '../services/contentfulClient'
 import { Link } from 'react-router-dom'
+import Loading from './Loading';
 
 class Header extends React.Component {
   state = {
-    featured: {},
-    background: {}
+    featured: '',
+    background: '',
+    hasData: false
   }
 
   componentDidMount() {
-    this._asyncRequest = getEntries('background').then(response => {
+    this._asyncRequest = getEntries({content_type:'background'}).then(response => {
       this._asyncRequest = null
-      this.setState({ background: this.getCarouselItem(response) })
-    })
+      this.setState({ background: this.getCarouselItem(response.items) })
 
-    this._asyncRequest = getFeatured('blogPost').then(response => {
-      this._asyncRequest = null
-      response.items.map(item =>
-        this.setState({
-          featured: {
-            title: item.fields.title,
-            description: item.fields.description,
-            slug: item.fields.slug
-          }
-        })
+      this._asyncRequest = getEntries({ content_type: 'blogPost', 'fields.featured': true }).then(
+        response => {
+          this._asyncRequest = null
+          this.setState({
+            featured: response.items[0].fields,
+            hasData: true
+          })
+        }
       )
     })
   }
@@ -37,12 +36,10 @@ class Header extends React.Component {
 
   getCarouselItem(images) {
     let imgUrl = []
-    let max
-    images.map(item => {
-      let result = item.fields.image
-      max = result.length - 1
+    let max = images.length-1
 
-      return result.map(image => {
+    images.map(item => {
+      return item.fields.image.map(image => {
         return imgUrl.push('https:' + image.fields.file.url)
       })
     })
@@ -51,6 +48,9 @@ class Header extends React.Component {
   }
 
   render() {
+    if (!this.state.hasData) {
+      return <Loading />
+    }
     return (
       <Carousel controls={false} indicators={false}>
         <Carousel.Item>

@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
-import { getPerson } from '../services/contentfulClient'
+import { getPersonAndSite } from '../services/contentfulClient'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { MdHome, MdPermContactCalendar, MdBook, MdDeveloperMode } from 'react-icons/md'
 import { GoGitBranch, GoRepo } from 'react-icons/go'
@@ -17,6 +17,7 @@ import {
   DiOpensource,
   DiDocker
 } from 'react-icons/di'
+import Loading from './Loading';
 
 /*
   DiLinux,
@@ -27,24 +28,32 @@ import {
   DiVisualstudio,
   */
 
-import logo_lg from '../media/logotype/qlikowl.com@0,15x.png'
-import logo_sm from '../media/logotype/qlikowl.com@0,12x.png'
-
-const DropdownTitle = props => (
-  <span>
-    <GoGitBranch /> Explore
-  </span>
-)
-
 class Navigation extends React.Component {
-  constructor(props) {
-    super(props)
+  
+  state = {
+    isToggleOpen: false,
+    width: 250,
+    data: {},
+    hasData: false
+  }
 
+  componentDidMount() {
     this.navToggler = this.navToggler.bind(this)
-    this.state = {
-      isToggleOpen: false,
-      width: 250,
-      social: {}
+    const innerWidth = window.innerWidth;
+
+    this._asyncFetch = getPersonAndSite().then(response => {
+      this._asyncFetch = null
+      this.setState({
+        data: response,
+        width: innerWidth,
+        hasData: true
+      })
+    })
+  }
+
+  componentWillUnmount() {
+    if (this._asyncFetch) {
+      this._asyncFetch = null
     }
   }
 
@@ -55,33 +64,31 @@ class Navigation extends React.Component {
     })
   }
 
-  componentDidMount() {
-    this._asyncRequest = getPerson().then(result => {
-      this._asyncRequest = null
-      this.setState({
-        social: {
-          github: 'https://github.com/' + result.fields.github,
-          linkedIn: 'https://linkedin.com/in/' + result.fields.linkedIn,
-          facebook: 'https://www.facebook.com/' + result.fields.facebook
-        },
-        width: window.innerWidth
-      })
-    })
-  }
-
-  componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel()
-    }
+  destructObject(logos) {
+    if(logos.length) {
+      return 
+    } 
+    return null;
   }
 
   render() {
+
+    if(!this.state.hasData) {
+      return <Loading />
+    }
+
+    const logotype = width => {
+      return 'http:' + width > 992
+        ? this.state.data.site.logotype[0].fields.file.url
+        : this.state.data.site.logotype[1].fields.file.url
+    }
+
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
         <Container>
-          <Navbar.Brand href={process.env.PUBLIC_URL} className="mr-auto mr-lg-0">
-            <img
-              src={this.state.width > 992 ? logo_lg : logo_sm}
+          <Navbar.Brand href={process.env.PUBLIC_URL || 'https://qlikowl.com'} className="mr-auto mr-lg-0">
+            <img 
+              src={logotype(this.state.width)}
               alt="QlikOwl"
               className="img-fluid"
             />
@@ -101,7 +108,13 @@ class Navigation extends React.Component {
               <Nav.Link href="/">
                 <MdHome /> Home
               </Nav.Link>
-              <NavDropdown title={DropdownTitle()} id="basic-nav-dropdown">
+              <NavDropdown
+                title={
+                  <span>
+                    <GoGitBranch /> Explore
+                  </span>
+                }
+                id="basic-nav-dropdown">
                 <NavDropdown.Item href="/explore/projects">
                   <GoRepo /> Projects
                 </NavDropdown.Item>
@@ -145,16 +158,13 @@ class Navigation extends React.Component {
               <Nav.Link href="/contact">
                 <MdPermContactCalendar /> Get in touch
               </Nav.Link>
-              <Nav.Link
-                className="ml-md-auto ml-sm-0"
-                href={this.state.social.github}
-                target="_blank">
+              <Nav.Link className="ml-md-auto ml-sm-0" href={'#abc'} target="_blank">
                 <IoLogoGithub size={30} />
               </Nav.Link>
-              <Nav.Link href={this.state.social.linkedIn} target="_blank">
+              <Nav.Link href={'#abc'} target="_blank">
                 <IoLogoLinkedin size={30} />
               </Nav.Link>
-              <Nav.Link href={this.state.social.facebook} target="_blank">
+              <Nav.Link href={'#abc'} target="_blank">
                 <IoLogoFacebook size={30} />
               </Nav.Link>
             </Nav>

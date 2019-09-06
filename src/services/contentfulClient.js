@@ -21,17 +21,48 @@ const getContentTypes = async () => {
 const getPerson = async () => {
   try {
     const response = await client.getEntry('15jwOBqpxqSAOy2eOO4S0m')
+    
+    response.fields.github    = 'https://github.com/' + response.fields.github;
+    response.fields.linkedIn  = 'https://linkedin.com/in/' + response.fields.linkedIn;
+    response.fields.facebook  = 'https://www.facebook.com/' + response.fields.facebook;
+    
     return response
   } catch (error) {
     return console.error(error)
   }
 }
 
-const getSite = async () => {
+const getPersonAndSite = async () => {
   try {
+    const person = await client.getEntry('15jwOBqpxqSAOy2eOO4S0m');
+    const site = await client.getEntry('5nYiPPMvdN1MFpHnGt5NMd');
+    
+    if(person && site) {
+      return { person: person.fields, site: site.fields}
+    } else {
+      console.log("error...")
+    }
+  } catch (error) {
+    return console.error(error)
+  }
+}
+
+const getSite = async slug => {
+  try {
+    let blogPosts
+    if ((slug === null) | undefined) {
+      console.log('HERE')
+      blogPosts = await client.getEntries({ content_type: 'blogPost' })
+    } else {
+      console.log('HERE222')
+      blogPosts = await client.getEntries({ content_type: 'blogPost', 'fields.slug': slug })
+    }
     const response = {
       site: await client.getEntry('5nYiPPMvdN1MFpHnGt5NMd'),
-      person: await client.getEntry('15jwOBqpxqSAOy2eOO4S0m')
+      person: await client.getEntry('15jwOBqpxqSAOy2eOO4S0m'),
+      blogPosts,
+      featured: await client.getEntries({ content_type: 'blogPost', 'fields.featured': true }),
+      background: getCarouselItem()
     }
     return response
   } catch (error) {
@@ -39,10 +70,41 @@ const getSite = async () => {
   }
 }
 
-const getEntries = async type => {
+const getCarouselItem = async () => {
   try {
-    const response = await client.getEntries({ content_type: type })
-    return response.items
+    const response = await client.getEntries({ content_type: 'background' })
+
+    let imgUrl = []
+    let max
+
+    response.items.map(item => {
+      let result = item.fields.image
+      max = result.length - 1
+
+      return result.map(image => {
+        return imgUrl.push('https:' + image.fields.file.url)
+      })
+    })
+
+    return imgUrl[Math.floor(Math.random() * +max)]
+  } catch (error) {
+    return console.error(error)
+  }
+}
+
+const getEntries = async query => {
+  try {
+    const response = await client.getEntries(query)
+    return response
+  } catch (error) {
+    return console.error(error)
+  }
+}
+
+const getEntry = async query => {
+  try {
+    const response = await client.getEntry(query)
+    return response.fields
   } catch (error) {
     return console.error(error)
   }
@@ -83,5 +145,7 @@ export {
   getContentTypes,
   getAssets,
   getEntryBySlug,
-  getSite
+  getSite,
+  getPersonAndSite,
+  getEntry
 }

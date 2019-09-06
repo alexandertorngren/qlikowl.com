@@ -1,38 +1,36 @@
 import React from 'react'
 import Media from 'react-bootstrap/Media'
-import { getPerson } from '../services/contentfulClient'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
+import { getPerson } from '../services/contentfulClient'
+import Loading from './Loading';
 
 class SideBar extends React.Component {
   state = {
-    social: {},
-    person: {},
-    avatar: null
+    author: '',
+    hasData: false
   }
 
   componentDidMount() {
-    this._asyncRequest = getPerson().then(result => {
-      this._asyncRequest = null
+    this._asyncFetch = getPerson().then(response => {
+      this._asyncFetch = null
       this.setState({
-        person: result.fields,
-        avatar: 'https:' + result.fields.image.fields.file.url,
-        social: {
-          github: 'https://github.com/' + result.fields.github,
-          linkedIn: 'https://linkedin.com/in/' + result.fields.linkedIn,
-          facebook: 'https://www.facebook.com/' + result.fields.facebook
-        }
+        author: response.fields,
+        hasData: true
       })
     })
   }
 
   componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel()
+    if (this._asyncFetch) {
+      this._asyncFetch = null
     }
   }
 
   render() {
-    console.log(this.state.person.name)
+    if (!this.state.hasData) {
+      return <Loading />
+    }
+    
     return (
       <div>
         <div className="p-4 mb-3 bg-light rounded">
@@ -41,18 +39,20 @@ class SideBar extends React.Component {
               width={100}
               height={100}
               className="mr-3"
-              src={this.state.avatar}
-              alt={this.state.person.name}
+              src={
+                'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwj1x-Lp0rzkAhUjxKYKHQDxA5oQjRx6BAgBEAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FReact_(web_framework)&psig=AOvVaw1qEt5GHWGPLrgWEv6K70f1&ust=1567874773298988'
+              } //{'http:' + this.state.author.image.fields.file.url}
+              alt={this.state.author.name}
             />
             <Media.Body>
               <h4 className="font-italic">About</h4>
-              <p className="mb-0">{this.state.person.name}</p>
+              <p className="mb-0">{this.state.author.name}</p>
               <p className="text-muted small">
-                {this.state.person.title} at {this.state.person.company}
+                {this.state.author.title} at {this.state.author.company}
               </p>
             </Media.Body>
           </Media>
-          <p className="mb-0">{this.state.person.shortBio}</p>
+          <p className="mb-0">{this.state.author.shortBio}</p>
         </div>
 
         <div className="p-4">
@@ -100,19 +100,19 @@ class SideBar extends React.Component {
         <div className="p-4">
           <h4 className="font-italic">Get social with me</h4>
           <div className="d-flex justify-content-around">
-            <a href={this.state.social.github} className="github text-center">
+            <a href={this.state.author.github} className="github text-center">
               <IoLogoGithub size={40} />
               <br />
               Github
             </a>
 
-            <a href={this.state.social.linkedIn} className="linkedIn text-center">
+            <a href={this.state.author.linkedIn} className="linkedIn text-center">
               <IoLogoLinkedin size={40} />
               <br />
               LinkedIn
             </a>
 
-            <a href={this.state.social.facebook} className="facebook text-center">
+            <a href={this.state.author.facebook} className="facebook text-center">
               <IoLogoFacebook size={40} />
               <br />
               Facebook
