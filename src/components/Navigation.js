@@ -44,9 +44,7 @@ class Navigation extends React.Component {
     this.state = {
       isToggleOpen: false,
       width: 250,
-      github: null,
-      linkedIn: null,
-      facebook: null
+      social: {}
     }
   }
 
@@ -58,14 +56,23 @@ class Navigation extends React.Component {
   }
 
   componentDidMount() {
-    getPerson().then(result => {
+    this._asyncRequest = getPerson().then(result => {
+      this._asyncRequest = null
       this.setState({
-        github: result.fields.github,
-        linkedIn: result.fields.linkedIn,
-        facebook: result.fields.facebook,
+        social: {
+          github: 'https://github.com/' + result.fields.github,
+          linkedIn: 'https://linkedin.com/in/' + result.fields.linkedIn,
+          facebook: 'https://www.facebook.com/' + result.fields.facebook
+        },
         width: window.innerWidth
       })
     })
+  }
+
+  componentWillUnmount() {
+    if (this._asyncRequest) {
+      this._asyncRequest.cancel()
+    }
   }
 
   render() {
@@ -140,13 +147,14 @@ class Navigation extends React.Component {
               </Nav.Link>
               <Nav.Link
                 className="ml-md-auto ml-sm-0"
-                href={'https://github.com/' + this.state.github}>
+                href={this.state.social.github}
+                target="_blank">
                 <IoLogoGithub size={30} />
               </Nav.Link>
-              <Nav.Link href={'https://linkedin.com/in/' + this.state.linkedIn}>
+              <Nav.Link href={this.state.social.linkedIn} target="_blank">
                 <IoLogoLinkedin size={30} />
               </Nav.Link>
-              <Nav.Link href={'https://www.facebook.com/' + this.state.facebook}>
+              <Nav.Link href={this.state.social.facebook} target="_blank">
                 <IoLogoFacebook size={30} />
               </Nav.Link>
             </Nav>
@@ -156,5 +164,5 @@ class Navigation extends React.Component {
     )
   }
 }
-//<Navbar.Collapse className="offcanvas-collapse" id="navbar-offcanvas-collapse">
+
 export default Navigation

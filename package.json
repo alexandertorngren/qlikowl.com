@@ -27,9 +27,6 @@
     "format": "prettier --write \"src/**/*.js\"",
     "deploy": "netlify deploy"
   },
-  "jest": {
-    "preset": "react-native"
-  },
   "eslintConfig": {
     "extends": "react-app"
   },

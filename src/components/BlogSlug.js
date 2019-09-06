@@ -7,9 +7,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import BlogPost from './subcomponent/BlogPost'
-import { getEntries } from '../services/contentfulClient'
+import { getEntryBySlug } from '../services/contentfulClient'
 
-class Blog extends React.Component {
+class BlogSlug extends React.Component {
   state = {
     blogPosts: [],
     slug: this.props.match.params.slug,
@@ -17,10 +17,12 @@ class Blog extends React.Component {
   }
 
   componentDidMount() {
-    this._asyncRequest = getEntries('blogPost').then(blogPosts => {
-      this._asyncRequest = null
-      this.setState({ blogPosts })
-    })
+    this._asyncRequest = getEntryBySlug('blogPost', this.props.match.params.slug).then(
+      blogPosts => {
+        this._asyncRequest = null
+        this.setState({ blogPosts })
+      }
+    )
   }
 
   componentWillUnmount() {
@@ -31,16 +33,9 @@ class Blog extends React.Component {
 
   render() {
     if (this.state.blogPosts.length < 1) {
-      return (
-        <Container fluid style={{ backgroundColor: '#000000' }}>
-          <Row>
-            <Col className="text-center">
-              <h1>LOADING</h1>
-            </Col>
-          </Row>
-        </Container>
-      )
+      return <div>LOADING</div>
     } else {
+      console.log(this.state.blogPosts)
       return (
         <Template>
           <Heading />
@@ -57,8 +52,10 @@ class Blog extends React.Component {
                           title={item.fields.title}
                           publishDate={item.fields.publishDate}
                           author={item.fields.author}
-                          body={item.fields.description}
+                          body={item.fields.body}
+                          tags={item.fields.tags}
                           goBack={this.state.history.goBack}
+                          slugState={this.state.slug}
                         />
                       </div>
                     )
@@ -76,4 +73,4 @@ class Blog extends React.Component {
   }
 }
 
-export default Blog
+export default BlogSlug

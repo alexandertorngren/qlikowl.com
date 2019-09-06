@@ -5,32 +5,34 @@ import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 
 class SideBar extends React.Component {
   state = {
-    name: null,
-    title: null,
-    company: null,
-    shortBio: null,
-    github: null,
-    linkedIn: null,
-    facebook: null,
-    image: null
+    social: {},
+    person: {},
+    avatar: null
   }
 
   componentDidMount() {
-    getPerson().then(result => {
+    this._asyncRequest = getPerson().then(result => {
+      this._asyncRequest = null
       this.setState({
-        name: result.fields.name,
-        title: result.fields.title,
-        company: result.fields.company,
-        shortBio: result.fields.shortBio,
-        github: result.fields.github,
-        linkedIn: result.fields.linkedIn,
-        facebook: result.fields.facebook,
-        image: 'https:' + result.fields.image.fields.file.url
+        person: result.fields,
+        avatar: 'https:' + result.fields.image.fields.file.url,
+        social: {
+          github: 'https://github.com/' + result.fields.github,
+          linkedIn: 'https://linkedin.com/in/' + result.fields.linkedIn,
+          facebook: 'https://www.facebook.com/' + result.fields.facebook
+        }
       })
     })
   }
 
+  componentWillUnmount() {
+    if (this._asyncRequest) {
+      this._asyncRequest.cancel()
+    }
+  }
+
   render() {
+    console.log(this.state.person.name)
     return (
       <div>
         <div className="p-4 mb-3 bg-light rounded">
@@ -39,18 +41,18 @@ class SideBar extends React.Component {
               width={100}
               height={100}
               className="mr-3"
-              src={this.state.image}
-              alt={this.state.name}
+              src={this.state.avatar}
+              alt={this.state.person.name}
             />
             <Media.Body>
               <h4 className="font-italic">About</h4>
-              <p className="mb-0">{this.state.name}</p>
+              <p className="mb-0">{this.state.person.name}</p>
               <p className="text-muted small">
-                {this.state.title} at {this.state.company}
+                {this.state.person.title} at {this.state.person.company}
               </p>
             </Media.Body>
           </Media>
-          <p className="mb-0">{this.state.shortBio}</p>
+          <p className="mb-0">{this.state.person.shortBio}</p>
         </div>
 
         <div className="p-4">
@@ -96,25 +98,21 @@ class SideBar extends React.Component {
         </div>
 
         <div className="p-4">
-          <h4 className="font-italic">Elsewhere</h4>
+          <h4 className="font-italic">Get social with me</h4>
           <div className="d-flex justify-content-around">
-            <a href={'https://github.com/' + this.state.github} className="github text-center">
+            <a href={this.state.social.github} className="github text-center">
               <IoLogoGithub size={40} />
               <br />
               Github
             </a>
 
-            <a
-              href={'https://linkedin.com/in/' + this.state.linkedIn}
-              className="linkedIn text-center">
+            <a href={this.state.social.linkedIn} className="linkedIn text-center">
               <IoLogoLinkedin size={40} />
               <br />
               LinkedIn
             </a>
 
-            <a
-              href={'https://www.facebook.com/' + this.state.facebook}
-              className="facebook text-center">
+            <a href={this.state.social.facebook} className="facebook text-center">
               <IoLogoFacebook size={40} />
               <br />
               Facebook

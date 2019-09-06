@@ -10,12 +10,14 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    getEntries('background').then(response =>
+    this._asyncRequest = getEntries('background').then(response => {
+      this._asyncRequest = null
       this.setState({ background: this.getCarouselItem(response) })
-    )
+    })
 
-    getFeatured('blogPost').then(response => {
-      response.items.map((item, key) =>
+    this._asyncRequest = getFeatured('blogPost').then(response => {
+      this._asyncRequest = null
+      response.items.map(item =>
         this.setState({
           featured: {
             title: item.fields.title,
@@ -25,6 +27,12 @@ class Header extends React.Component {
         })
       )
     })
+  }
+
+  componentWillUnmount() {
+    if (this._asyncRequest) {
+      this._asyncRequest.cancel()
+    }
   }
 
   getCarouselItem(images) {

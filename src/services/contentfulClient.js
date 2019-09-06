@@ -27,6 +27,18 @@ const getPerson = async () => {
   }
 }
 
+const getSite = async () => {
+  try {
+    const response = {
+      site: await client.getEntry('5nYiPPMvdN1MFpHnGt5NMd'),
+      person: await client.getEntry('15jwOBqpxqSAOy2eOO4S0m')
+    }
+    return response
+  } catch (error) {
+    return console.error(error)
+  }
+}
+
 const getEntries = async type => {
   try {
     const response = await client.getEntries({ content_type: type })
@@ -70,5 +82,6 @@ export {
   getFeatured,
   getContentTypes,
   getAssets,
-  getEntryBySlug
+  getEntryBySlug,
+  getSite
 }
