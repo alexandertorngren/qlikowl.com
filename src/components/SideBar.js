@@ -98,9 +98,7 @@ class SideBar extends React.Component {
         <div className="p-4">
           <h4 className="font-italic">Elsewhere</h4>
           <div className="d-flex justify-content-around">
-            <a 
-              href={'https://github.com/' + this.state.github} 
-              className="github text-center">
+            <a href={'https://github.com/' + this.state.github} className="github text-center">
               <IoLogoGithub size={40} />
               <br />
               Github

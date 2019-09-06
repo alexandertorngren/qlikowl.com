@@ -29,7 +29,10 @@ class Blog extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.slug !== this.state.slug && nextProps.match.params.slug !== undefined) {
+    if (
+      nextProps.match.params.slug !== this.state.slug &&
+      nextProps.match.params.slug !== undefined
+    ) {
       getEntryBySlug('blogPost', nextProps.match.params.slug).then(response =>
         this.setState({ blogPosts: response, singlePost: true, slug: nextProps.match.params.slug })
       )
@@ -63,7 +66,6 @@ class Blog extends React.Component {
   }
 
   render() {
-    
     return (
       <Template>
         <Heading />

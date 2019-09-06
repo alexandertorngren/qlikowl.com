@@ -39,10 +39,11 @@ class BlogPost extends React.Component {
           </Col>
           <Col lg={8} sm={12}>
             <h2 className="blog-post-title">
-              {this.props.singlePost ? 
-                this.props.title :
+              {this.props.singlePost ? (
+                this.props.title
+              ) : (
                 <Link to={`/post/${this.props.slug}`}>{this.props.title}</Link>
-              }
+              )}
             </h2>
             <p className="blog-post-meta">
               <FaCalendarDay /> <DateFormated date={this.props.publishDate} /> by{' '}

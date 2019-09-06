@@ -15,12 +15,12 @@ class Header extends React.Component {
     )
 
     getFeatured('blogPost').then(response => {
-      response.items.map((item, key) => 
+      response.items.map((item, key) =>
         this.setState({
-          featured: { 
-            title: item.fields.title, 
-            description: item.fields.description, 
-            slug: item.fields.slug 
+          featured: {
+            title: item.fields.title,
+            description: item.fields.description,
+            slug: item.fields.slug
           }
         })
       )
