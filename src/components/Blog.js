@@ -63,7 +63,7 @@ class Blog extends React.Component {
   }
 
   render() {
-    console.log('STATE',this.state)
+    
     return (
       <Template>
         <Heading />

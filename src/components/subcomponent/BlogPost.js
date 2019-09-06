@@ -39,7 +39,10 @@ class BlogPost extends React.Component {
           </Col>
           <Col lg={8} sm={12}>
             <h2 className="blog-post-title">
-              <Link to={`/post/${this.props.slug}`}>{this.props.title}</Link>
+              {this.props.singlePost ? 
+                this.props.title :
+                <Link to={`/post/${this.props.slug}`}>{this.props.title}</Link>
+              }
             </h2>
             <p className="blog-post-meta">
               <FaCalendarDay /> <DateFormated date={this.props.publishDate} /> by{' '}
@@ -52,9 +55,9 @@ class BlogPost extends React.Component {
             </p>
             <p className="mt-4">
               {this.props.singlePost ? (
-                <a href="#back" onClick={this.props.goBack} style={{ float: 'right' }}>
+                <Link to={this.props.goBack} onClick={this.props.goBack} style={{ float: 'right' }}>
                   Back <MdChevronRight />
-                </a>
+                </Link>
               ) : (
                 <Link to={`/post/${this.props.slug}`} style={{ float: 'right' }}>
                   Continue reading <MdChevronRight />
