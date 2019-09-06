@@ -24,6 +24,23 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
+a {
+  color: $green_dark;
+  &:hover {
+    color: $green_light;
+  }
+
+  &.facebook {
+    color: $facebook;
+  }
+  &.github {
+    color: $github;
+  }
+  &.linkedIn {
+    color: $linkedin;
+  }
+}
+
 .display-4 {
   font-size: 2.5rem;
 }

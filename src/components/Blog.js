@@ -6,46 +6,41 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import BlogPost from './subs/BlogPost'
-import initClient from '../services/contentfulClient'
-
-//import Pagination from './subs/Pagination'
-const client = initClient(process.env.REACT_APP_SPACE_ID, process.env.REACT_APP_ACCESS_TOKEN);
+import BlogPost from './subcomponent/BlogPost'
+import { getEntries, getEntryBySlug } from '../services/contentfulClient'
 
 class Blog extends React.Component {
   state = {
-    contentTypes: [],
-    blogPosts: []
+    blogPosts: [],
+    slug: null,
+    singlePost: false
   }
 
-  componentDidMount() {  
-    this.getContents()
-      .then(response =>
-        this.setState({
-          contentTypes: response
-        })
+  componentDidMount() {
+    if (this.state.slug !== null) {
+      getEntryBySlug('blogPost', this.props.match.params.slug).then(response =>
+        this.setState({ blogPosts: response, singlePost: true })
       )
-      .then(
-        this.getEntries().then(response =>
-          this.setState({
-            blogPosts: response
-          })
-        )
+    } else {
+      getEntries('blogPost').then(response =>
+        this.setState({ blogPosts: response, singlePost: false })
       )
+    }
   }
 
-  async getContents() {
-    return await client
-      .getContentTypes()
-      .then(response => response.items)
-      .catch(error => console.error(error));
-  }
-
-  async getEntries() {
-    return await client
-      .getEntries({ 'content_type': 'blogPost' })
-      .then(response => response.items)
-      .catch(error => console.error(error));
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.match.params.slug !== this.state.slug &&
+      nextProps.match.params.slug !== undefined
+    ) {
+      getEntryBySlug('blogPost', nextProps.match.params.slug).then(response =>
+        this.setState({ blogPosts: response, singlePost: true, slug: nextProps.match.params.slug })
+      )
+    } else {
+      getEntries('blogPost').then(response =>
+        this.setState({ blogPosts: response, singlePost: false })
+      )
+    }
   }
 
   createPosts() {
@@ -53,11 +48,15 @@ class Blog extends React.Component {
       return (
         <div key={key}>
           <BlogPost
+            slug={item.fields.slug}
+            blogImage={item.fields.blogImage}
             title={item.fields.title}
-            date={item.fields.publishDate}
-            author={item.fields.author.fields.name}
-            summary={item.fields.body.substr(0,250) + '...'}
+            publishDate={item.fields.publishDate}
+            author={item.fields.author}
+            description={item.fields.description}
             body={item.fields.body}
+            singlePost={this.state.singlePost}
+            goBack={this.props.history.goBack}
           />
         </div>
       )
@@ -67,22 +66,19 @@ class Blog extends React.Component {
   }
 
   render() {
-    const { blogPosts } = this.state;
-    console.log(blogPosts);
-
     return (
       <Template>
         <Heading />
         <Container>
-          <Card body style={{marginTop: "-50px"}}>
-          <Row>
-            <Col lg="8" sm="12">
-              {this.createPosts()}
-            </Col>
-            <Col lg="4" sm="12">
-              <SideBar />
-            </Col>
-          </Row>
+          <Card body style={{ marginTop: '-50px' }}>
+            <Row>
+              <Col lg="8" sm="12">
+                {this.createPosts()}
+              </Col>
+              <Col lg="4" sm="12">
+                <SideBar />
+              </Col>
+            </Row>
           </Card>
         </Container>
       </Template>
