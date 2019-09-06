@@ -6,12 +6,7 @@ import Routes from './components/Routes'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './scss/main.scss'
 
-
-
-ReactDOM.render(
-  <Routes />,
-  document.getElementById('root')
-)
+ReactDOM.render(<Routes />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
