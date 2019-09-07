@@ -12,9 +12,8 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    this._asyncFetch = getEntries({ content_type: 'background' }).then(response => {
-      this._asyncFetch = null
-      this.setState({ background: this.getCarouselItem(response.items) })
+    this._asyncFetch = getEntries({ content_type: 'background' }).then(images => {
+      this.setState({ background: this.getCarouselItem(images.items) })
 
       this._asyncFetch = getEntries({ content_type: 'blogPost', 'fields.featured': true }).then(
         response => {

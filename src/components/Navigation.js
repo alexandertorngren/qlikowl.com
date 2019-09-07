@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
-import { getPersonAndSite } from '../services/contentfulClient'
+import { getSite, getPerson } from '../services/contentfulClient'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { MdHome, MdPermContactCalendar, MdBook, MdDeveloperMode } from 'react-icons/md'
 import { GoGitBranch, GoRepo } from 'react-icons/go'
@@ -32,19 +32,28 @@ class Navigation extends React.Component {
   state = {
     isToggleOpen: false,
     width: 250,
-    data: {},
+    site: '',
+    author: '',
     hasData: false
   }
 
   componentDidMount() {
     this.navToggler = this.navToggler.bind(this)
-    const innerWidth = window.innerWidth
 
-    this._asyncFetch = getPersonAndSite().then(response => {
+    this._asyncFetch = getSite().then(response => {
       this._asyncFetch = null
       this.setState({
-        data: response,
-        width: innerWidth,
+        site: response.fields,
+        width: window.innerWidth,
+        hasData: true
+      })
+    })
+
+    this._asyncFetch = getPerson().then(response => {
+      this._asyncFetch = null
+      this.setState({
+        author: response.fields,
+        width: window.innerWidth,
         hasData: true
       })
     })
@@ -75,17 +84,19 @@ class Navigation extends React.Component {
       return <Loading />
     }
 
+    const { site, author } = this.state
+
     const logotype = width => {
       return 'http:' + width > 992
-        ? this.state.data.site.logotype[0].fields.file.url
-        : this.state.data.site.logotype[1].fields.file.url
+        ? site.logotype[0].fields.file.url
+        : site.logotype[1].fields.file.url
     }
 
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
         <Container>
           <Navbar.Brand
-            href={process.env.PUBLIC_URL || 'https://qlikowl.com'}
+            href={process.env.PUBLIC_URL || `https://${site.domain}`}
             className="mr-auto mr-lg-0">
             <img src={logotype(this.state.width)} alt="QlikOwl" className="img-fluid" />
           </Navbar.Brand>
@@ -101,7 +112,7 @@ class Navigation extends React.Component {
             }
             id="navbar-offcanvas-collapse">
             <Nav className="mr-auto ml-sm-0 ml-md-5 w-100 d-md-flex">
-              <Nav.Link href="/" className="justify-content-between">
+              <Nav.Link href="/home" className="justify-content-between">
                 <MdHome /> Home
               </Nav.Link>
               <NavDropdown
@@ -110,7 +121,8 @@ class Navigation extends React.Component {
                     <GoGitBranch /> Explore
                   </span>
                 }
-                id="basic-nav-dropdown">
+                id="basic-nav-dropdown"
+                disabled>
                 <NavDropdown.Item href="/explore/projects">
                   <GoRepo /> Projects
                 </NavDropdown.Item>
@@ -148,20 +160,20 @@ class Navigation extends React.Component {
                   <DiSymfonyBadge /> Symfony / PHP
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/about">
+              <Nav.Link href="#/about">
                 <MdBook /> About me
               </Nav.Link>
-              <Nav.Link href="/contact">
+              <Nav.Link href="#/contact">
                 <MdPermContactCalendar /> Get in touch
               </Nav.Link>
 
-              <Nav.Link className="ml-lg-auto ml-sm-0" href={'#abc'} target="_blank">
+              <Nav.Link className="ml-lg-auto ml-sm-0" href={author.github} target="_blank">
                 <IoLogoGithub size={30} />
               </Nav.Link>
-              <Nav.Link href={'#abc'} target="_blank">
+              <Nav.Link href={author.linkedIn} target="_blank">
                 <IoLogoLinkedin size={30} />
               </Nav.Link>
-              <Nav.Link href={'#abc'} target="_blank">
+              <Nav.Link href={author.facebook} target="_blank">
                 <IoLogoFacebook size={30} />
               </Nav.Link>
             </Nav>
