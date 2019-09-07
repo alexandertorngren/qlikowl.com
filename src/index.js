@@ -14,7 +14,7 @@ ReactDOM.render(<Routes />, document.getElementById('root'))
 
 switch (process.env.NODE_ENV) {
   case 'production':
-    serviceWorker.register()
+    serviceWorker.unregister()
     break
   case 'development':
     serviceWorker.unregister()
