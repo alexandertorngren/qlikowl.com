@@ -18,7 +18,6 @@ class BlogHome extends React.Component {
   }
 
   render() {
-    console.log('<BLOGHOME>', this.props)
     return (
       <App>
         <Header />

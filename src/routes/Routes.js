@@ -8,7 +8,7 @@ import LandingPage from '../containers/LandingPage'
 
 const history = createBrowserHistory()
 
-const Routes = () => (
+const Routes = props => (
   <Router history={history}>
     <Switch>
       <Route exact path="/" component={LandingPage} history={history} />

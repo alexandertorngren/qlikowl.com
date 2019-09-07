@@ -13,7 +13,14 @@ class Header extends React.Component {
 
   componentDidMount() {
     this._asyncFetch = getEntries({ content_type: 'background' }).then(images => {
-      this.setState({ background: this.getCarouselItem(images.items) })
+      const backgroundImg = images.items.map(bg => {
+        const image = bg.fields.image
+        const len = Math.floor(Math.random() * +image.length - 1)
+        return image[len].fields.file.url
+      })
+
+      this.setState({ background: backgroundImg })
+      this._asyncFetch = null
 
       this._asyncFetch = getEntries({ content_type: 'blogPost', 'fields.featured': true }).then(
         response => {
@@ -33,28 +40,24 @@ class Header extends React.Component {
     }
   }
 
-  getCarouselItem(items) {
-    let fields = items[0].fields
-    return fields.image[Math.floor(Math.random() * +fields.image.length - 1)].fields.file.url
-  }
-
   render() {
     if (!this.state.hasData) {
       return <Loading />
     }
+
+    const { background, featured } = this.state
+
     return (
       <Carousel controls={false} indicators={false}>
         <Carousel.Item>
-          <img className="sm-block w-100" src={this.state.background} alt={''} />
+          <img className="sm-block w-100" src={background} alt={''} />
           <Carousel.Caption>
             <div className="d-flex align-items-center flex-column caption-container">
               <div className="d-flex align-items-center flex-column my-auto p-2 p-lg-4 caption-color">
-                <h1 className="display-4 mt-auto">{this.state.featured.title}</h1>
-                <p className="lead">{this.state.featured.description}</p>
+                <h1 className="display-4 mt-auto">{featured.title}</h1>
+                <p className="lead">{featured.description}</p>
                 <p className="lead mb-auto">
-                  <Link
-                    to={`/post/${this.state.featured.slug}`}
-                    className="text-white font-weight-bold">
+                  <Link to={`/post/${featured.slug}`} className="text-white font-weight-bold">
                     Continue reading...
                   </Link>
                 </p>

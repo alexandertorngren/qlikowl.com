@@ -31,6 +31,8 @@ class SideBar extends React.Component {
       return <Loading />
     }
 
+    const { author } = this.state
+
     return (
       <div>
         <div className="p-4 mb-3 bg-light rounded">
@@ -39,18 +41,18 @@ class SideBar extends React.Component {
               width={100}
               height={100}
               className="mr-3"
-              src={this.state.author.image.fields.file.url}
-              alt={this.state.author.name}
+              src={author.image.fields.file.url}
+              alt={author.name}
             />
             <Media.Body>
               <h4 className="font-italic">About</h4>
-              <p className="mb-0">{this.state.author.name}</p>
+              <p className="mb-0">{author.name}</p>
               <p className="text-muted small">
-                {this.state.author.title} at {this.state.author.company}
+                {author.title} at {author.company}
               </p>
             </Media.Body>
           </Media>
-          <p className="mb-0">{this.state.author.shortBio}</p>
+          <p className="mb-0">{author.shortBio}</p>
         </div>
 
         <div className="p-4">
@@ -99,7 +101,7 @@ class SideBar extends React.Component {
           <h4 className="font-italic">Get social with me</h4>
           <div className="d-flex justify-content-around">
             <a
-              href={this.state.author.github}
+              href={author.github}
               className="github text-center"
               target="_blank"
               rel="noopener noreferrer">
@@ -109,7 +111,7 @@ class SideBar extends React.Component {
             </a>
 
             <a
-              href={this.state.author.linkedIn}
+              href={author.linkedIn}
               className="linkedIn text-center"
               target="_blank"
               rel="noopener noreferrer">
@@ -119,7 +121,7 @@ class SideBar extends React.Component {
             </a>
 
             <a
-              href={this.state.author.facebook}
+              href={author.facebook}
               className="facebook text-center"
               target="_blank"
               rel="noopener noreferrer">

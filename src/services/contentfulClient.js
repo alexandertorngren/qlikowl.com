@@ -56,31 +56,6 @@ const getSite = async () => {
   }
 }
 
-/*
-const getSite = async slug => {
-  try {
-    let blogPosts
-    if ((slug === null) | undefined) {
-      console.log('HERE')
-      blogPosts = await client.getEntries({ content_type: 'blogPost' })
-    } else {
-      console.log('HERE222')
-      blogPosts = await client.getEntries({ content_type: 'blogPost', 'fields.slug': slug })
-    }
-    const response = {
-      site: await client.getEntry('5nYiPPMvdN1MFpHnGt5NMd'),
-      person: await client.getEntry('15jwOBqpxqSAOy2eOO4S0m'),
-      blogPosts,
-      featured: await client.getEntries({ content_type: 'blogPost', 'fields.featured': true }),
-      background: getCarouselItem()
-    }
-    return response
-  } catch (error) {
-    return console.error(error)
-  }
-}
-*/
-
 const getEntries = async query => {
   try {
     const response = await client.getEntries(query)

@@ -40,23 +40,23 @@ class Navigation extends React.Component {
   componentDidMount() {
     this.navToggler = this.navToggler.bind(this)
 
-    this._asyncFetch = getSite().then(response => {
-      this._asyncFetch = null
-      this.setState({
-        site: response.fields,
-        width: window.innerWidth,
-        hasData: true
-      })
-    })
+    this._asyncFetch = getSite()
+      .then(response => {
+        this._asyncFetch = null
+        this.setState({
+          site: response.fields,
+          hasData: true
+        })
 
-    this._asyncFetch = getPerson().then(response => {
-      this._asyncFetch = null
-      this.setState({
-        author: response.fields,
-        width: window.innerWidth,
-        hasData: true
+        this._asyncFetch = getPerson().then(response => {
+          this._asyncFetch = null
+          this.setState({
+            author: response.fields,
+            hasData: true
+          })
+        })
       })
-    })
+      .then(() => this.setState({ hasData: true }))
   }
 
   componentWillUnmount() {
@@ -86,19 +86,13 @@ class Navigation extends React.Component {
 
     const { site, author } = this.state
 
-    const logotype = width => {
-      return 'http:' + width > 992
-        ? site.logotype[0].fields.file.url
-        : site.logotype[1].fields.file.url
-    }
-
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
         <Container>
           <Navbar.Brand
             href={process.env.PUBLIC_URL || `https://${site.domain}`}
             className="mr-auto mr-lg-0">
-            <img src={logotype(this.state.width)} alt="QlikOwl" className="img-fluid" />
+            <img src={site.logotype.fields.file.url} alt="QlikOwl" className="img-fluid" />
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="navbar-offcanvas-collapse"

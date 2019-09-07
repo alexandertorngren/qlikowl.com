@@ -17,28 +17,33 @@ class LandingPage extends React.Component {
   }
 
   componentDidMount() {
-    this._asyncFetch = getEntries({ content_type: 'background' }).then(response => {
-      this._asyncFetch = null
-      this.setState({ background: this.getCarouselItem(response.items) })
-    })
+    this._asyncFetch = getEntries({ content_type: 'background' }).then(images => {
+      const backgroundImg = images.items.map(bg => {
+        const image = bg.fields.image
+        const len = Math.floor(Math.random() * +image.length - 1)
+        return image[len].fields.file.url
+      })
 
-    this._asyncFetch = getPerson().then(response => {
+      this.setState({ background: backgroundImg })
       this._asyncFetch = null
-      this.setState({
-        author: response.fields,
-        hasData: true
+
+      this._asyncFetch = getPerson().then(response => {
+        this._asyncFetch = null
+        return this.setState({
+          author: response.fields,
+          hasData: true
+        })
       })
     })
   }
 
-  getCarouselItem(items) {
-    let fields = items[0].fields
-    return fields.image[Math.floor(Math.random() * +fields.image.length - 1)].fields.file.url
+  componentWillUnmount() {
+    if (this._asyncFetch) {
+      this._asyncFetch = null
+    }
   }
 
   render() {
-    console.log('<LandingPage>', this.props)
-
     if (!this.state.hasData) {
       return <Loading className="w-100 h-100 position-absolute" style={{ marginTop: '-56px' }} />
     }

@@ -1,6 +1,5 @@
 import React from 'react'
 import App from './App'
-import Header from '../components/Header'
 import SideBar from '../components/SideBar'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -18,10 +17,9 @@ class BlogPost extends React.Component {
       return <div>LOADING</div>
     } else {
       return (
-        <App site={this.state.site} person={this.state.person}>
-          <Header featured={this.state.featured} />
+        <App>
           <Container>
-            <Card body style={{ marginTop: '-50px' }}>
+            <Card body style={{ marginTop: '50px' }}>
               <Row>
                 <Col lg="8" sm="12">
                   <BlogPosts slug={this.state.slug} history={this.props.history} />
