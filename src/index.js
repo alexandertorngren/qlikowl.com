@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
 import * as serviceWorker from './serviceWorker'
-import Routes from './components/Routes'
+import Routes from './routes/Routes'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './scss/main.scss'
 
@@ -12,5 +12,13 @@ ReactDOM.render(<Routes />, document.getElementById('root'))
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
-//process.env.NODE_ENV === 'production' ? serviceWorker.register() : serviceWorker.unregister()
-serviceWorker.unregister()
+switch (process.env.NODE_ENV) {
+  case 'production':
+    serviceWorker.unregister()
+    break
+  case 'development':
+    serviceWorker.unregister()
+    break
+  default:
+    serviceWorker.unregister()
+}

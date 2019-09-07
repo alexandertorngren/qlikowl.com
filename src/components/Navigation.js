@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
-import { getPerson } from '../services/contentfulClient'
+import { getSite, getPerson } from '../services/contentfulClient'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { MdHome, MdPermContactCalendar, MdBook, MdDeveloperMode } from 'react-icons/md'
 import { GoGitBranch, GoRepo } from 'react-icons/go'
@@ -17,6 +17,7 @@ import {
   DiOpensource,
   DiDocker
 } from 'react-icons/di'
+import Loading from './Loading'
 
 /*
   DiLinux,
@@ -27,26 +28,40 @@ import {
   DiVisualstudio,
   */
 
-import logo_lg from '../media/logotype/qlikowl.com@0,15x.png'
-import logo_sm from '../media/logotype/qlikowl.com@0,12x.png'
-
-const DropdownTitle = props => (
-  <span>
-    <GoGitBranch /> Explore
-  </span>
-)
-
 class Navigation extends React.Component {
-  constructor(props) {
-    super(props)
+  state = {
+    isToggleOpen: false,
+    width: 250,
+    site: '',
+    author: '',
+    hasData: false
+  }
 
+  componentDidMount() {
     this.navToggler = this.navToggler.bind(this)
-    this.state = {
-      isToggleOpen: false,
-      width: 250,
-      github: null,
-      linkedIn: null,
-      facebook: null
+
+    this._asyncFetch = getSite()
+      .then(response => {
+        this._asyncFetch = null
+        this.setState({
+          site: response.fields,
+          hasData: true
+        })
+
+        this._asyncFetch = getPerson().then(response => {
+          this._asyncFetch = null
+          this.setState({
+            author: response.fields,
+            hasData: true
+          })
+        })
+      })
+      .then(() => this.setState({ hasData: true }))
+  }
+
+  componentWillUnmount() {
+    if (this._asyncFetch) {
+      this._asyncFetch = null
     }
   }
 
@@ -57,27 +72,27 @@ class Navigation extends React.Component {
     })
   }
 
-  componentDidMount() {
-    getPerson().then(result => {
-      this.setState({
-        github: result.fields.github,
-        linkedIn: result.fields.linkedIn,
-        facebook: result.fields.facebook,
-        width: window.innerWidth
-      })
-    })
+  destructObject(logos) {
+    if (logos.length) {
+      return
+    }
+    return null
   }
 
   render() {
+    if (!this.state.hasData) {
+      return <Loading />
+    }
+
+    const { site, author } = this.state
+
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
         <Container>
-          <Navbar.Brand href={process.env.PUBLIC_URL} className="mr-auto mr-lg-0">
-            <img
-              src={this.state.width > 992 ? logo_lg : logo_sm}
-              alt="QlikOwl"
-              className="img-fluid"
-            />
+          <Navbar.Brand
+            href={process.env.PUBLIC_URL || `https://${site.domain}`}
+            className="mr-auto mr-lg-0">
+            <img src={site.logotype.fields.file.url} alt="QlikOwl" className="img-fluid" />
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="navbar-offcanvas-collapse"
@@ -90,11 +105,18 @@ class Navigation extends React.Component {
                 : 'offcanvas-collapse navbar-collapse'
             }
             id="navbar-offcanvas-collapse">
-            <Nav className="mr-auto ml-sm-0 ml-md-5 w-100">
-              <Nav.Link href="/">
+            <Nav className="mr-auto ml-sm-0 ml-md-5 w-100 d-md-flex">
+              <Nav.Link href="/home" className="justify-content-between">
                 <MdHome /> Home
               </Nav.Link>
-              <NavDropdown title={DropdownTitle()} id="basic-nav-dropdown">
+              <NavDropdown
+                title={
+                  <span>
+                    <GoGitBranch /> Explore
+                  </span>
+                }
+                id="basic-nav-dropdown"
+                disabled>
                 <NavDropdown.Item href="/explore/projects">
                   <GoRepo /> Projects
                 </NavDropdown.Item>
@@ -132,21 +154,20 @@ class Navigation extends React.Component {
                   <DiSymfonyBadge /> Symfony / PHP
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/about">
+              <Nav.Link href="#/about">
                 <MdBook /> About me
               </Nav.Link>
-              <Nav.Link href="/contact">
+              <Nav.Link href="#/contact">
                 <MdPermContactCalendar /> Get in touch
               </Nav.Link>
-              <Nav.Link
-                className="ml-md-auto ml-sm-0"
-                href={'https://github.com/' + this.state.github}>
+
+              <Nav.Link className="ml-lg-auto ml-sm-0" href={author.github} target="_blank">
                 <IoLogoGithub size={30} />
               </Nav.Link>
-              <Nav.Link href={'https://linkedin.com/in/' + this.state.linkedIn}>
+              <Nav.Link href={author.linkedIn} target="_blank">
                 <IoLogoLinkedin size={30} />
               </Nav.Link>
-              <Nav.Link href={'https://www.facebook.com/' + this.state.facebook}>
+              <Nav.Link href={author.facebook} target="_blank">
                 <IoLogoFacebook size={30} />
               </Nav.Link>
             </Nav>
@@ -156,5 +177,5 @@ class Navigation extends React.Component {
     )
   }
 }
-//<Navbar.Collapse className="offcanvas-collapse" id="navbar-offcanvas-collapse">
+
 export default Navigation
