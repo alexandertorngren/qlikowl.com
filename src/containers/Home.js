@@ -1,6 +1,6 @@
 import React from 'react'
 import App from './App'
-import Heading from '../components/Header'
+import Header from '../components/Header'
 import SideBar from '../components/SideBar'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col'
 
 const Home = props => (
   <App>
-    <Heading />
+    <Header />
     <Container>
       <Row>
         <Col lg="8" sm="12">

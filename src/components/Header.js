@@ -2,7 +2,7 @@ import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import { getEntries } from '../services/contentfulClient'
 import { Link } from 'react-router-dom'
-import Loading from './Loading';
+import Loading from './Loading'
 
 class Header extends React.Component {
   state = {
@@ -12,13 +12,13 @@ class Header extends React.Component {
   }
 
   componentDidMount() {
-    this._asyncRequest = getEntries({content_type:'background'}).then(response => {
-      this._asyncRequest = null
+    this._asyncFetch = getEntries({ content_type: 'background' }).then(response => {
+      this._asyncFetch = null
       this.setState({ background: this.getCarouselItem(response.items) })
 
-      this._asyncRequest = getEntries({ content_type: 'blogPost', 'fields.featured': true }).then(
+      this._asyncFetch = getEntries({ content_type: 'blogPost', 'fields.featured': true }).then(
         response => {
-          this._asyncRequest = null
+          this._asyncFetch = null
           this.setState({
             featured: response.items[0].fields,
             hasData: true
@@ -29,22 +29,14 @@ class Header extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this._asyncRequest) {
-      this._asyncRequest.cancel()
+    if (this._asyncFetch) {
+      this._asyncFetch = null
     }
   }
 
-  getCarouselItem(images) {
-    let imgUrl = []
-    let max = images.length-1
-
-    images.map(item => {
-      return item.fields.image.map(image => {
-        return imgUrl.push('https:' + image.fields.file.url)
-      })
-    })
-
-    return imgUrl[Math.floor(Math.random() * +max)]
+  getCarouselItem(items) {
+    let fields = items[0].fields
+    return fields.image[Math.floor(Math.random() * +fields.image.length - 1)].fields.file.url
   }
 
   render() {

@@ -2,7 +2,7 @@ import React from 'react'
 import Media from 'react-bootstrap/Media'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { getPerson } from '../services/contentfulClient'
-import Loading from './Loading';
+import Loading from './Loading'
 
 class SideBar extends React.Component {
   state = {
@@ -30,7 +30,7 @@ class SideBar extends React.Component {
     if (!this.state.hasData) {
       return <Loading />
     }
-    
+
     return (
       <div>
         <div className="p-4 mb-3 bg-light rounded">
@@ -39,9 +39,7 @@ class SideBar extends React.Component {
               width={100}
               height={100}
               className="mr-3"
-              src={
-                'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwj1x-Lp0rzkAhUjxKYKHQDxA5oQjRx6BAgBEAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FReact_(web_framework)&psig=AOvVaw1qEt5GHWGPLrgWEv6K70f1&ust=1567874773298988'
-              } //{'http:' + this.state.author.image.fields.file.url}
+              src={this.state.author.image.fields.file.url}
               alt={this.state.author.name}
             />
             <Media.Body>
@@ -100,19 +98,31 @@ class SideBar extends React.Component {
         <div className="p-4">
           <h4 className="font-italic">Get social with me</h4>
           <div className="d-flex justify-content-around">
-            <a href={this.state.author.github} className="github text-center">
+            <a
+              href={this.state.author.github}
+              className="github text-center"
+              target="_blank"
+              rel="noopener noreferrer">
               <IoLogoGithub size={40} />
               <br />
               Github
             </a>
 
-            <a href={this.state.author.linkedIn} className="linkedIn text-center">
+            <a
+              href={this.state.author.linkedIn}
+              className="linkedIn text-center"
+              target="_blank"
+              rel="noopener noreferrer">
               <IoLogoLinkedin size={40} />
               <br />
               LinkedIn
             </a>
 
-            <a href={this.state.author.facebook} className="facebook text-center">
+            <a
+              href={this.state.author.facebook}
+              className="facebook text-center"
+              target="_blank"
+              rel="noopener noreferrer">
               <IoLogoFacebook size={40} />
               <br />
               Facebook

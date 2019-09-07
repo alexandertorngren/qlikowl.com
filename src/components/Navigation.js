@@ -17,7 +17,7 @@ import {
   DiOpensource,
   DiDocker
 } from 'react-icons/di'
-import Loading from './Loading';
+import Loading from './Loading'
 
 /*
   DiLinux,
@@ -29,7 +29,6 @@ import Loading from './Loading';
   */
 
 class Navigation extends React.Component {
-  
   state = {
     isToggleOpen: false,
     width: 250,
@@ -39,7 +38,7 @@ class Navigation extends React.Component {
 
   componentDidMount() {
     this.navToggler = this.navToggler.bind(this)
-    const innerWidth = window.innerWidth;
+    const innerWidth = window.innerWidth
 
     this._asyncFetch = getPersonAndSite().then(response => {
       this._asyncFetch = null
@@ -65,15 +64,14 @@ class Navigation extends React.Component {
   }
 
   destructObject(logos) {
-    if(logos.length) {
-      return 
-    } 
-    return null;
+    if (logos.length) {
+      return
+    }
+    return null
   }
 
   render() {
-
-    if(!this.state.hasData) {
+    if (!this.state.hasData) {
       return <Loading />
     }
 
@@ -86,12 +84,10 @@ class Navigation extends React.Component {
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
         <Container>
-          <Navbar.Brand href={process.env.PUBLIC_URL || 'https://qlikowl.com'} className="mr-auto mr-lg-0">
-            <img 
-              src={logotype(this.state.width)}
-              alt="QlikOwl"
-              className="img-fluid"
-            />
+          <Navbar.Brand
+            href={process.env.PUBLIC_URL || 'https://qlikowl.com'}
+            className="mr-auto mr-lg-0">
+            <img src={logotype(this.state.width)} alt="QlikOwl" className="img-fluid" />
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="navbar-offcanvas-collapse"
@@ -104,8 +100,8 @@ class Navigation extends React.Component {
                 : 'offcanvas-collapse navbar-collapse'
             }
             id="navbar-offcanvas-collapse">
-            <Nav className="mr-auto ml-sm-0 ml-md-5 w-100">
-              <Nav.Link href="/">
+            <Nav className="mr-auto ml-sm-0 ml-md-5 w-100 d-md-flex">
+              <Nav.Link href="/" className="justify-content-between">
                 <MdHome /> Home
               </Nav.Link>
               <NavDropdown
@@ -158,7 +154,8 @@ class Navigation extends React.Component {
               <Nav.Link href="/contact">
                 <MdPermContactCalendar /> Get in touch
               </Nav.Link>
-              <Nav.Link className="ml-md-auto ml-sm-0" href={'#abc'} target="_blank">
+
+              <Nav.Link className="ml-lg-auto ml-sm-0" href={'#abc'} target="_blank">
                 <IoLogoGithub size={30} />
               </Nav.Link>
               <Nav.Link href={'#abc'} target="_blank">

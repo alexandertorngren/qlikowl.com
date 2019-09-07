@@ -1,7 +1,7 @@
 import React from 'react'
 import { DiReact } from 'react-icons/di'
 import { getEntry } from '../services/contentfulClient'
-import Loading from './Loading';
+import Loading from './Loading'
 
 const DateFormated = props => <span>{new Date(props.date).toLocaleDateString().substr(0, 4)}</span>
 
@@ -29,11 +29,12 @@ class Footer extends React.Component {
       return <Loading />
     }
 
-    const { site } = this.state;
+    const { site } = this.state
 
     if (site.copyright) {
       return (
-        <footer className="blog-footer">
+        <footer
+          className={this.props.className ? `blog-footer ${this.props.className}` : 'blog-footer'}>
           <p>
             © Copyright <DateFormated date={site.publishDate} /> | {site.siteName} by{' '}
             <a href={`mailto:${site.email}`} alt={site.name}>
@@ -51,7 +52,8 @@ class Footer extends React.Component {
       )
     } else {
       return (
-        <footer className="blog-footer">
+        <footer
+          className={this.props.className ? `blog-footer ${this.props.className}` : 'blog-footer'}>
           <p>
             {site.siteName} <DateFormated date={site.publishDate} />
             {' by '}
