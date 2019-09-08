@@ -67,7 +67,7 @@ class Blog extends React.Component {
   render() {
     return (
       <App>
-        <Route exact path="/home" render={() => <Header />} />
+        <Route path="/home" render={() => <Header />} />
         <Container>
           <Card
             body
