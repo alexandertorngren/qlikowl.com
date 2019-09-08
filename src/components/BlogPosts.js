@@ -22,13 +22,18 @@ const renderImage = (image, slug) => {
   if (image && image.fields.file) {
     return (
       <Link to={`/post/${slug}`}>
-        <img className="mb-3 img-fluid" src={image.fields.file.url} alt={image.fields.title} />
+        <img
+          className="mb-3 img-fluid blog-post-image"
+          src={image.fields.file.url}
+          alt={image.fields.title}
+        />
       </Link>
     )
   }
 }
 
 const BlogPosts = props => {
+  console.log(props.posts)
   let blogObject
 
   if (props.posts.length === 1) {

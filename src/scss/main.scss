@@ -6,12 +6,25 @@
 @import './preloader';
 @import './offcanvas';
 @import './carousel';
+@import './Footer';
+//@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here|Long+Cang|Nanum+Brush+Script|Over+the+Rainbow|Ranga|Roboto&display=swap');
+
+/*
+font-family: 'Roboto', sans-serif;
+font-family: 'Ranga', cursive;
+font-family: 'Over the Rainbow', cursive;
+font-family: 'Just Me Again Down Here', cursive;
+font-family: 'Long Cang', cursive;
+font-family: 'Nanum Brush Script', cursive;
+*/
 
 $bgcolor: #efefef;
 
 body {
   background-color: $bgcolor;
-  line-height: 1.2;
+  line-height: 1.5;
+  font-family: 'Roboto', sans-serif;
 }
 @media (min-width: 768px) {
   body {
@@ -32,16 +45,29 @@ a {
   color: $green_dark;
   &:hover {
     color: $green_light;
+    text-decoration: none;
   }
 
   &.facebook {
     color: $facebook;
+    &:hover {
+      color: $facebook_light;
+      font-weight: normal;
+    }
   }
   &.github {
     color: $github;
+    &:hover {
+      color: $github_light;
+      font-weight: normal;
+    }
   }
   &.linkedIn {
     color: $linkedin;
+    &:hover {
+      color: $linkedin_light;
+      font-weight: normal;
+    }
   }
 }
 

@@ -80,7 +80,7 @@ class Navigation extends React.Component {
 
   navComponent(author) {
     return (
-      <div>
+      <div className="nav-width">
         <Navbar.Toggle
           aria-controls="navbar-offcanvas-collapse"
           onClick={() => this.navToggler()}
@@ -92,13 +92,8 @@ class Navigation extends React.Component {
               : 'offcanvas-collapse navbar-collapse'
           }
           id="navbar-offcanvas-collapse">
-          <Nav className="mr-auto ml-sm-0 ml-md-5 w-100 d-md-flex">
-            <NavLink
-              to={'/home'}
-              className="nav-link"
-              activeStyle={{
-                fontWeight: 'bold'
-              }}>
+          <Nav className="ml-2 mr-auto">
+            <NavLink to={'/home'} className="nav-link">
               <MdHome /> Home
             </NavLink>
             <NavDropdown
@@ -108,7 +103,7 @@ class Navigation extends React.Component {
                 </span>
               }
               id="basic-nav-dropdown"
-              disabled>
+              className="pr-3">
               <NavDropdown.Item href="/explore/projects">
                 <GoRepo /> Projects
               </NavDropdown.Item>
@@ -158,21 +153,12 @@ class Navigation extends React.Component {
               to={'/contact'}
               className="nav-link"
               activeStyle={{
-                fontWeight: 'bold'
+                color: '#fff'
               }}>
               <MdPermContactCalendar /> Get in touch
             </NavLink>
-
-            <NavLink className="ml-lg-auto ml-sm-0 nav-link" to={author.github} target="_blank">
-              <IoLogoGithub size={30} />
-            </NavLink>
-            <NavLink to={author.linkedIn} target="_blank" className="nav-link">
-              <IoLogoLinkedin size={30} />
-            </NavLink>
-            <NavLink to={author.facebook} target="_blank" className="nav-link">
-              <IoLogoFacebook size={30} />
-            </NavLink>
           </Nav>
+          {this.createSocial(author)}
         </div>
       </div>
     )
@@ -180,16 +166,16 @@ class Navigation extends React.Component {
 
   createSocial(author) {
     return (
-      <Nav>
-        <NavLink className="ml-lg-auto ml-sm-0 nav-link" to={author.github} target="_blank">
+      <Nav className="ml-auto social">
+        <Nav.Link href={author.github} target="_blank">
           <IoLogoGithub size={30} />
-        </NavLink>
-        <NavLink to={author.linkedIn} target="_blank" className="nav-link">
+        </Nav.Link>
+        <Nav.Link href={author.linkedIn} target="_blank">
           <IoLogoLinkedin size={30} />
-        </NavLink>
-        <NavLink to={author.facebook} target="_blank" className="nav-link">
+        </Nav.Link>
+        <Nav.Link href={author.facebook} target="_blank">
           <IoLogoFacebook size={30} />
-        </NavLink>
+        </Nav.Link>
       </Nav>
     )
   }
@@ -204,15 +190,13 @@ class Navigation extends React.Component {
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
         <Container>
-          <Navbar.Brand
-            href={process.env.PUBLIC_URL || `https://${site.domain}`}
-            className="mr-auto mr-lg-0">
-            <img src={site.logotype.fields.file.url} alt="QlikOwl" className="img-fluid" />
+          <Navbar.Brand href={process.env.PUBLIC_URL || `https://${site.domain}`} className="p-0">
+            <img src={site.logotype.fields.file.url} alt="QlikOwl" className="h-100 img-fluid" />
           </Navbar.Brand>
           {this.props.path !== '/' ? this.navComponent(author) : this.createSocial(author)}
         </Container>
       </Navbar>
-    )
+    ) //mr-auto ml-sm-0 ml-md-5 w-100 d-md-flex //mr-auto mr-lg-0
   }
 }
 

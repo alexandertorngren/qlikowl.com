@@ -1,8 +1,8 @@
 import React from 'react'
-import Media from 'react-bootstrap/Media'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { getPerson } from '../services/contentfulClient'
 import Loading from './Loading'
+import AboutMe from './AboutMe'
 
 class SideBar extends React.Component {
   state = {
@@ -35,26 +35,7 @@ class SideBar extends React.Component {
 
     return (
       <div>
-        <div className="p-4 mb-3 bg-light rounded">
-          <Media>
-            <img
-              width={100}
-              height={100}
-              className="mr-3"
-              src={author.image.fields.file.url}
-              alt={author.name}
-            />
-            <Media.Body>
-              <h4 className="font-italic">About</h4>
-              <p className="mb-0">{author.name}</p>
-              <p className="text-muted small">
-                {author.title} at {author.company}
-              </p>
-            </Media.Body>
-          </Media>
-          <p className="mb-0">{author.shortBio}</p>
-        </div>
-
+        <AboutMe author={author} />
         <div className="p-4">
           <h4 className="font-italic">Archives</h4>
           <ol className="list-unstyled mb-0">
@@ -96,7 +77,6 @@ class SideBar extends React.Component {
             </li>
           </ol>
         </div>
-
         <div className="p-4">
           <h4 className="font-italic">Get social with me</h4>
           <div className="d-flex justify-content-around">
