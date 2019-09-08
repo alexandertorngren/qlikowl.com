@@ -3,7 +3,6 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
-import { getSite, getPerson } from '../services/contentfulClient'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { MdHome, MdPermContactCalendar, MdBook, MdDeveloperMode } from 'react-icons/md'
 import { GoGitBranch, GoRepo } from 'react-icons/go'
@@ -18,7 +17,6 @@ import {
   DiOpensource,
   DiDocker
 } from 'react-icons/di'
-import Loading from './Loading'
 
 /*
   DiLinux,
@@ -32,36 +30,11 @@ import Loading from './Loading'
 class Navigation extends React.Component {
   state = {
     isToggleOpen: false,
-    width: 250,
-    site: '',
-    author: '',
-    hasData: false
+    width: 250
   }
 
   componentDidMount() {
     this.navToggler = this.navToggler.bind(this)
-
-    this._asyncFetch = getSite().then(response => {
-      this._asyncFetch = null
-      this.setState({
-        site: response.fields,
-        hasData: true
-      })
-
-      this._asyncFetch = getPerson().then(response => {
-        this._asyncFetch = null
-        this.setState({
-          author: response.fields,
-          hasData: true
-        })
-      })
-    })
-  }
-
-  componentWillUnmount() {
-    if (this._asyncFetch) {
-      this._asyncFetch = null
-    }
   }
 
   navToggler() {
@@ -69,13 +42,6 @@ class Navigation extends React.Component {
     this.setState({
       isToggleOpen: !currentState
     })
-  }
-
-  destructObject(logos) {
-    if (logos.length) {
-      return
-    }
-    return null
   }
 
   navComponent(author) {
@@ -102,8 +68,7 @@ class Navigation extends React.Component {
                   <GoGitBranch /> Explore
                 </span>
               }
-              id="basic-nav-dropdown"
-              className="pr-3">
+              id="basic-nav-dropdown">
               <NavDropdown.Item href="/explore/projects">
                 <GoRepo /> Projects
               </NavDropdown.Item>
@@ -181,11 +146,7 @@ class Navigation extends React.Component {
   }
 
   render() {
-    const { site, author } = this.state
-
-    if (!this.state.hasData) {
-      return <Loading />
-    }
+    const { site, author } = this.props
 
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
@@ -196,7 +157,7 @@ class Navigation extends React.Component {
           {this.props.path !== '/' ? this.navComponent(author) : this.createSocial(author)}
         </Container>
       </Navbar>
-    ) //mr-auto ml-sm-0 ml-md-5 w-100 d-md-flex //mr-auto mr-lg-0
+    )
   }
 }
 

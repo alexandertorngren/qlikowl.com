@@ -1,5 +1,4 @@
 import React from 'react'
-import App from './App'
 import SideBar from '../components/SideBar'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -7,22 +6,38 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import BlogPosts from '../components/BlogPosts'
 import Header from '../components/Header'
+import Navigation from '../components/Navigation'
+import Footer from '../components/Footer'
 import { Route } from 'react-router-dom'
-import { getEntries } from '../services/contentfulClient'
+import { getEntries, getSite, getPerson, getEntry } from '../services/contentfulClient'
+import Loading from '../components/Loading'
 
 class Blog extends React.Component {
   state = {
+    site: null,
+    author: null,
     posts: [],
-    slug: this.props.match.params.slug,
-    hasData: null
+    initialFetch: true,
+    listView: true
   }
 
   componentDidMount() {
-    this.fetchData()
+    this.fetchDataInitial()
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.updateComponent()
+    if (
+      this.props.match.params.tag === undefined &&
+      this.props.match.params.slug !== prevProps.match.params.slug
+    ) {
+      this.fetchData()
+    }
+    if (
+      this.props.match.params.slug === undefined &&
+      this.props.match.params.tag !== prevProps.match.params.tag
+    ) {
+      this.fetchData()
+    }
   }
 
   componentWillUnmount() {
@@ -31,58 +46,124 @@ class Blog extends React.Component {
     }
   }
 
-  updateComponent() {
-    if (this.state.slug !== this.props.match.params.slug) {
-      this.setState({ slug: this.props.match.params.slug })
-      this.fetchData()
-    }
+  fetchData() {
+    this._asyncFetch = getEntries({
+      content_type: 'blogPost',
+      'fields.slug': this.props.match.params.slug,
+      'fields.tags': this.props.match.params.tag,
+      order: '-fields.publishDate'
+    }).then(posts => {
+      this._asyncFetch = null
+
+      this.setState({
+        posts: posts.items,
+        slug: this.props.match.params.slug,
+        tag: this.props.match.params.tag,
+        listView: posts.items.length > 1
+      })
+
+      console.log('UPD #1: thisfetchData(), New STATE', this.state)
+    })
   }
 
-  fetchData() {
-    let query = { content_type: 'blogPost' }
-
-    if (this.state.hasData === null) {
-      this._asyncFetch = getEntries(query).then(posts => {
+  fetchDataInitial() {
+    this._asyncFetch = getSite()
+      .then(response => {
         this._asyncFetch = null
-        this.setState({
-          posts: posts.items,
-          hasData: true,
-          slug: this.props.match.params.slug
-        })
+        return response
       })
-    } else if (this.state.slug !== this.props.match.params.slug) {
-      query = { content_type: 'blogPost', 'fields.slug': this.props.match.params.slug }
+      .then(site => {
+        this._asyncFetch = getPerson()
+          .then(author => {
+            this._asyncFetch = null
+            return { site: site.fields, author: author.fields }
+          })
+          .then(partialState => {
+            this._asyncFetch = getEntries({
+              content_type: 'blogPost',
+              'fields.slug': this.props.match.params.slug,
+              'fields.tags': this.props.match.params.tag,
+              order: '-fields.publishDate'
+            })
+              .then(posts => {
+                this._asyncFetch = null
+                partialState.posts = posts.items
+                return partialState
+              })
+              .then(partialStateFinal => {
+                this._asyncFetch = getEntry('H0EjxqdvViOmSP4VTDML7').then(backgrounds => {
+                  this._asyncFetch = null
 
-      this._asyncFetch = getEntries(query).then(posts => {
-        this._asyncFetch = null
-        this.setState({
-          posts: posts.items,
-          hasData: true,
-          slug: this.props.match.params.slug
-        })
+                  // FEATURED
+                  const filterPost = partialStateFinal.posts.filter(post => {
+                    return post.fields.featured
+                  })
+
+                  partialStateFinal.featured = filterPost[0].fields
+                  const images = backgrounds.image
+
+                  partialStateFinal.background =
+                    images[Math.floor(Math.random() * +images.length - 1)].fields.file.url
+                  partialStateFinal.initialFetch = false
+
+                  this.setState(partialStateFinal)
+                })
+              })
+          })
       })
-    }
   }
 
   render() {
+    if (this.state.initialFetch) {
+      return <Loading />
+    }
+
+    console.log(this.state)
+    console.log(this.props)
+
+    const { site, author, posts, background, featured, listView } = this.state
+
+    /*
     return (
-      <App>
-        <Route path="/home" render={() => <Header />} />
+      <div>
+        <Route
+          path={`${this.props.match.path}/:slug`}
+          render={() => <BlogPosts slug={this.state.match.params.slug} listView={false} />}
+        />
+        <Route exact path={this.props.match.path} render={() => <BlogPosts listView />} />
+      </div>
+    )
+    )
+    */
+    return (
+      <div>
+        <Navigation site={site} author={author} />
+        <Route
+          exact
+          path="/home"
+          render={() => <Header author={author} featured={featured} background={background} />}
+        />
+        <Route
+          exact
+          path="/tags"
+          render={() => <Header author={author} featured={featured} background={background} />}
+        />
         <Container>
           <Card
             body
             style={this.props.match.params.slug ? { marginTop: '50px' } : { marginTop: '-50px' }}>
             <Row>
               <Col lg="8" sm="12">
-                <BlogPosts posts={this.state.posts} />
+                <BlogPosts posts={posts} listView={this.state.listView} />
               </Col>
               <Col lg="4" sm="12">
-                <SideBar />
+                <SideBar author={author} />
               </Col>
             </Row>
           </Card>
         </Container>
-      </App>
+        <Footer site={site} author={author} />
+      </div>
     )
   }
 }

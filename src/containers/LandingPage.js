@@ -7,35 +7,43 @@ import { Link } from 'react-router-dom'
 
 import '../scss/_cover.scss'
 import Footer from '../components/Footer'
-import { getPerson, getEntries } from '../services/contentfulClient'
+import { getPerson, getEntry, getSite } from '../services/contentfulClient'
 import Loading from '../components/Loading'
 
 class LandingPage extends React.Component {
   state = {
     author: '',
     background: '',
+    site: '',
     hasData: false
   }
 
   componentDidMount() {
-    this._asyncFetch = getEntries({ content_type: 'background' }).then(images => {
-      const backgroundImg = images.items.map(bg => {
-        const image = bg.fields.image
-        const len = Math.floor(Math.random() * +image.length - 1)
-        return image[len].fields.file.url
-      })
-
-      this.setState({ background: backgroundImg })
-      this._asyncFetch = null
-
-      this._asyncFetch = getPerson().then(response => {
+    this._asyncFetch = getSite()
+      .then(response => {
         this._asyncFetch = null
-        return this.setState({
-          author: response.fields,
-          hasData: true
-        })
+        return response
       })
-    })
+      .then(site => {
+        this._asyncFetch = getEntry('H0EjxqdvViOmSP4VTDML7')
+          .then(backgrounds => {
+            this._asyncFetch = null
+
+            const images = backgrounds.image
+            const len = images.length - 1
+
+            return {
+              site,
+              background: images[Math.floor(Math.random() * +len)].fields.file.url
+            }
+          })
+          .then(({ site, background }) => {
+            this._asyncFetch = getPerson().then(author => {
+              this._asyncFetch = null
+              this.setState({ site: site.fields, author: author.fields, background, hasData: true })
+            })
+          })
+      })
   }
 
   componentWillUnmount() {
@@ -49,15 +57,14 @@ class LandingPage extends React.Component {
       return <Loading className="w-100 h-100 position-absolute" style={{ marginTop: '-56px' }} />
     }
 
-    const { author, background } = this.state
+    const { site, author, background } = this.state
 
     return (
       <div
         className="cover-container"
         id="cover-page-bg"
         style={{ backgroundImage: `url(${background})` }}>
-        <Navigation path={this.props.match.path} />
-
+        <Navigation site={site} author={author} path={this.props.match.path} />
         <Col id="cover-page">
           <main role="main" className="inner cover">
             <h1 className="font-italic">Still under development!</h1>
@@ -103,7 +110,7 @@ class LandingPage extends React.Component {
             </p>
           </main>
         </Col>
-        <Footer className="fixed-bottom" />
+        <Footer site={site} author={author} className="fixed-bottom" />
       </div>
     )
   }

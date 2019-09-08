@@ -4,9 +4,9 @@ import Footer from '../components/Footer'
 
 const App = props => (
   <div>
-    <Navigation />
+    <Navigation site={props.site} author={props.author} />
     {props.children}
-    <Footer />
+    <Footer site={props.site} />
   </div>
 )
 

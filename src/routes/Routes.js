@@ -11,6 +11,11 @@ const Routes = props => (
       <Route exact path="/" component={LandingPage} />
       <Route path="/home" component={Blog} />
       <Route path="/post/:slug" component={Blog} />
+      <Route path="/tags/:tag" component={Blog} />
+
+      <Route path="/explore" component={LandingPage} />
+      <Route path="/about" component={LandingPage} />
+      <Route path="/contact" component={LandingPage} />
       <Route component={LandingPage} />
     </Switch>
   </Router>

@@ -5,7 +5,7 @@ import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import { Link } from 'react-router-dom'
 import { MdPersonPin, MdChevronRight } from 'react-icons/md'
 import { FaCalendarDay, FaHashtag } from 'react-icons/fa'
-import Loading from './Loading'
+import ReactMarkdown from 'react-markdown'
 
 const DateFormated = props => <span>{new Date(props.date).toLocaleDateString()}</span>
 
@@ -22,31 +22,28 @@ const renderImage = (image, slug) => {
   if (image && image.fields.file) {
     return (
       <Link to={`/post/${slug}`}>
-        <img
-          className="mb-3 img-fluid blog-post-image"
-          src={image.fields.file.url}
-          alt={image.fields.title}
-        />
+        <img className="blog-post-image" src={image.fields.file.url} alt={image.fields.title} />
       </Link>
     )
   }
 }
 
 const BlogPosts = props => {
-  console.log(props.posts)
   let blogObject
 
-  if (props.posts.length === 1) {
+  if (!props.listView) {
     blogObject = props.posts.map(post => {
       let fields = post.fields
       return (
         <div className="blog-post" key={fields.slug}>
           <Row>
             <Col>
-              {renderImage(fields.blogImage)}
+              {renderImage(fields.blogImage, fields.slug)}
               <h2 className="blog-post-title">{fields.title}</h2>
               {blogPostMeta(fields)}
-              <p className="blog-post-body">{fields.body}</p>
+
+              <ReactMarkdown source={fields.body} className="blog-post-body" />
+
               <div className="blog-post-footer mt-4 d-flex justify-content-between">
                 <span>
                   {fields.tags.map(item => (
@@ -69,7 +66,7 @@ const BlogPosts = props => {
         </div>
       )
     })
-  } else if (props.posts.length > 1) {
+  } else {
     blogObject = props.posts.map(post => {
       let fields = post.fields
       return (
@@ -99,8 +96,6 @@ const BlogPosts = props => {
         </div>
       )
     })
-  } else {
-    return <Loading />
   }
 
   return blogObject
