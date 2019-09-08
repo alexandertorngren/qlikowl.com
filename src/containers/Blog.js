@@ -11,6 +11,7 @@ import Footer from '../components/Footer'
 import { Route } from 'react-router-dom'
 import { getEntries, getSite, getPerson, getEntry } from '../services/contentfulClient'
 import Loading from '../components/Loading'
+import { trackPage } from '../services/gTracker'
 
 class Blog extends React.Component {
   state = {
@@ -114,27 +115,13 @@ class Blog extends React.Component {
   }
 
   render() {
+    trackPage(this.props.match.path)
     if (this.state.initialFetch) {
       return <Loading />
     }
 
-    console.log(this.state)
-    console.log(this.props)
-
     const { site, author, posts, background, featured, listView } = this.state
 
-    /*
-    return (
-      <div>
-        <Route
-          path={`${this.props.match.path}/:slug`}
-          render={() => <BlogPosts slug={this.state.match.params.slug} listView={false} />}
-        />
-        <Route exact path={this.props.match.path} render={() => <BlogPosts listView />} />
-      </div>
-    )
-    )
-    */
     return (
       <div>
         <Navigation site={site} author={author} />
@@ -154,7 +141,7 @@ class Blog extends React.Component {
             style={this.props.match.params.slug ? { marginTop: '50px' } : { marginTop: '-50px' }}>
             <Row>
               <Col lg="8" sm="12">
-                <BlogPosts posts={posts} listView={this.state.listView} />
+                <BlogPosts posts={posts} listView={listView} />
               </Col>
               <Col lg="4" sm="12">
                 <SideBar author={author} />

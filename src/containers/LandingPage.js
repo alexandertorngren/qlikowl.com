@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col'
 import { IoLogoGithub, IoLogoFacebook, IoLogoLinkedin } from 'react-icons/io'
 import { MdChevronRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import { trackPage } from '../services/gTracker'
 
 import '../scss/_cover.scss'
 import Footer from '../components/Footer'
@@ -53,6 +54,8 @@ class LandingPage extends React.Component {
   }
 
   render() {
+    trackPage(this.props.match.path)
+
     if (!this.state.hasData) {
       return <Loading className="w-100 h-100 position-absolute" style={{ marginTop: '-56px' }} />
     }
