@@ -55,7 +55,7 @@ body {
 
     .navbar-nav.social {
       display: flex !important;
-      flex-direction: row;
+      flex-direction: row !important;
       width: 100%;
       justify-content: space-around;
       margin-top: 2rem;
