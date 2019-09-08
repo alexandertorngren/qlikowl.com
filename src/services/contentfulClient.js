@@ -32,21 +32,6 @@ const getPerson = async () => {
   }
 }
 
-const getPersonAndSite = async () => {
-  try {
-    const person = await client.getEntry('15jwOBqpxqSAOy2eOO4S0m')
-    const site = await client.getEntry('5nYiPPMvdN1MFpHnGt5NMd')
-
-    if (person && site) {
-      return { person: person.fields, site: site.fields }
-    } else {
-      console.log('error...')
-    }
-  } catch (error) {
-    return console.error(error)
-  }
-}
-
 const getSite = async () => {
   try {
     const response = await client.getEntry('5nYiPPMvdN1MFpHnGt5NMd')
@@ -74,24 +59,6 @@ const getEntry = async query => {
   }
 }
 
-const getEntryBySlug = async (type, slug) => {
-  try {
-    const response = await client.getEntries({ content_type: type, 'fields.slug': slug })
-    return response.items
-  } catch (error) {
-    return console.error(error)
-  }
-}
-
-const getFeatured = async type => {
-  try {
-    const response = await client.getEntries({ content_type: type, 'fields.featured': true })
-    return response
-  } catch (error) {
-    return console.error(error)
-  }
-}
-
 const getAssets = async () => {
   try {
     const response = await client.getAssets()
@@ -101,15 +68,4 @@ const getAssets = async () => {
   }
 }
 
-export {
-  initClient,
-  getPerson,
-  getEntries,
-  getFeatured,
-  getContentTypes,
-  getAssets,
-  getEntryBySlug,
-  getSite,
-  getPersonAndSite,
-  getEntry
-}
+export { initClient, getPerson, getEntries, getContentTypes, getAssets, getSite, getEntry }

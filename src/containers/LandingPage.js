@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation'
 import Col from 'react-bootstrap/Col'
 import { IoLogoGithub, IoLogoFacebook, IoLogoLinkedin } from 'react-icons/io'
 import { MdChevronRight } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 
 import '../scss/_cover.scss'
 import Footer from '../components/Footer'
@@ -48,12 +49,14 @@ class LandingPage extends React.Component {
       return <Loading className="w-100 h-100 position-absolute" style={{ marginTop: '-56px' }} />
     }
 
+    const { author, background } = this.state
+
     return (
       <div
         className="cover-container"
         id="cover-page-bg"
-        style={{ backgroundImage: `url(${this.state.background})` }}>
-        <Navigation />
+        style={{ backgroundImage: `url(${background})` }}>
+        <Navigation path={this.props.match.path} />
 
         <Col id="cover-page">
           <main role="main" className="inner cover">
@@ -63,7 +66,7 @@ class LandingPage extends React.Component {
               <h4 className="font-italic">Get social with me</h4>
               <div className="d-flex justify-content-around">
                 <a
-                  href={this.state.author.github}
+                  href={author.github}
                   className="text-center text-light"
                   target="_blank"
                   rel="noopener noreferrer">
@@ -73,7 +76,7 @@ class LandingPage extends React.Component {
                 </a>
 
                 <a
-                  href={this.state.author.linkedIn}
+                  href={author.linkedIn}
                   className="text-center text-light"
                   target="_blank"
                   rel="noopener noreferrer">
@@ -83,7 +86,7 @@ class LandingPage extends React.Component {
                 </a>
 
                 <a
-                  href={this.state.author.facebook}
+                  href={author.facebook}
                   className="text-center text-light"
                   target="_blank"
                   rel="noopener noreferrer">
@@ -94,9 +97,9 @@ class LandingPage extends React.Component {
               </div>
             </div>
             <p className="lead">
-              <a href="/home" className="btn btn-secondary">
+              <Link to={'/home'} className="btn btn-secondary">
                 Take a sneak peak <MdChevronRight />
-              </a>
+              </Link>
             </p>
           </main>
         </Col>

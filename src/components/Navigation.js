@@ -7,6 +7,7 @@ import { getSite, getPerson } from '../services/contentfulClient'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { MdHome, MdPermContactCalendar, MdBook, MdDeveloperMode } from 'react-icons/md'
 import { GoGitBranch, GoRepo } from 'react-icons/go'
+import { Link } from 'react-router-dom'
 import {
   DiReact,
   DiJavascript1,
@@ -79,12 +80,97 @@ class Navigation extends React.Component {
     return null
   }
 
+  navComponent(author) {
+    return (
+      <div>
+        <Navbar.Toggle
+          aria-controls="navbar-offcanvas-collapse"
+          onClick={() => this.navToggler()}
+        />
+        <div
+          className={
+            this.state.isToggleOpen
+              ? 'offcanvas-collapse navbar-collapse open'
+              : 'offcanvas-collapse navbar-collapse'
+          }
+          id="navbar-offcanvas-collapse">
+          <Nav className="mr-auto ml-sm-0 ml-md-5 w-100 d-md-flex">
+            <Link to={'/home'} className="nav-link">
+              <MdHome /> Home
+            </Link>
+            <NavDropdown
+              title={
+                <span>
+                  <GoGitBranch /> Explore
+                </span>
+              }
+              id="basic-nav-dropdown"
+              disabled>
+              <NavDropdown.Item href="/explore/projects">
+                <GoRepo /> Projects
+              </NavDropdown.Item>
+
+              <NavDropdown.Divider />
+
+              <NavDropdown.Item href="/explore/qlik-sense">
+                <DiOpensource /> Qlik Sense
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/explore/qlik-core">
+                <DiDocker /> Qlik Core
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/explore/qlik-extension">
+                <DiRequirejs /> Qlik Extension
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/explore/qlik-api">
+                <MdDeveloperMode /> Qlik API
+              </NavDropdown.Item>
+
+              <NavDropdown.Divider />
+
+              <NavDropdown.Item href="/explore/javascript">
+                <DiJavascript1 /> JavaScript
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/explore/react">
+                <DiReact /> React
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/explore/style">
+                <DiCssdeck /> Style
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/explore/server-linux">
+                <DiUbuntu /> Server / Linux
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/explore/symfony-php">
+                <DiSymfonyBadge /> Symfony / PHP
+              </NavDropdown.Item>
+            </NavDropdown>
+            <Link to={'/about'} className="nav-link">
+              <MdBook /> About me
+            </Link>
+            <Link to={'/contact'} className="nav-link">
+              <MdPermContactCalendar /> Get in touch
+            </Link>
+
+            <Nav.Link className="ml-lg-auto ml-sm-0" href={author.github} target="_blank">
+              <IoLogoGithub size={30} />
+            </Nav.Link>
+            <Nav.Link href={author.linkedIn} target="_blank">
+              <IoLogoLinkedin size={30} />
+            </Nav.Link>
+            <Nav.Link href={author.facebook} target="_blank">
+              <IoLogoFacebook size={30} />
+            </Nav.Link>
+          </Nav>
+        </div>
+      </div>
+    )
+  }
+
   render() {
+    const { site, author } = this.state
+
     if (!this.state.hasData) {
       return <Loading />
     }
-
-    const { site, author } = this.state
 
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
@@ -94,84 +180,7 @@ class Navigation extends React.Component {
             className="mr-auto mr-lg-0">
             <img src={site.logotype.fields.file.url} alt="QlikOwl" className="img-fluid" />
           </Navbar.Brand>
-          <Navbar.Toggle
-            aria-controls="navbar-offcanvas-collapse"
-            onClick={() => this.navToggler()}
-          />
-          <div
-            className={
-              this.state.isToggleOpen
-                ? 'offcanvas-collapse navbar-collapse open'
-                : 'offcanvas-collapse navbar-collapse'
-            }
-            id="navbar-offcanvas-collapse">
-            <Nav className="mr-auto ml-sm-0 ml-md-5 w-100 d-md-flex">
-              <Nav.Link href="/home" className="justify-content-between">
-                <MdHome /> Home
-              </Nav.Link>
-              <NavDropdown
-                title={
-                  <span>
-                    <GoGitBranch /> Explore
-                  </span>
-                }
-                id="basic-nav-dropdown"
-                disabled>
-                <NavDropdown.Item href="/explore/projects">
-                  <GoRepo /> Projects
-                </NavDropdown.Item>
-
-                <NavDropdown.Divider />
-
-                <NavDropdown.Item href="/explore/qlik-sense">
-                  <DiOpensource /> Qlik Sense
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/explore/qlik-core">
-                  <DiDocker /> Qlik Core
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/explore/qlik-extension">
-                  <DiRequirejs /> Qlik Extension
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/explore/qlik-api">
-                  <MdDeveloperMode /> Qlik API
-                </NavDropdown.Item>
-
-                <NavDropdown.Divider />
-
-                <NavDropdown.Item href="/explore/javascript">
-                  <DiJavascript1 /> JavaScript
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/explore/react">
-                  <DiReact /> React
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/explore/style">
-                  <DiCssdeck /> Style
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/explore/server-linux">
-                  <DiUbuntu /> Server / Linux
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/explore/symfony-php">
-                  <DiSymfonyBadge /> Symfony / PHP
-                </NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="#/about">
-                <MdBook /> About me
-              </Nav.Link>
-              <Nav.Link href="#/contact">
-                <MdPermContactCalendar /> Get in touch
-              </Nav.Link>
-
-              <Nav.Link className="ml-lg-auto ml-sm-0" href={author.github} target="_blank">
-                <IoLogoGithub size={30} />
-              </Nav.Link>
-              <Nav.Link href={author.linkedIn} target="_blank">
-                <IoLogoLinkedin size={30} />
-              </Nav.Link>
-              <Nav.Link href={author.facebook} target="_blank">
-                <IoLogoFacebook size={30} />
-              </Nav.Link>
-            </Nav>
-          </div>
+          {this.props.path !== '/' ? this.navComponent(author) : ''}
         </Container>
       </Navbar>
     )
