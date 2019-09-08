@@ -1,6 +1,7 @@
 import ReactGA from 'react-ga'
 
 const initReactGA = () => {
+  console.log('Get ENV:', process.env)
   console.log(`Actual CONTEXT: ${process.env.CONTEXT}`)
   let trackerID
   switch (process.env.CONTEXT) {
