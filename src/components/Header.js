@@ -13,24 +13,27 @@ class Header extends React.Component {
 
   componentDidMount() {
     this._asyncFetch = getEntries({ content_type: 'background' }).then(images => {
-      const backgroundImg = images.items.map(bg => {
-        const image = bg.fields.image
-        const len = Math.floor(Math.random() * +image.length - 1)
-        return image[len].fields.file.url
-      })
+      if (images.items.length) {
+        const backgroundImg = images.items.map(bg => {
+          const image = bg.fields.image
+          const len = Math.floor(Math.random() * +image.length - 1)
+          return image[len].fields.file.url
+        })
 
-      this.setState({ background: backgroundImg })
-      this._asyncFetch = null
+        this.setState({ background: backgroundImg })
+        this._asyncFetch = null
 
-      this._asyncFetch = getEntries({ content_type: 'blogPost', 'fields.featured': true }).then(
-        response => {
+        this._asyncFetch = getEntries({
+          content_type: 'blogPost',
+          'fields.featured': true
+        }).then(response => {
           this._asyncFetch = null
           this.setState({
             featured: response.items[0].fields,
             hasData: true
           })
-        }
-      )
+        })
+      }
     })
   }
 

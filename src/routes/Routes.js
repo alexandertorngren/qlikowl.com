@@ -1,21 +1,17 @@
 import React from 'react'
-import { Switch, Route, Router } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 //import Home from '../containers/Home'
-import BlogHome from '../containers/BlogHome'
-import BlogPost from '../containers/BlogPost'
+//Aimport BlogHome from '../containers/BlogHome'
 import LandingPage from '../containers/LandingPage'
-
-const history = createBrowserHistory()
+import Blog from '../containers/Blog'
 
 const Routes = props => (
-  <Router history={history}>
+  <Router>
     <Switch>
-      <Route exact path="/" component={LandingPage} history={history} />
-      <Route path="/home" component={BlogHome} history={history} />
-      <Route exact path="/blog" component={BlogHome} />
-      <Route path="/blog/p/:page" component={BlogHome} history={history} />
-      <Route path="/post/:slug" component={BlogPost} history={history} />
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/home" component={Blog} />
+      <Route path="/post/:slug" component={Blog} />
+      <Route component={LandingPage} />
     </Switch>
   </Router>
 )
