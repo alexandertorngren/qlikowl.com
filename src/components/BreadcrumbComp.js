@@ -1,26 +1,26 @@
 import React from 'react'
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap'
+import Breadcrumb from 'react-bootstrap'
 
 const BreadcrumbComp = props => {
   return (
     <div>
       <Breadcrumb>
-        <BreadcrumbItem active>Home</BreadcrumbItem>
+        <Breadcrumb.NavItem active>Home</Breadcrumb.NavItem>
       </Breadcrumb>
       <Breadcrumb>
-        <BreadcrumbItem>
+        <Breadcrumb.NavItem>
           <a href="/">Home</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem active>Library</BreadcrumbItem>
+        </Breadcrumb.NavItem>
+        <Breadcrumb.NavItem active>Library</Breadcrumb.NavItem>
       </Breadcrumb>
       <Breadcrumb>
-        <BreadcrumbItem>
+        <Breadcrumb.NavItem>
           <a href="/">Home</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
+        </Breadcrumb.NavItem>
+        <Breadcrumb.NavItem>
           <a href="/">Library</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem active>Data</BreadcrumbItem>
+        </Breadcrumb.NavItem>
+        <Breadcrumb.NavItem active>Data</Breadcrumb.NavItem>
       </Breadcrumb>
     </div>
   )

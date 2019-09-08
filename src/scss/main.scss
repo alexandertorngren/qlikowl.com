@@ -1,10 +1,10 @@
-@import './_fonts';
+@import './fonts';
 //@import './_header';
-@import './_featured';
-@import './_blog';
+@import './featured';
+@import './blog';
 @import './colors';
-@import './_preloader';
-@import './_offcanvas';
+@import './preloader';
+@import './offcanvas';
 @import './carousel';
 
 $bgcolor: #efefef;

@@ -11,6 +11,12 @@ body {
   z-index: 15 !important;
   background-color: #323436;
   color: #ffffff;
+  .nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+    &:hover {
+      color: rgba(255, 255, 255, 1) !important;
+    }
+  }
 }
 
 @media (max-width: 991.98px) {
@@ -25,9 +31,10 @@ body {
     overflow-y: auto;
     visibility: hidden;
     background-color: #343a40;
-    transition: visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
-    transition: transform .3s ease-in-out, visibility .3s ease-in-out;
-    transition: transform .3s ease-in-out, visibility .3s ease-in-out, -webkit-transform .3s ease-in-out;
+    transition: visibility 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out,
+      -webkit-transform 0.3s ease-in-out;
     z-index: 15;
   }
   .offcanvas-collapse.open {
@@ -36,6 +43,3 @@ body {
     transform: translateX(-100%);
   }
 }
-
-
-

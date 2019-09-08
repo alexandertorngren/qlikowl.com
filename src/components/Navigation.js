@@ -7,7 +7,7 @@ import { getSite, getPerson } from '../services/contentfulClient'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { MdHome, MdPermContactCalendar, MdBook, MdDeveloperMode } from 'react-icons/md'
 import { GoGitBranch, GoRepo } from 'react-icons/go'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import {
   DiReact,
   DiJavascript1,
@@ -41,23 +41,21 @@ class Navigation extends React.Component {
   componentDidMount() {
     this.navToggler = this.navToggler.bind(this)
 
-    this._asyncFetch = getSite()
-      .then(response => {
+    this._asyncFetch = getSite().then(response => {
+      this._asyncFetch = null
+      this.setState({
+        site: response.fields,
+        hasData: true
+      })
+
+      this._asyncFetch = getPerson().then(response => {
         this._asyncFetch = null
         this.setState({
-          site: response.fields,
+          author: response.fields,
           hasData: true
         })
-
-        this._asyncFetch = getPerson().then(response => {
-          this._asyncFetch = null
-          this.setState({
-            author: response.fields,
-            hasData: true
-          })
-        })
       })
-      .then(() => this.setState({ hasData: true }))
+    })
   }
 
   componentWillUnmount() {
@@ -95,9 +93,14 @@ class Navigation extends React.Component {
           }
           id="navbar-offcanvas-collapse">
           <Nav className="mr-auto ml-sm-0 ml-md-5 w-100 d-md-flex">
-            <Link to={'/home'} className="nav-link">
+            <NavLink
+              to={'/home'}
+              className="nav-link"
+              activeStyle={{
+                fontWeight: 'bold'
+              }}>
               <MdHome /> Home
-            </Link>
+            </NavLink>
             <NavDropdown
               title={
                 <span>
@@ -143,25 +146,51 @@ class Navigation extends React.Component {
                 <DiSymfonyBadge /> Symfony / PHP
               </NavDropdown.Item>
             </NavDropdown>
-            <Link to={'/about'} className="nav-link">
+            <NavLink
+              to={'/about'}
+              className="nav-link"
+              activeStyle={{
+                fontWeight: 'bold'
+              }}>
               <MdBook /> About me
-            </Link>
-            <Link to={'/contact'} className="nav-link">
+            </NavLink>
+            <NavLink
+              to={'/contact'}
+              className="nav-link"
+              activeStyle={{
+                fontWeight: 'bold'
+              }}>
               <MdPermContactCalendar /> Get in touch
-            </Link>
+            </NavLink>
 
-            <Nav.Link className="ml-lg-auto ml-sm-0" href={author.github} target="_blank">
+            <NavLink className="ml-lg-auto ml-sm-0 nav-link" to={author.github} target="_blank">
               <IoLogoGithub size={30} />
-            </Nav.Link>
-            <Nav.Link href={author.linkedIn} target="_blank">
+            </NavLink>
+            <NavLink to={author.linkedIn} target="_blank" className="nav-link">
               <IoLogoLinkedin size={30} />
-            </Nav.Link>
-            <Nav.Link href={author.facebook} target="_blank">
+            </NavLink>
+            <NavLink to={author.facebook} target="_blank" className="nav-link">
               <IoLogoFacebook size={30} />
-            </Nav.Link>
+            </NavLink>
           </Nav>
         </div>
       </div>
+    )
+  }
+
+  createSocial(author) {
+    return (
+      <Nav>
+        <NavLink className="ml-lg-auto ml-sm-0 nav-link" to={author.github} target="_blank">
+          <IoLogoGithub size={30} />
+        </NavLink>
+        <NavLink to={author.linkedIn} target="_blank" className="nav-link">
+          <IoLogoLinkedin size={30} />
+        </NavLink>
+        <NavLink to={author.facebook} target="_blank" className="nav-link">
+          <IoLogoFacebook size={30} />
+        </NavLink>
+      </Nav>
     )
   }
 
@@ -180,7 +209,7 @@ class Navigation extends React.Component {
             className="mr-auto mr-lg-0">
             <img src={site.logotype.fields.file.url} alt="QlikOwl" className="img-fluid" />
           </Navbar.Brand>
-          {this.props.path !== '/' ? this.navComponent(author) : ''}
+          {this.props.path !== '/' ? this.navComponent(author) : this.createSocial(author)}
         </Container>
       </Navbar>
     )

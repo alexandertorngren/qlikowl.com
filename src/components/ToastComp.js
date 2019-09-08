@@ -1,16 +1,21 @@
 import React from 'react'
-import { Toast, ToastBody, ToastHeader } from 'reactstrap'
+import Toast from 'react-bootstrap/Toast'
+import { Row } from 'react-bootstrap/Row'
+import { Col } from 'react-bootstrap/Col'
 
-const ToastComp = props => {
-  this.props = props
-  return (
-    <div>
+const ToastComp = props => (
+  <Row>
+    <Col xs={6}>
       <Toast>
-        <ToastHeader icon={this.props.icon}>{this.props.header}</ToastHeader>
-        <ToastBody>{this.props.body}</ToastBody>
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+          <strong className="mr-auto">Bootstrap</strong>
+          <small>11 mins ago</small>
+        </Toast.Header>
+        <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
       </Toast>
-    </div>
-  )
-}
+    </Col>
+  </Row>
+)
 
 export default ToastComp
