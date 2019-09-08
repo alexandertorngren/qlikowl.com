@@ -32,6 +32,9 @@ body {
   .nav-width {
     width: auto;
   }
+  .navbar-nav.social {
+    flex-direction: row !important;
+  }
   .offcanvas-collapse {
     position: fixed;
     top: 56px; /* Height of navbar */
