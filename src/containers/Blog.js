@@ -9,7 +9,7 @@ import Header from '../components/Header'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import { Route } from 'react-router-dom'
-import { getEntries, getSite, getPerson, getEntry } from '../services/contentfulClient'
+import { getEntries, getSite, getEntry } from '../services/contentfulClient'
 import Loading from '../components/Loading'
 import { trackPage } from '../services/gTracker'
 
@@ -56,14 +56,14 @@ class Blog extends React.Component {
     }).then(posts => {
       this._asyncFetch = null
 
+      this.bool = posts.items.length > 1 ? true : false
+
       this.setState({
         posts: posts.items,
         slug: this.props.match.params.slug,
         tag: this.props.match.params.tag,
-        listView: posts.items.length > 1
+        listView: this.bool
       })
-
-      console.log('UPD #1: thisfetchData(), New STATE', this.state)
     })
   }
 
@@ -74,42 +74,38 @@ class Blog extends React.Component {
         return response
       })
       .then(site => {
-        this._asyncFetch = getPerson()
-          .then(author => {
+        this._asyncFetch = getEntries({
+          content_type: 'blogPost',
+          'fields.slug': this.props.match.params.slug,
+          'fields.tags': this.props.match.params.tag,
+          order: '-fields.publishDate'
+        })
+          .then(posts => {
             this._asyncFetch = null
-            return { site: site.fields, author: author.fields }
+            return {
+              site: site.fields,
+              author: site.fields.owner.fields,
+              posts: posts.items
+            }
           })
-          .then(partialState => {
-            this._asyncFetch = getEntries({
-              content_type: 'blogPost',
-              'fields.slug': this.props.match.params.slug,
-              'fields.tags': this.props.match.params.tag,
-              order: '-fields.publishDate'
+          .then(stateObj => {
+            this._asyncFetch = getEntry('H0EjxqdvViOmSP4VTDML7').then(backgrounds => {
+              this._asyncFetch = null
+
+              // FEATURED
+              const filterPost = stateObj.posts.filter(post => {
+                return post.fields.featured
+              })
+
+              stateObj.featured = filterPost[0].fields
+              const images = backgrounds.image
+
+              stateObj.background =
+                images[Math.floor(Math.random() * +images.length - 1)].fields.file.url
+              stateObj.initialFetch = false
+
+              this.setState(stateObj)
             })
-              .then(posts => {
-                this._asyncFetch = null
-                partialState.posts = posts.items
-                return partialState
-              })
-              .then(partialStateFinal => {
-                this._asyncFetch = getEntry('H0EjxqdvViOmSP4VTDML7').then(backgrounds => {
-                  this._asyncFetch = null
-
-                  // FEATURED
-                  const filterPost = partialStateFinal.posts.filter(post => {
-                    return post.fields.featured
-                  })
-
-                  partialStateFinal.featured = filterPost[0].fields
-                  const images = backgrounds.image
-
-                  partialStateFinal.background =
-                    images[Math.floor(Math.random() * +images.length - 1)].fields.file.url
-                  partialStateFinal.initialFetch = false
-
-                  this.setState(partialStateFinal)
-                })
-              })
           })
       })
   }
