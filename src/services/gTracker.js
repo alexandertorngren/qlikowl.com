@@ -1,30 +1,30 @@
 import ReactGA from 'react-ga'
 
 const initReactGA = () => {
-  console.log('Get ENV:', process.env)
-  console.log(window)
-  console.log(`Actual CONTEXT: ${process.env.CONTEXT}`)
   let trackerID
-  switch (process.env.CONTEXT) {
-    case 'production':
-      trackerID = 'UA-147418387-1'
-      break
-    case 'branch-deploy':
-      trackerID = 'UA-147418387-2'
-      break
-    default:
-      trackerID = false
-  }
-  if (trackerID) {
-    ReactGA.initialize(trackerID)
+  if (process.env.NODE_ENV === 'production') {
+    switch (window.document.URL.split('/')[2]) {
+      case 'qlikowl.com':
+        trackerID = 'UA-147418387-1'
+        break
+      case 'branch-deploy.qlikowl.com':
+        trackerID = 'UA-147418387-2'
+        break
+      default:
+        trackerID = false
+    }
+
+    trackerID
+      ? ReactGA.initialize(trackerID)
+      : console.log(`Could not connect with ReactGA.initialize('${trackerID}')`)
   }
 }
 
 const trackPage = path => {
-  if (process.env.CONTEXT) {
+  if (process.env.NODE_ENV === 'production') {
     ReactGA.pageview(path)
   } else {
-    console.error(`Actual CONTEXT is: ${process.env.CONTEXT}`)
+    console.log(`Actual ENV: ${process.env.NODE_ENV}, trackPage('${path}')`)
   }
 }
 
