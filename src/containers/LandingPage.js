@@ -4,10 +4,12 @@ import Col from 'react-bootstrap/Col'
 import { IoLogoGithub, IoLogoFacebook, IoLogoLinkedin } from 'react-icons/io'
 import { MdChevronRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import { trackPage } from '../services/gTracker'
+import Helmet from 'react-helmet'
 
 import '../scss/_cover.scss'
 import Footer from '../components/Footer'
-import { getPerson, getEntry, getSite } from '../services/contentfulClient'
+import { getEntry, getSite } from '../services/contentfulClient'
 import Loading from '../components/Loading'
 
 class LandingPage extends React.Component {
@@ -25,24 +27,19 @@ class LandingPage extends React.Component {
         return response
       })
       .then(site => {
-        this._asyncFetch = getEntry('H0EjxqdvViOmSP4VTDML7')
-          .then(backgrounds => {
-            this._asyncFetch = null
+        this._asyncFetch = getEntry('H0EjxqdvViOmSP4VTDML7').then(backgrounds => {
+          this._asyncFetch = null
 
-            const images = backgrounds.image
-            const len = images.length - 1
+          const images = backgrounds.image
+          const len = images.length - 1
 
-            return {
-              site,
-              background: images[Math.floor(Math.random() * +len)].fields.file.url
-            }
+          this.setState({
+            site: site.fields,
+            author: site.fields.owner.fields,
+            background: images[Math.floor(Math.random() * +len)].fields.file.url,
+            hasData: true
           })
-          .then(({ site, background }) => {
-            this._asyncFetch = getPerson().then(author => {
-              this._asyncFetch = null
-              this.setState({ site: site.fields, author: author.fields, background, hasData: true })
-            })
-          })
+        })
       })
   }
 
@@ -53,6 +50,8 @@ class LandingPage extends React.Component {
   }
 
   render() {
+    trackPage(this.props.match.path)
+
     if (!this.state.hasData) {
       return <Loading className="w-100 h-100 position-absolute" style={{ marginTop: '-56px' }} />
     }
@@ -64,6 +63,11 @@ class LandingPage extends React.Component {
         className="cover-container"
         id="cover-page-bg"
         style={{ backgroundImage: `url(${background})` }}>
+        <Helmet>
+          <title>{`Dev blog soon be available! - ${process.env.REACT_APP_TITLE}`}</title>
+          <meta name="description" content={site.description} />
+          <meta name="og:image" content={background} />
+        </Helmet>
         <Navigation site={site} author={author} path={this.props.match.path} />
         <Col id="cover-page">
           <main role="main" className="inner cover">

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { MdPersonPin, MdChevronRight } from 'react-icons/md'
 import { FaCalendarDay, FaHashtag } from 'react-icons/fa'
 import ReactMarkdown from 'react-markdown'
+import Helmet from 'react-helmet'
 
 const DateFormated = props => <span>{new Date(props.date).toLocaleDateString()}</span>
 
@@ -36,6 +37,11 @@ const BlogPosts = props => {
       let fields = post.fields
       return (
         <div className="blog-post" key={fields.slug}>
+          <Helmet>
+            <title>{`${fields.metaTitle} - ${process.env.REACT_APP_TITLE}`}</title>
+            <meta name="description" content={fields.description} />
+            <meta name="og:image" content={fields.blogImage.fields.file.url} />
+          </Helmet>
           <Row>
             <Col>
               {renderImage(fields.blogImage, fields.slug)}
@@ -69,6 +75,7 @@ const BlogPosts = props => {
   } else {
     blogObject = props.posts.map(post => {
       let fields = post.fields
+
       return (
         <div className="blog-post" key={fields.slug}>
           <Row>
