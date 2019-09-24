@@ -65,8 +65,10 @@ a {
   &.linkedIn {
     color: $linkedin;
     &:hover {
-      color: $linkedin_light;
       font-weight: normal;
+    }
+
+    @media (min-width: 768px) {
     }
   }
 }

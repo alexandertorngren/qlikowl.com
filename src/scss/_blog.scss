@@ -93,6 +93,9 @@
   }
   .blog-post-body {
     text-align: justify;
+    @media (mad) {
+      
+    }
   }
   .blog-post-footer {
     a.tags {

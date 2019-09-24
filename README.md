@@ -1,101 +1,82 @@
 # QlikOwl
-## A blog about my journey with BI, Qlik and development, moving towards cloud and SAAS.
-<div align="center">
 
-## ***Powered*** by <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" height="50"> ***React*** using `create-react-app` [![Create React App @ NPM][npm-image]][npm-url]
+> A blog about my journey with BI, Qlik and development, moving towards cloud and SAAS.
+>
+> > This web app is powered by **_React_** <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" height="20"> and **_create-react-app_**
 
-</div>
+[![Github Tag][tag-img]][tag-url]
+[![NPM Version][npm-img]][npm-url]
+[![NPM Dependency Status][pkg_img]][pkg_url]
+[![Netlify Status][netlify-img]][netlify-url]
+[![Website Status][web-img]][web-url]
 
-____
+![](header.png)
 
-<div align="center">
+## Installation
 
-[![Netlify Status][netlify-status-img]][netlify-status-url]
-[![Github Tag][github-tag-image]][github-tag-url]
-[![Build Status][travis-image]][travis-url]
-[![Dependency Status][david_img]][david_site]
-[![Website Status][url-status-img]][url-status-url]
+OS X & Linux:
 
-</div>
-
-<div align="center">
-
-[![Check It Out][check-it-out]][url-status-url][![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)[![forthebadge](https://forthebadge.com/images/badges/powered-by-netflix.svg)](https://forthebadge.com)
-
-</div>
-
-```bash 
-$ npm install
-
-# running test...
+```sh
+npm install my-crazy-module --save
 ```
 
-## Available Scripts
+Windows:
 
-In the project directory, you can run:
+```sh
+edit autoexec.bat
+```
 
-### `npm start`
+## Usage example
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> Comming in a near future!
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+_For more examples and usage, please refer to the [Wiki][wiki]._
 
-### `npm format`
+## Development setup
 
-Runs Prettier to clean the code.
+Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
 
-### `npm test`
+```sh
+git clone
+npm test
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Release History
 
-### `npm run build`
+- 0.1.5
+  - CHANGE: Update docs (module code remains unchanged)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Meta
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Alexander Torngren – [https://qlikowl.com](https://qlikowl.com)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Distributed under the [![MIT License][license-img]][license-url]. See [LICENSE][license-url] for more information.
 
-### `npm run eject`
+[https://github.com/yourname/github-link](https://github.com/dbader/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Contributing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Fork it (<https://github.com/yourname/yourproject/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<!-- Markdown link & img dfn's -->
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## License
-
-&copy; Copyright 2019 | QlikOwl by [Alexander Torngren](mailto:alexander.torngren@drakeanalytics.se?subject=[GitRepo][qlikowl.com]) | All Right Reserved
-
-[github-commit-img]: https://img.shields.io/github/last-commit/alexandertorngren/qlikowl.com?style=flat-square
-
-[github-license-img]: https://img.shields.io/github/license/alexandertorngren/qlikowl.com?style=flat-square
-[github-license-url]: https://github.com/alexandertorngren/qlikowl.com/blob/master/LICENSE
-
-[github-tag-image]: https://img.shields.io/github/package-json/v/alexandertorngren/qlikowl.com?style=flat-square
-[github-tag-url]: https://github.com/alexandertorngren/qlikowl.com
-
-[david_img]: https://img.shields.io/david/alexandertorngren/qlikowl.com?style=flat-square
-[david_site]: https://david-dm.org/alexandertorngren/qlikowl.com
-
-[travis-image]: https://img.shields.io/travis/com/alexandertorngren/qlikowl.com?style=flat-square
-[travis-url]: https://travis-ci.org/alexandertorngren/qlikowl.com
-
-[npm-image]: https://img.shields.io/npm/v/create-react-app?style=flat-square
+[commit-img]: https://img.shields.io/github/last-commit/alexandertorngren/qlikowl.com?style=flat-square
+[license-img]: https://img.shields.io/github/license/alexandertorngren/qlikowl.com?style=flat-square
+[license-url]: https://github.com/alexandertorngren/qlikowl.com/blob/master/LICENSE
+[tag-img]: https://img.shields.io/github/package-json/v/alexandertorngren/qlikowl.com?style=flat-square
+[tag-url]: https://github.com/alexandertorngren/qlikowl.com
+[pkg_img]: https://img.shields.io/david/alexandertorngren/qlikowl.com?style=flat-square
+[pkg_url]: https://david-dm.org/alexandertorngren/qlikowl.com
+[npm-img]: https://img.shields.io/npm/v/create-react-app?style=flat-square
 [npm-url]: https://www.npmjs.com/package/create-react-app
-
-[netlify-status-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status?style=flat-square
-[netlify-status-url]: https://app.netlify.com/sites/qlikowl/deploys
-
-[url-status-img]: https://img.shields.io/website/http/qlikowl.netlify.com?down_color=lightgrey&down_message=offline&style=flat-square&up_color=blue&up_message=online
-[url-status-url]: http://qlikowl.netlify.com
-
+[netlify-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status?style=flat-square
+[netlify-url]: https://app.netlify.com/sites/qlikowl/deploys
+[web-img]: https://img.shields.io/website/http/qlikowl.netlify.com?down_color=lightgrey&down_message=offline&style=flat-square&up_color=blue&up_message=online
+[web-url]: http://qlikowl.netlify.com
 [check-it-out]: https://forthebadge.com/images/badges/check-it-out.svg
+[netlify-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status?style=flat-square
+[netlify-url]: https://app.netlify.com/sites/qlikowl/deploys
