@@ -60,62 +60,64 @@ class LandingPage extends React.Component {
     const { site, author, background } = this.state
 
     return (
-      <div
-        className="cover-container"
-        id="cover-page-bg"
-        style={{ backgroundImage: `url(${background})` }}>
-        <Helmet>
-          <title>{`Dev blog soon be available! - ${process.env.REACT_APP_TITLE}`}</title>
-          <meta name="description" content={site.description} />
-          <meta name="og:image" content={background} />
-        </Helmet>
-        <Navigation site={site} author={author} path={this.props.match.path} />
-        <Col id="cover-page">
-          <main role="main" className="inner cover">
-            <h1 className="font-italic">Still under development!</h1>
-            <p className="lead">The page will soon be available with a lot of content</p>
-            <div className="p-4">
-              <h4 className="font-italic">Get social with me</h4>
-              <div className="d-flex justify-content-around">
-                <a
-                  href={author.github}
-                  className="text-center text-light"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  <IoLogoGithub size={40} />
-                  <br />
-                  Github
-                </a>
+      <div className="wrapper">
+        <div
+          className="cover-container"
+          id="cover-page-bg"
+          style={{ backgroundImage: `url(${background})` }}>
+          <Helmet>
+            <title>{`Dev blog soon be available! - ${process.env.REACT_APP_TITLE}`}</title>
+            <meta name="description" content={site.description} />
+            <meta name="og:image" content={background} />
+          </Helmet>
+          <Navigation site={site} author={author} path={this.props.match.path} />
+          <Col id="cover-page">
+            <main role="main" className="inner cover">
+              <h1 className="font-italic">Still under development!</h1>
+              <p className="lead">The page will soon be available with a lot of content</p>
+              <div className="p-4">
+                <h4 className="font-italic">Get social with me</h4>
+                <div className="d-flex justify-content-around">
+                  <a
+                    href={author.github}
+                    className="text-center text-light"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <IoLogoGithub size={40} />
+                    <br />
+                    Github
+                  </a>
 
-                <a
-                  href={author.linkedIn}
-                  className="text-center text-light"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  <IoLogoLinkedin size={40} />
-                  <br />
-                  LinkedIn
-                </a>
+                  <a
+                    href={author.linkedIn}
+                    className="text-center text-light"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <IoLogoLinkedin size={40} />
+                    <br />
+                    LinkedIn
+                  </a>
 
-                <a
-                  href={author.facebook}
-                  className="text-center text-light"
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  <IoLogoFacebook size={40} />
-                  <br />
-                  Facebook
-                </a>
+                  <a
+                    href={author.facebook}
+                    className="text-center text-light"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <IoLogoFacebook size={40} />
+                    <br />
+                    Facebook
+                  </a>
+                </div>
               </div>
-            </div>
-            <p className="lead">
-              <Link to={'/home'} className="btn btn-secondary">
-                Take a sneak peak <MdChevronRight />
-              </Link>
-            </p>
-          </main>
-        </Col>
-        <Footer site={site} author={author} className="fixed-bottom" />
+              <p className="lead">
+                <Link to={'/home'} className="btn btn-secondary">
+                  Take a sneak peak <MdChevronRight />
+                </Link>
+              </p>
+            </main>
+          </Col>
+          <Footer site={site} author={author} className="fixed-bottom" />
+        </div>
       </div>
     )
   }

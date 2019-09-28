@@ -16,7 +16,7 @@ const Header = props => {
         <img className="sm-block w-100" src={props.background} alt={props.featured.fields.title} />
         <Carousel.Caption>
           <div className="d-flex align-items-center flex-column caption-container">
-            <div className="d-flex align-items-center flex-column my-auto p-2 p-lg-4 caption-color">
+            <div className="d-flex align-items-center flex-column my-auto p-4 caption-color">
               <Helmet>
                 <title>{`${props.featured.fields.metaTitle} - ${process.env.REACT_APP_TITLE}`}</title>
                 <meta name="description" content={props.featured.fields.description} />
