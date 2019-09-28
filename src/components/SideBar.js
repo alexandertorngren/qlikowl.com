@@ -1,6 +1,6 @@
 import React from 'react'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
-import { getPerson } from '../services/contentfulClient'
+import { getPerson, createSocialUrl } from '../services/contentfulClient'
 import Loading from './Loading'
 import AboutMe from './AboutMe'
 
@@ -13,6 +13,7 @@ class SideBar extends React.Component {
   componentDidMount() {
     this._asyncFetch = getPerson().then(response => {
       this._asyncFetch = null
+      createSocialUrl(response)
       this.setState({
         author: response.fields,
         hasData: true
@@ -78,7 +79,7 @@ class SideBar extends React.Component {
           </ol>
         </div>
         <div className="p-4">
-          <h4 className="font-italic">Get social with me</h4>
+          <h4 className="font-italic text-center">Get social with me</h4>
           <div className="d-flex justify-content-around">
             <a
               href={author.github}

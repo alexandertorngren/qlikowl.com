@@ -1,8 +1,8 @@
+@import './colors';
 @import './fonts';
 //@import './_header';
 @import './featured';
 @import './blog';
-@import './colors';
 @import './preloader';
 @import './offcanvas';
 @import './carousel';
@@ -20,25 +20,68 @@ font-family: 'Nanum Brush Script', cursive;
 */
 
 $bgcolor: #efefef;
+$font-size: 2.5rem;
 
 body {
   background-color: $bgcolor;
   line-height: 1.5;
   font-family: 'Roboto', sans-serif;
+  position: relative;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    font-size: $font-size 80%;
+  }
 }
 @media (min-width: 768px) {
+  $font-size: 4.5rem;
+
   body {
     line-height: 1.5;
+    position: relative;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      font-size: $font-size 80%;
+    }
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+.btn-secondary,
+.btn-secondary,
+.btn-secondary {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  border: 0.05rem solid #fff;
+  background-color: #fff;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+
+  &:hover {
+    color: #333;
+    background-color: #eee;
+    border: 0.05rem solid #ccc;
+  }
+  &:focus {
+    color: #333;
+    background-color: #fff;
+    border: 0.05rem solid #fff;
+  }
+  &:active {
+    color: #333;
+    background-color: #ccc;
+    border: 0.05rem solid #fff;
+  }
 }
 
 a {

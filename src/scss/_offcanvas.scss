@@ -1,3 +1,11 @@
+$nav-color: rgba(51, 52, 54, 1);
+$nav-color-opac: rgba(51, 52, 54, 0.8);
+
+$nav-link-color: #fff;
+$nav-link-color-hover: #eee;
+$nav-link-color-sm: $nav-color;
+$nav-link-color-sm-hover: $nav-color-opac;
+
 html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
@@ -12,14 +20,29 @@ body {
 }
 .navbar {
   z-index: 15 !important;
-  background-color: #323436;
-  color: #ffffff;
+  background-color: $nav-color; //#323436;
+  color: $nav-link-color;
+  -webkit-box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 13px 0 rgba(0, 0, 0, 0.2);
+
+  .fade-in {
+    background-color: $nav-color;
+    transition: background-color 0.2s linear;
+  }
+
+  .fade-out {
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.2s linear;
+  }
+
   .navbar-nav {
     width: 100%;
     .nav-link {
-      color: rgba(255, 255, 255, 0.7) !important;
+      color: $nav-link-color; //rgba(51, 52, 54, 1) !important;
+
       &:hover {
-        color: rgba(255, 255, 255, 1) !important;
+        color: $nav-link-color-hover; //rgba(51, 52, 54, 1) !important;
       }
     }
     &.social {
@@ -40,21 +63,28 @@ body {
     top: 56px; /* Height of navbar */
     bottom: 0;
     left: 100%;
-    width: 80%;
+    width: 65%;
     padding-right: 1rem;
     padding-left: 1rem;
     padding-top: 0.5rem;
     overflow-y: auto;
     visibility: hidden;
-    background-color: rgba(52, 58, 64, 0.95);
-    -webkit-box-shadow: -3px 2px 5px 0 rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: -3px 2px 5px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: -3px 2px 5px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgb(236, 236, 236);
+    -webkit-box-shadow: -2px 2px 3px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: -2px 2px 3px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: -2px 2px 3px 0 rgba(0, 0, 0, 0.1);
     transition: visibility 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
     transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
     transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out,
       -webkit-transform 0.3s ease-in-out;
     z-index: 15;
+
+    .nav-link {
+      color: $nav-link-color-sm !important;
+      &:hover {
+        color: $nav-link-color-sm-hover !important;
+      }
+    }
 
     .navbar-nav.social {
       display: flex !important;
@@ -65,6 +95,11 @@ body {
 
       .nav-link {
         margin-right: 10px;
+        color: $nav-link-color-sm !important;
+
+        &:hover {
+          color: $nav-link-color-sm-hover !important;
+        }
       }
     }
   }

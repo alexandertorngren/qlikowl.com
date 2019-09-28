@@ -9,7 +9,7 @@ import Helmet from 'react-helmet'
 
 import '../scss/_cover.scss'
 import Footer from '../components/Footer'
-import { getEntry, getSite } from '../services/contentfulClient'
+import { getEntry, getSite, createSocialUrl } from '../services/contentfulClient'
 import Loading from '../components/Loading'
 
 class LandingPage extends React.Component {
@@ -24,6 +24,7 @@ class LandingPage extends React.Component {
     this._asyncFetch = getSite()
       .then(response => {
         this._asyncFetch = null
+        createSocialUrl(response.fields.owner)
         return response
       })
       .then(site => {

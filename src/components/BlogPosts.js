@@ -7,6 +7,7 @@ import { MdPersonPin, MdChevronRight } from 'react-icons/md'
 import { FaCalendarDay, FaHashtag } from 'react-icons/fa'
 import ReactMarkdown from 'react-markdown'
 import Helmet from 'react-helmet'
+import CodeBlock from '../services/CodeBlock'
 
 const DateFormated = props => <span>{new Date(props.date).toLocaleDateString()}</span>
 
@@ -30,82 +31,89 @@ const renderImage = (image, slug) => {
 }
 
 const BlogPosts = props => {
-  let blogObject
+  const blogObject = props.posts.map(post => {
+    let fields = post.fields
 
-  if (!props.listView) {
-    blogObject = props.posts.map(post => {
-      let fields = post.fields
-      return (
-        <div className="blog-post" key={fields.slug}>
-          <Helmet>
-            <title>{`${fields.metaTitle} - ${process.env.REACT_APP_TITLE}`}</title>
-            <meta name="description" content={fields.description} />
-            <meta name="og:image" content={fields.blogImage.fields.file.url} />
-          </Helmet>
-          <Row>
-            <Col>
+    return (
+      <div className="blog-post" key={fields.slug}>
+        <Row>
+          <Col lg={12} sm={12}>
+            <h1 className="blog-post-title">
+              <Link to={`/post/${fields.slug}`} slug={fields.slug}>
+                {fields.title}
+              </Link>
+            </h1>
+            {blogPostMeta(fields)}
+          </Col>
+        </Row>
+        <Row className="mb-4">
+          <Col lg={4} sm={12}>
+            <ResponsiveEmbed aspect="1by1">
               {renderImage(fields.blogImage, fields.slug)}
-              <h2 className="blog-post-title">{fields.title}</h2>
-              {blogPostMeta(fields)}
-
-              <ReactMarkdown source={fields.body} className="blog-post-body" />
-
-              <div className="blog-post-footer mt-4 d-flex justify-content-between">
-                <span>
-                  {fields.tags.map(item => (
-                    <Link to={`/tags/${item}`} key={item} className="mr-2 tags">
-                      <kbd>
-                        <FaHashtag />
-                        {item}
-                      </kbd>
-                    </Link>
-                  ))}
-                </span>
-
-                <Link to={'/home'}>
-                  Back <MdChevronRight />
-                </Link>
-              </div>
-            </Col>
-          </Row>
-          <div className="dropdown-divider"></div>
-        </div>
-      )
-    })
-  } else {
-    blogObject = props.posts.map(post => {
-      let fields = post.fields
-
-      return (
-        <div className="blog-post" key={fields.slug}>
-          <Row>
-            <Col lg={4} sm={12}>
-              <ResponsiveEmbed aspect="1by1">
-                {renderImage(fields.blogImage, fields.slug)}
-              </ResponsiveEmbed>
-            </Col>
-            <Col lg={8} sm={12}>
-              <h2 className="blog-post-title">
-                <Link to={`/post/${fields.slug}`} slug={fields.slug}>
-                  {fields.title}
-                </Link>
-              </h2>
-              {blogPostMeta(fields)}
-              <p className="blog-post-body">{fields.description}</p>
-              <p className="mt-4">
-                <Link to={`/post/${fields.slug}`} style={{ float: 'right' }}>
-                  Continue reading <MdChevronRight />
-                </Link>
-              </p>
-            </Col>
-          </Row>
-          <div className="dropdown-divider"></div>
-        </div>
-      )
-    })
-  }
-
+            </ResponsiveEmbed>
+          </Col>
+          <Col lg={8} sm={12}>
+            <ReactMarkdown
+              source={fields.description}
+              renderers={{ code: CodeBlock }}
+              className="blog-post-body"
+            />
+            <p className="mt-4">
+              <Link to={`/post/${fields.slug}`} style={{ float: 'right' }}>
+                Continue reading <MdChevronRight />
+              </Link>
+            </p>
+          </Col>
+        </Row>
+        <div className="dropdown-divider"></div>
+      </div>
+    )
+  })
   return blogObject
 }
 
-export default BlogPosts
+const BlogPost = props => {
+  const fields = props.post.fields
+  return (
+    <div className="blog-post" key={fields.slug}>
+      <Helmet>
+        <title>{`${fields.metaTitle} - ${process.env.REACT_APP_TITLE}`}</title>
+        <meta name="description" content={fields.description} />
+        <meta name="og:image" content={fields.blogImage.fields.file.url} />
+      </Helmet>
+      <Row>
+        <Col>
+          {renderImage(fields.blogImage, fields.slug)}
+          <h1 className="blog-post-title">{fields.title}</h1>
+          {blogPostMeta(fields)}
+
+          <ReactMarkdown
+            source={fields.body}
+            renderers={{ code: CodeBlock }}
+            className="blog-post-body"
+          />
+
+          <div className="blog-post-footer mt-4 d-flex justify-content-between">
+            <span>
+              {fields.tags.map(item => (
+                <Link to={`/tags/${item}`} key={item} className="mr-2 tags">
+                  <kbd>
+                    <FaHashtag />
+                    {item}
+                  </kbd>
+                </Link>
+              ))}
+            </span>
+
+            <Link to={'/home'}>
+              Back <MdChevronRight />
+            </Link>
+          </div>
+        </Col>
+      </Row>
+      <div className="dropdown-divider"></div>
+    </div>
+  )
+}
+
+export { BlogPosts, BlogPost }

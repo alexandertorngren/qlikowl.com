@@ -1,12 +1,10 @@
 import React from 'react'
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import { initReactGA } from '../services/gTracker'
-//import Home from '../containers/Home'
-//Aimport BlogHome from '../containers/BlogHome'
 import LandingPage from '../containers/LandingPage'
-import Blog from '../containers/Blog'
+import { Blog, BlogTest } from '../containers/Blog'
 
-const Routes = props => {
+const Routes = () => {
   initReactGA()
   return (
     <Router>
@@ -19,7 +17,14 @@ const Routes = props => {
         <Route path="/explore" component={LandingPage} />
         <Route path="/about" component={LandingPage} />
         <Route path="/contact" component={LandingPage} />
+
+        <Route path="/test" component={BlogTest} />
         <Route component={LandingPage} />
+
+        <Redirect from="/explore" to="/" />
+        <Redirect from="/about" to="/" />
+        <Redirect from="/contact" to="/" />
+        <Redirect from="/explore" to="/" />
       </Switch>
     </Router>
   )

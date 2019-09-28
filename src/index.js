@@ -12,6 +12,9 @@ ReactDOM.render(<Routes />, document.getElementById('root'))
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
+serviceWorker.unregister()
+
+/*
 switch (process.env.NODE_ENV) {
   case 'production':
     serviceWorker.unregister()
@@ -22,3 +25,4 @@ switch (process.env.NODE_ENV) {
   default:
     serviceWorker.unregister()
 }
+*/
