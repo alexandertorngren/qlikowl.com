@@ -5,7 +5,7 @@ import LandingPage from '../containers/LandingPage'
 import { Blog, BlogTest } from '../containers/Blog'
 
 const Routes = () => {
-  console.log()
+  console.log('QlikOwl.com')
   initReactGA()
   return (
     <Router>

@@ -74,7 +74,6 @@ const BlogPosts = props => {
 }
 
 const BlogPost = props => {
-  console.log('props', props)
   if (!props.post) {
     return <Loading />
   }
