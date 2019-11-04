@@ -1,7 +1,7 @@
 {
   "name": "client",
   "description": "QlikOwl.com | A blog by Alexander Torngren",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.4.0",
     "@contentful/rich-text-types": "^13.4.0",

@@ -5,6 +5,7 @@ import LandingPage from '../containers/LandingPage'
 import { Blog, BlogTest } from '../containers/Blog'
 
 const Routes = () => {
+  console.log()
   initReactGA()
   return (
     <Router>
