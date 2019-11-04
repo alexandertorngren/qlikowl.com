@@ -18,8 +18,7 @@ const Routes = () => {
         <Route path="/about" component={LandingPage} />
         <Route path="/contact" component={LandingPage} />
 
-        <Route path="/test" component={BlogTest} />
-        <Route component={LandingPage} />
+        <Route path="/test/:slug" component={BlogTest} />
 
         <Redirect from="/explore" to="/" />
         <Redirect from="/about" to="/" />

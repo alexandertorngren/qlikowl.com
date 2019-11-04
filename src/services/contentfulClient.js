@@ -66,7 +66,7 @@ const getAssets = async () => {
 const createSocialUrl = author => {
   author.fields.github = 'https://github.com/' + author.fields.github
   author.fields.linkedIn = 'https://linkedin.com/in/' + author.fields.linkedIn
-  author.fields.facebook = 'https://www.facebook.com/' + author.fields.facebook
+  author.fields.facebook = 'https://facebook.com/' + author.fields.facebook
 
   return author
 }

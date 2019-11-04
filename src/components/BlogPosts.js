@@ -8,6 +8,7 @@ import { FaCalendarDay, FaHashtag } from 'react-icons/fa'
 import ReactMarkdown from 'react-markdown'
 import Helmet from 'react-helmet'
 import CodeBlock from '../services/CodeBlock'
+import Loading from './Loading'
 
 const DateFormated = props => <span>{new Date(props.date).toLocaleDateString()}</span>
 
@@ -73,6 +74,11 @@ const BlogPosts = props => {
 }
 
 const BlogPost = props => {
+  console.log('props', props)
+  if (!props.post) {
+    return <Loading />
+  }
+
   const fields = props.post.fields
   return (
     <div className="blog-post" key={fields.slug}>
