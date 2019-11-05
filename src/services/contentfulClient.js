@@ -21,11 +21,6 @@ const getContentTypes = async () => {
 const getPerson = async () => {
   try {
     const response = await client.getEntry('15jwOBqpxqSAOy2eOO4S0m')
-
-    response.fields.github = 'https://github.com/' + response.fields.github
-    response.fields.linkedIn = 'https://linkedin.com/in/' + response.fields.linkedIn
-    response.fields.facebook = 'https://www.facebook.com/' + response.fields.facebook
-
     return response
   } catch (error) {
     return console.error(error)
@@ -68,4 +63,21 @@ const getAssets = async () => {
   }
 }
 
-export { initClient, getPerson, getEntries, getContentTypes, getAssets, getSite, getEntry }
+const createSocialUrl = author => {
+  author.fields.github = 'https://github.com/' + author.fields.github
+  author.fields.linkedIn = 'https://linkedin.com/in/' + author.fields.linkedIn
+  author.fields.facebook = 'https://facebook.com/' + author.fields.facebook
+
+  return author
+}
+
+export {
+  initClient,
+  getPerson,
+  getEntries,
+  getContentTypes,
+  getAssets,
+  getSite,
+  getEntry,
+  createSocialUrl
+}

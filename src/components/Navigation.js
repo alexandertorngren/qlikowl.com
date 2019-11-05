@@ -7,6 +7,7 @@ import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { MdHome, MdPermContactCalendar, MdBook, MdDeveloperMode } from 'react-icons/md'
 import { GoGitBranch, GoRepo } from 'react-icons/go'
 import { NavLink } from 'react-router-dom'
+
 import {
   DiReact,
   DiJavascript1,
@@ -26,6 +27,8 @@ import {
   DiPhp,
   DiVisualstudio,
   */
+
+const activeStyle = { color: '#ccc' }
 
 class Navigation extends React.Component {
   state = {
@@ -59,7 +62,7 @@ class Navigation extends React.Component {
           }
           id="navbar-offcanvas-collapse">
           <Nav className="ml-2 mr-auto">
-            <NavLink to={'/home'} className="nav-link">
+            <NavLink to={'/home'} className="nav-link" activeStyle={activeStyle}>
               <MdHome /> Home
             </NavLink>
             <NavDropdown
@@ -106,20 +109,10 @@ class Navigation extends React.Component {
                 <DiSymfonyBadge /> Symfony / PHP
               </NavDropdown.Item>
             </NavDropdown>
-            <NavLink
-              to={'/about'}
-              className="nav-link"
-              activeStyle={{
-                fontWeight: 'bold'
-              }}>
+            <NavLink to={'/about'} className="nav-link" activeStyle={activeStyle}>
               <MdBook /> About me
             </NavLink>
-            <NavLink
-              to={'/contact'}
-              className="nav-link"
-              activeStyle={{
-                color: '#fff'
-              }}>
+            <NavLink to={'/contact'} className="nav-link" activeStyle={activeStyle}>
               <MdPermContactCalendar /> Get in touch
             </NavLink>
           </Nav>

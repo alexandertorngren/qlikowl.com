@@ -1,33 +1,40 @@
-# QlikOwl
-## A blog about my journey with BI, Qlik and development, moving towards cloud and SAAS.
-<div align="center">
-
-## ***Powered*** by <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" height="50"> ***React*** using `create-react-app` [![Create React App @ NPM][npm-image]][npm-url]
-
-</div>
-
-____
+# Qlik Owl
 
 <div align="center">
 
-[![Netlify Status][netlify-status-img]][netlify-status-url]
-[![Github Tag][github-tag-image]][github-tag-url]
-[![Build Status][travis-image]][travis-url]
-[![Dependency Status][david_img]][david_site]
-[![Website Status][url-status-img]][url-status-url]
+> A blog about my journey with BI, Qlik and development, moving towards cloud and SAAS.
+>
+> This web app is powered by **_[React](https://reactjs.org)_** <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" height="20"> and **_[create-react-app](https://create-react-app.dev)_** [![Create React App @ NPM][npm-image]][npm-url]
+
+[![Netlify Status][netlify-img]][netlify-url]
+[![Github Tag][tag-img]][tag-url]
+[![NPM Dependency Status][pkg_img]][pkg_url]
+[![Website Status][web-img]][web-url]
+
+[![Check It Out][check-it-out]][web-url][![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)][web-url][![forthebadge](https://forthebadge.com/images/badges/powered-by-netflix.svg)][web-url]
+
+---
+
+![Start Page](misc/startpage.png)
+
+![Phone](misc/phone.png) ![Phone Menu](misc/phone-menu.png)
 
 </div>
 
-<div align="center">
+---
 
-[![Check It Out][check-it-out]][url-status-url][![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)[![forthebadge](https://forthebadge.com/images/badges/powered-by-netflix.svg)](https://forthebadge.com)
+## Get started
 
-</div>
+```bash
+> git clone https://github.com/alexandertorngren/qlikowl.com.git
 
-```bash 
-$ npm install
+> cd ./qlikowl.com
 
-# running test...
+> npm install
+
+# When the installation is done, run this to start the server
+> npm start
+# Server running on http://localhost:3000
 ```
 
 ## Available Scripts
@@ -71,31 +78,47 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## License
+## Release History
 
-&copy; Copyright 2019 | QlikOwl by [Alexander Torngren](mailto:alexander.torngren@drakeanalytics.se?subject=[GitRepo][qlikowl.com]) | All Right Reserved
+- 0.1.5
+  - CHANGE: Implementing Contentful and Netlify
+- 0.2.0
+  - CHANGE: Continuing to develop the framework, working with props and layout
+- 0.2.5
+  - CHANGE: Added scroll handler, fixed css, changed featured posts and much more
 
-[github-commit-img]: https://img.shields.io/github/last-commit/alexandertorngren/qlikowl.com?style=flat-square
+## Meta
 
-[github-license-img]: https://img.shields.io/github/license/alexandertorngren/qlikowl.com?style=flat-square
-[github-license-url]: https://github.com/alexandertorngren/qlikowl.com/blob/master/LICENSE
+Alexander Torngren - [QlikOwl.com][web-url]
 
-[github-tag-image]: https://img.shields.io/github/package-json/v/alexandertorngren/qlikowl.com?style=flat-square
-[github-tag-url]: https://github.com/alexandertorngren/qlikowl.com
+Distributed under the [![License][license-img]][license-url]. See [LICENSE][license-url] for more information.
 
-[david_img]: https://img.shields.io/david/alexandertorngren/qlikowl.com?style=flat-square
-[david_site]: https://david-dm.org/alexandertorngren/qlikowl.com
+[https://github.com/yourname/github-link](https://github.com/dbader/)
 
-[travis-image]: https://img.shields.io/travis/com/alexandertorngren/qlikowl.com?style=flat-square
-[travis-url]: https://travis-ci.org/alexandertorngren/qlikowl.com
+## Contributing
 
-[npm-image]: https://img.shields.io/npm/v/create-react-app?style=flat-square
+1. [Fork it][fork-url]
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+<!-- Markdown link & img dfn's -->
+
+[commit-img]: https://img.shields.io/github/last-commit/alexandertorngren/qlikowl.com?style=flat-square
+[license-img]: https://img.shields.io/github/license/alexandertorngren/qlikowl.com?style=flat-square
+[license-url]: https://github.com/alexandertorngren/qlikowl.com/blob/master/LICENSE
+[fork-url]: https://github.com/alexandertorngren/qlikowl.com/fork/
+[tag-img]: https://img.shields.io/github/package-json/v/alexandertorngren/qlikowl.com?style=flat-square
+[tag-url]: https://github.com/alexandertorngren/qlikowl.com
+[pkg_img]: https://img.shields.io/david/alexandertorngren/qlikowl.com?style=flat-square
+[pkg_url]: https://david-dm.org/alexandertorngren/qlikowl.com
+[npm-img]: https://img.shields.io/npm/v/create-react-app?style=flat-square
 [npm-url]: https://www.npmjs.com/package/create-react-app
-
-[netlify-status-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status?style=flat-square
-[netlify-status-url]: https://app.netlify.com/sites/qlikowl/deploys
-
-[url-status-img]: https://img.shields.io/website/http/qlikowl.netlify.com?down_color=lightgrey&down_message=offline&style=flat-square&up_color=blue&up_message=online
-[url-status-url]: http://qlikowl.netlify.com
-
+[netlify-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status?style=flat-square
+[netlify-url]: https://app.netlify.com/sites/qlikowl/deploys
+[web-img]: https://img.shields.io/website/http/qlikowl.netlify.com?down_color=lightgrey&down_message=offline&style=flat-square&up_color=blue&up_message=online
+[web-url]: https://qlikowl.com
 [check-it-out]: https://forthebadge.com/images/badges/check-it-out.svg
+[netlify-img]: https://api.netlify.com/api/v1/badges/fb30cf44-6f5e-4ab7-9c55-501985ea0dc6/deploy-status?style=flat-square
+[netlify-url]: https://app.netlify.com/sites/qlikowl/deploys

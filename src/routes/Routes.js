@@ -1,15 +1,17 @@
 import React from 'react'
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import { initReactGA } from '../services/gTracker'
-//import Home from '../containers/Home'
-//Aimport BlogHome from '../containers/BlogHome'
 import LandingPage from '../containers/LandingPage'
-import Blog from '../containers/Blog'
+import { Blog } from '../containers/Blog'
 
-const Routes = props => {
+//import { Blog, BlogTest } from '../containers/Blog'
+// <Route path="/test/:slug" component={BlogTest} />
+
+export default () => {
+  console.log('QlikOwl.com')
   initReactGA()
   return (
-    <Router>
+    <Router onUpdate={() => window.scrollTo(0, 0)}>
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route path="/home" component={Blog} />
@@ -19,10 +21,12 @@ const Routes = props => {
         <Route path="/explore" component={LandingPage} />
         <Route path="/about" component={LandingPage} />
         <Route path="/contact" component={LandingPage} />
-        <Route component={LandingPage} />
+
+        <Redirect from="/explore" to="/" />
+        <Redirect from="/about" to="/" />
+        <Redirect from="/contact" to="/" />
+        <Redirect from="/explore" to="/" />
       </Switch>
     </Router>
   )
 }
-
-export default Routes

@@ -30,7 +30,7 @@
   color: #999;
 }
 
-@media (min-width: 40em) {
+@media (min-width: 768px) {
   .blog-title {
     font-size: 3.5rem;
   }
@@ -59,10 +59,9 @@
    * Blog posts
    */
 .blog-post {
-  margin-bottom: 4rem;
   .blog-post-title {
     margin-bottom: 0.25rem;
-    font-size: 2.2rem;
+
     a {
       color: $github;
       &:hover {
@@ -93,6 +92,10 @@
   }
   .blog-post-body {
     text-align: justify;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
   }
   .blog-post-footer {
     a.tags {

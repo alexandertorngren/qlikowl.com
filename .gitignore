@@ -27,8 +27,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-_*
-
-/.netlify
-
+# windows
 desktop.ini
+
+# Netlify
+/.netlify
+netlify.toml
+
+# Local folders containing backups, notes and media
+_*
