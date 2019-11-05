@@ -1,7 +1,7 @@
 {
   "name": "client",
   "description": "QlikOwl.com | A blog by Alexander Torngren",
-  "version": "0.2.1",
+  "version": "0.2.5",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.4.0",
     "@contentful/rich-text-types": "^13.4.0",
@@ -55,7 +55,7 @@
   "repository": "github:alexandertorngren/qlikowl.com.git",
   "author": "Alexander Torngren <alexander.torngren@drakeanalytics.se> (https://qlikowl.com)",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/alexandertorngren/qlikowl.com/issues"
   },

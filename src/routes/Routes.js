@@ -2,7 +2,10 @@ import React from 'react'
 import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import { initReactGA } from '../services/gTracker'
 import LandingPage from '../containers/LandingPage'
-import { Blog, BlogTest } from '../containers/Blog'
+import { Blog } from '../containers/Blog'
+
+//import { Blog, BlogTest } from '../containers/Blog'
+// <Route path="/test/:slug" component={BlogTest} />
 
 export default () => {
   console.log('QlikOwl.com')
@@ -18,8 +21,6 @@ export default () => {
         <Route path="/explore" component={LandingPage} />
         <Route path="/about" component={LandingPage} />
         <Route path="/contact" component={LandingPage} />
-
-        <Route path="/test/:slug" component={BlogTest} />
 
         <Redirect from="/explore" to="/" />
         <Redirect from="/about" to="/" />

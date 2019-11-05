@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+//import React, { useState, useEffect } from 'react'
 import SideBar from '../components/SideBar'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -8,69 +9,12 @@ import { BlogPosts, BlogPost } from '../components/BlogPosts'
 import Header from '../components/Header'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { getEntries, getSite, getEntry, createSocialUrl } from '../services/contentfulClient'
 import Loading from '../components/Loading'
 import { trackPage } from '../services/gTracker'
-import Button from 'react-bootstrap/Button'
+//import Button from 'react-bootstrap/Button'
 import HandleScroll from '../services/HandleScroll'
-
-const BlogTest = props => {
-  const [site, setSite] = useState(null)
-  const [author, setAuthor] = useState(null)
-  const [posts, setPosts] = useState(null)
-  const [background, setBackground] = useState(null)
-  const [slug, setSlug] = useState(props.match.params.slug)
-
-  useEffect(() => {
-    // API call
-    console.log(props)
-    async function fetchData() {
-      const site = await getSite()
-      createSocialUrl(site.fields.owner)
-      console.log(site)
-      setSite(site)
-    }
-
-    async function fetchPosts() {
-      const posts = await getEntries({
-        content_type: 'blogPost',
-        'fields.slug': slug,
-        'fields.tags': props.match.params.tag,
-        'fields.featured': false,
-        order: '-fields.publishDate'
-      })
-      console.log(posts)
-      setPosts(posts)
-    }
-
-    async function fetchBackground() {
-      const background = await getEntry('H0EjxqdvViOmSP4VTDML7')
-      const [images] = background.image
-      console.log(images.fields.file.url)
-      setBackground(images.fields.file.url)
-    }
-
-    fetchData()
-    fetchPosts()
-    fetchBackground()
-    // eslint-disable-next-line
-  }, [slug]) // Run once
-
-  return (
-    <div>
-      <Button
-        variant="secondary"
-        size="sm"
-        block
-        onClick={() => {
-          setSlug('hello-world')
-        }}>
-        Update State
-      </Button>
-    </div>
-  )
-}
 
 class Blog extends React.Component {
   state = {
@@ -231,4 +175,66 @@ class Blog extends React.Component {
   }
 }
 
-export { Blog, BlogTest }
+// TEST
+/*
+const BlogTest = props => {
+  const [site, setSite] = useState(null)
+  const [author, setAuthor] = useState(null)
+  const [posts, setPosts] = useState(null)
+  const [background, setBackground] = useState(null)
+  const [slug, setSlug] = useState(props.match.params.slug)
+
+  useEffect(() => {
+    // API call
+    console.log(props)
+    async function fetchData() {
+      const site = await getSite()
+      createSocialUrl(site.fields.owner)
+      console.log(site)
+      setSite(site)
+    }
+
+    async function fetchPosts() {
+      const posts = await getEntries({
+        content_type: 'blogPost',
+        'fields.slug': slug,
+        'fields.tags': props.match.params.tag,
+        'fields.featured': false,
+        order: '-fields.publishDate'
+      })
+      console.log(posts)
+      setPosts(posts)
+    }
+
+    async function fetchBackground() {
+      const background = await getEntry('H0EjxqdvViOmSP4VTDML7')
+      const [images] = background.image
+      console.log(images.fields.file.url)
+      setBackground(images.fields.file.url)
+    }
+
+    fetchData()
+    fetchPosts()
+    fetchBackground()
+    // eslint-disable-next-line
+  }, [slug]) // Run once
+
+  return (
+    <div>
+      <Button
+        variant="secondary"
+        size="sm"
+        block
+        onClick={() => {
+          setSlug('hello-world')
+        }}>
+        Update State
+      </Button>
+    </div>
+  )
+}
+
+*/
+
+//export { Blog, BlogTest }
+export { Blog }

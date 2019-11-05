@@ -1,6 +1,5 @@
 import React from 'react'
 import Navigation from '../components/Navigation'
-import Col from 'react-bootstrap/Col'
 import { IoLogoGithub, IoLogoFacebook, IoLogoLinkedin } from 'react-icons/io'
 import { MdChevronRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
