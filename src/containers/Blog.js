@@ -13,6 +13,7 @@ import { getEntries, getSite, getEntry, createSocialUrl } from '../services/cont
 import Loading from '../components/Loading'
 import { trackPage } from '../services/gTracker'
 import Button from 'react-bootstrap/Button'
+import HandleScroll from '../services/HandleScroll'
 
 const BlogTest = props => {
   const [site, setSite] = useState(null)
@@ -72,26 +73,19 @@ const BlogTest = props => {
 }
 
 class Blog extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      site: null,
-      author: null,
-      slug: null,
-      tag: null,
-      posts: [],
-      initialFetch: true,
-      dataLoaded: false
-    }
+  state = {
+    site: null,
+    author: null,
+    slug: null,
+    tag: null,
+    posts: [],
+    initialFetch: true,
+    dataLoaded: false
   }
 
-  scrollAction = () => {
-    console.log(this.offset)
-    return alert('Scroll here :)')
-  }
+  myRef = React.createRef()
 
-  componentDidMount() {
+  componentDidMount = () => {
     if (
       this.state.initialFetch ||
       (this.props.match.params.slug === undefined && this.props.match.params.tag === undefined)
@@ -100,6 +94,8 @@ class Blog extends React.Component {
     } else {
       this.fetchData()
     }
+
+    HandleScroll(this.props, this.myRef)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -111,6 +107,8 @@ class Blog extends React.Component {
     ) {
       this.fetchData()
     }
+
+    HandleScroll(this.props, this.myRef)
     return null
   }
 
@@ -188,8 +186,9 @@ class Blog extends React.Component {
     }
 
     const { site, author, posts, background } = this.state
+
     return (
-      <div>
+      <div ref={this.myRef}>
         <Navigation site={site} author={author} />
         <Route
           exact
@@ -222,7 +221,11 @@ class Blog extends React.Component {
             </Row>
           </Card>
         </Container>
-        <Footer site={site} author={author} />
+        <Footer
+          site={site}
+          author={author}
+          scroll={(props, myRef) => HandleScroll(this.props, this.myRef)}
+        />
       </div>
     )
   }

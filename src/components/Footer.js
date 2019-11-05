@@ -4,12 +4,24 @@ import Loading from './Loading'
 
 const DateFormated = props => <span>{new Date(props.date).toLocaleDateString().substr(0, 4)}</span>
 
+const Back = props => {
+  return props.spc ? (
+    <p></p>
+  ) : (
+    <p>
+      <button type="button" className="btn btn-link" onClick={props.scroll}>
+        Back to top
+      </button>
+    </p>
+  )
+}
+
 const Footer = props => {
   if (!props) {
     return <Loading />
   }
 
-  const { site, author } = props
+  const { site, author, spc, scroll } = props
 
   if (site.copyright) {
     return (
@@ -24,9 +36,7 @@ const Footer = props => {
             <DiReact size={30} /> React
           </a>
         </p>
-        <p>
-          <a href="#top">Back to top</a>
-        </p>
+        <Back spc={spc} scroll={scroll} />
       </footer>
     )
   } else {
@@ -43,9 +53,7 @@ const Footer = props => {
             <DiReact size={30} /> React
           </a>
         </p>
-        <p>
-          <a href="#top">Back to top</a>
-        </p>
+        <Back spc={spc} scroll={scroll} />
       </footer>
     )
   }

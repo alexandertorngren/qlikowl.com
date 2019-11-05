@@ -1,6 +1,8 @@
 @import './colors';
 
 .carousel {
+  padding-top: 56px;
+
   .carousel-inner {
     max-height: 700px;
     min-height: 500px;
@@ -47,5 +49,11 @@
         }
       }
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .carousel {
+    padding-top: 62px;
   }
 }

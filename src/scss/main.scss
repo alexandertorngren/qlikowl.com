@@ -21,11 +21,11 @@ body,
   height: 100%;
 }
 
-body {
+.main {
   padding-top: 56px;
 }
 @media (min-width: 768px) {
-  body {
+  .main {
     padding-top: 62px;
   }
 }
@@ -124,6 +124,14 @@ a {
 
     @media (min-width: 768px) {
     }
+  }
+}
+
+.btn-link {
+  color: $green_dark;
+  &:hover {
+    color: $green_light;
+    text-decoration: none;
   }
 }
 
