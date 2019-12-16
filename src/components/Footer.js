@@ -2,34 +2,36 @@ import React from 'react'
 import { DiReact } from 'react-icons/di'
 import Loading from './Loading'
 
-const DateFormated = props => <span>{new Date(props.date).toLocaleDateString().substr(0, 4)}</span>
+const DateFormated = (props) => (
+  <span>{new Date(props.date).toLocaleDateString().substr(0, 4)}</span>
+)
 
-const Back = props => {
+const Back = (props) => {
   return props.spc ? (
     <p></p>
   ) : (
     <p>
-      <button type="button" className="btn btn-link" onClick={props.scroll}>
+      <button type="button" className="btn btn-link" onClick={() => window.scrollTo(0, 0)}>
         Back to top
       </button>
     </p>
   )
 }
 
-const Footer = props => {
+const Footer = (props) => {
   if (!props) {
     return <Loading />
   }
 
-  const { site, author, spc, scroll } = props
+  const { site, spc, scroll } = props
 
   if (site.copyright) {
     return (
       <footer className={props.className ? `blog-footer ${props.className}` : 'blog-footer'}>
         <p>
           © Copyright <DateFormated date={site.publishDate} /> | {site.siteName} by{' '}
-          <a href={`mailto:${author.email}`} alt={author.name}>
-            {author.name}
+          <a href={`mailto:${site.owner.email}`} alt={site.owner.name}>
+            {site.owner.name}
           </a>{' '}
           | All Right Reserved | Powered by{' '}
           <a href="https://reactjs.org/" className="react">
@@ -45,8 +47,8 @@ const Footer = props => {
         <p>
           {site.siteName} <DateFormated date={site.publishDate} />
           {' by '}
-          <a href={`mailto:${author.email}`} alt={author.name}>
-            {author.name}
+          <a href={`mailto:${site.owner.email}`} alt={site.owner.name}>
+            {site.owner.name}
           </a>{' '}
           | Powered by{' '}
           <a href="https://reactjs.org/" className="react">

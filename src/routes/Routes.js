@@ -4,16 +4,13 @@ import { initReactGA } from '../services/gTracker'
 import LandingPage from '../containers/LandingPage'
 import { Blog } from '../containers/Blog'
 
-//import { Blog, BlogTest } from '../containers/Blog'
-// <Route path="/test/:slug" component={BlogTest} />
-
 export default () => {
-  console.log('QlikOwl.com')
   initReactGA()
   return (
-    <Router onUpdate={() => window.scrollTo(0, 0)}>
+    <Router>
       <Switch>
         <Route exact path="/" component={LandingPage} />
+
         <Route path="/home" component={Blog} />
         <Route path="/post/:slug" component={Blog} />
         <Route path="/tags/:tag" component={Blog} />

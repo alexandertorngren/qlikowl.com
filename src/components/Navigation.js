@@ -1,12 +1,9 @@
 import React from 'react'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Container from 'react-bootstrap/Container'
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
 import { IoLogoGithub, IoLogoLinkedin, IoLogoFacebook } from 'react-icons/io'
 import { MdHome, MdPermContactCalendar, MdBook, MdDeveloperMode } from 'react-icons/md'
 import { GoGitBranch, GoRepo } from 'react-icons/go'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import {
   DiReact,
@@ -28,10 +25,11 @@ import {
   DiVisualstudio,
   */
 
-const activeStyle = { color: '#ccc' }
+//const activeStyle = { color: '#ccc' }
 
 class Navigation extends React.Component {
   state = {
+    toggleClass: 'offcanvas-collapse navbar-collapse',
     isToggleOpen: false,
     width: 250
   }
@@ -42,7 +40,11 @@ class Navigation extends React.Component {
 
   navToggler() {
     const currentState = this.state.isToggleOpen
+    const toggleClass = !currentState
+      ? 'offcanvas-collapse navbar-collapse open'
+      : 'offcanvas-collapse navbar-collapse'
     this.setState({
+      toggleClass,
       isToggleOpen: !currentState
     })
   }
@@ -54,17 +56,11 @@ class Navigation extends React.Component {
           aria-controls="navbar-offcanvas-collapse"
           onClick={() => this.navToggler()}
         />
-        <div
-          className={
-            this.state.isToggleOpen
-              ? 'offcanvas-collapse navbar-collapse open'
-              : 'offcanvas-collapse navbar-collapse'
-          }
-          id="navbar-offcanvas-collapse">
+        <div className={this.state.toggleClass} id="navbar-offcanvas-collapse">
           <Nav className="ml-2 mr-auto">
-            <NavLink to={'/home'} className="nav-link" activeStyle={activeStyle}>
+            <Link to={'/home'} className="nav-link">
               <MdHome /> Home
-            </NavLink>
+            </Link>
             <NavDropdown
               title={
                 <span>
@@ -109,12 +105,12 @@ class Navigation extends React.Component {
                 <DiSymfonyBadge /> Symfony / PHP
               </NavDropdown.Item>
             </NavDropdown>
-            <NavLink to={'/about'} className="nav-link" activeStyle={activeStyle}>
+            <Nav.Link to={'/about'} className="nav-link">
               <MdBook /> About me
-            </NavLink>
-            <NavLink to={'/contact'} className="nav-link" activeStyle={activeStyle}>
+            </Nav.Link>
+            <Link to={'/contact'} className="nav-link">
               <MdPermContactCalendar /> Get in touch
-            </NavLink>
+            </Link>
           </Nav>
           {this.createSocial(author)}
         </div>
@@ -140,7 +136,9 @@ class Navigation extends React.Component {
 
   render() {
     const { site, author } = this.props
-
+    if (!site && !author) {
+      return false
+    }
     return (
       <Navbar variant="dark" expand="lg" fixed="top">
         <Container>
