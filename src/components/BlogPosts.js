@@ -1,25 +1,25 @@
-import React from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
-import { Link } from 'react-router-dom';
-import { MdPersonPin, MdChevronRight } from 'react-icons/md';
-import { FaCalendarDay, FaHashtag } from 'react-icons/fa';
-import ReactMarkdown from 'react-markdown';
-import Helmet from 'react-helmet';
-import codeBlock from '../services/codeBlock';
-import Loading from './Loading';
+import React from 'react'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
+import { Link } from 'react-router-dom'
+import { MdPersonPin, MdChevronRight } from 'react-icons/md'
+import { FaCalendarDay, FaHashtag } from 'react-icons/fa'
+import ReactMarkdown from 'react-markdown'
+import Helmet from 'react-helmet'
+import CodeBlock from './CodeBlock'
+import Loading from './Loading'
 
-const DateFormated = props => <span>{new Date(props.date).toLocaleDateString()}</span>;
+const DateFormated = (props) => <span>{new Date(props.date).toLocaleDateString()}</span>
 
-const blogPostMeta = fields => (
+const blogPostMeta = (fields) => (
   <p className="blog-post-meta">
     <FaCalendarDay /> <DateFormated date={fields.publishDate} /> by{' '}
     <Link to={`/author/${fields.author.fields.slug}`}>
       <MdPersonPin /> {fields.author.fields.name}
     </Link>
   </p>
-);
+)
 
 const renderImage = (image, slug) => {
   if (image && image.fields.file) {
@@ -27,13 +27,13 @@ const renderImage = (image, slug) => {
       <Link to={`/post/${slug}`}>
         <img className="blog-post-image" src={image.fields.file.url} alt={image.fields.title} />
       </Link>
-    );
+    )
   }
-};
+}
 
-const BlogPosts = props => {
-  const blogObject = props.posts.map(post => {
-    let fields = post.fields;
+const BlogPosts = (props) => {
+  const blogObject = props.posts.map((post) => {
+    let fields = post.fields
 
     return (
       <div className="blog-post" key={fields.slug}>
@@ -56,7 +56,7 @@ const BlogPosts = props => {
           <Col lg={8} sm={12}>
             <ReactMarkdown
               source={fields.description}
-              renderers={{ code: codeBlock }}
+              renderers={{ code: CodeBlock }}
               className="blog-post-body"
             />
             <p className="mt-4">
@@ -68,17 +68,17 @@ const BlogPosts = props => {
         </Row>
         <div className="dropdown-divider"></div>
       </div>
-    );
-  });
-  return blogObject;
-};
+    )
+  })
+  return blogObject
+}
 
-const BlogPost = props => {
+const BlogPost = (props) => {
   if (!props.post) {
-    return <Loading />;
+    return <Loading />
   }
 
-  const fields = props.post.fields;
+  const fields = props.post.fields
   return (
     <div className="blog-post" key={fields.slug}>
       <Helmet>
@@ -94,13 +94,13 @@ const BlogPost = props => {
 
           <ReactMarkdown
             source={fields.body}
-            renderers={{ code: codeBlock }}
+            renderers={{ code: CodeBlock }}
             className="blog-post-body"
           />
 
           <div className="blog-post-footer mt-4 d-flex justify-content-between">
             <span>
-              {fields.tags.map(item => (
+              {fields.tags.map((item) => (
                 <Link to={`/tags/${item}`} key={item} className="mr-2 tags">
                   <kbd>
                     <FaHashtag />
@@ -118,7 +118,7 @@ const BlogPost = props => {
       </Row>
       <div className="dropdown-divider"></div>
     </div>
-  );
-};
+  )
+}
 
-export { BlogPosts, BlogPost };
+export { BlogPosts, BlogPost }
