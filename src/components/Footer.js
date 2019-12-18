@@ -18,47 +18,49 @@ const Back = (props) => {
   )
 }
 
+const PoweredBy = () => (
+  <span>
+    {' '}
+    Powered by{' '}
+    <a href="https://reactjs.org/" className="react">
+      <DiReact size={30} /> React
+    </a>
+  </span>
+)
+
+const Owner = ({ ...props }) => {
+  console.log(props)
+  return (
+    <span>
+      by{' '}
+      <a href={`mailto:${props.author.email}`} alt={props.author.name}>
+        {props.author.name}
+      </a>{' '}
+    </span>
+  )
+}
+
+const FooterElement = ({ ...props }) => {
+  return (
+    <footer className={props.className ? `blog-footer ${props.className}` : 'blog-footer'}>
+      <p>
+        {props.site.copyright ? '© Copyright ' : props.site.siteName}{' '}
+        <DateFormated date={props.site.publishDate} /> <Owner {...props} /> |
+        <PoweredBy />
+      </p>
+      <Back spc={props.spc} scroll={props.scroll} />
+    </footer>
+  )
+}
+
 const Footer = (props) => {
   if (!props) {
     return <Loading />
   }
+  // const { site, spc, scroll, className, copyright } = props
+  //const item = { site, spc, scroll, className, copyright }
 
-  const { site, spc, scroll } = props
-
-  if (site.copyright) {
-    return (
-      <footer className={props.className ? `blog-footer ${props.className}` : 'blog-footer'}>
-        <p>
-          © Copyright <DateFormated date={site.publishDate} /> | {site.siteName} by{' '}
-          <a href={`mailto:${site.owner.email}`} alt={site.owner.name}>
-            {site.owner.name}
-          </a>{' '}
-          | All Right Reserved | Powered by{' '}
-          <a href="https://reactjs.org/" className="react">
-            <DiReact size={30} /> React
-          </a>
-        </p>
-        <Back spc={spc} scroll={scroll} />
-      </footer>
-    )
-  } else {
-    return (
-      <footer className={props.className ? `blog-footer ${props.className}` : 'blog-footer'}>
-        <p>
-          {site.siteName} <DateFormated date={site.publishDate} />
-          {' by '}
-          <a href={`mailto:${site.owner.email}`} alt={site.owner.name}>
-            {site.owner.name}
-          </a>{' '}
-          | Powered by{' '}
-          <a href="https://reactjs.org/" className="react">
-            <DiReact size={30} /> React
-          </a>
-        </p>
-        <Back spc={spc} scroll={scroll} />
-      </footer>
-    )
-  }
+  return <FooterElement {...props} />
 }
 
 export default Footer

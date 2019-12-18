@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import { Link } from 'react-router-dom'
-import { MdPersonPin, MdChevronRight } from 'react-icons/md'
+import { MdPersonPin, MdChevronRight, MdChevronLeft } from 'react-icons/md'
 import { FaCalendarDay, FaHashtag } from 'react-icons/fa'
 import ReactMarkdown from 'react-markdown'
 import Helmet from 'react-helmet'
@@ -99,6 +99,9 @@ const BlogPost = (props) => {
           />
 
           <div className="blog-post-footer mt-4 d-flex justify-content-between">
+            <Link to={'/home'}>
+              <MdChevronLeft /> Back
+            </Link>
             <span>
               {fields.tags.map((item) => (
                 <Link to={`/tags/${item}`} key={item} className="mr-2 tags">
@@ -109,10 +112,6 @@ const BlogPost = (props) => {
                 </Link>
               ))}
             </span>
-
-            <Link to={'/home'}>
-              Back <MdChevronRight />
-            </Link>
           </div>
         </Col>
       </Row>

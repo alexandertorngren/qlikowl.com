@@ -3,7 +3,6 @@
    */
 .blog-footer {
   padding: 1.5rem 1.5rem;
-  margin-top: 2.5rem;
   color: #999;
   text-align: center;
   background-color: #f9f9f9;
@@ -26,5 +25,6 @@
 @media (min-width: 768px) {
   .blog-footer {
     padding: 2.5rem 1.5rem;
+    margin-top: 2.5rem;
   }
 }

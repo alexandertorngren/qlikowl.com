@@ -22,7 +22,7 @@ const Blog = (props) => {
     const getData = async () => {
       try {
         let site = await client.getEntry(process.env.REACT_APP_SITE_ID)
-        let bg = await (await client.getEntry(process.env.REACT_APP_BG_ID)).fields.image
+        let background = await client.getEntry(process.env.REACT_APP_BG_ID)
 
         let posts = await client.getEntries({
           content_type: 'blogPost',
@@ -31,13 +31,26 @@ const Blog = (props) => {
           order: '-fields.publishDate'
         })
 
+        let featured = await client.getEntries({
+          content_type: 'blogPost',
+          'fields.slug': props.match.params.slug,
+          'fields.tags': props.match.params.tag,
+          'fields.featured': true,
+          order: '-fields.publishDate'
+        })
+
+        let bg = background.fields.image
+
         setState({
           slug: props.match.params.slug,
           tag: props.match.params.tag,
           background: bg[Math.floor(Math.random() * +bg.length - 1)].fields.file.url,
           posts: posts.items,
           site: site.fields,
-          loaded: true
+          loaded: true,
+          height: window.innerHeight,
+          width: window.innerWidth,
+          featured: featured.items[0]
         })
       } catch (error) {
         console.log(error)
@@ -47,49 +60,38 @@ const Blog = (props) => {
     window.scrollTo(0, 0)
   }, [props, pathname])
 
-  if (!state.loaded) {
+  if (!state.loaded || !state.posts) {
     return <Loading />
   }
 
-  const { site, posts, background } = state
+  const { site, posts, featured, background, height } = state
 
   return (
     <div>
       <Navigation site={site} author={site.owner.fields} />
-      <Route
-        exact
-        path="/home"
-        render={() => (
-          <Header author={site.owner.fields} featured={posts[0]} background={background} />
-        )}
-      />
-      <Container className="main">
-        <Card
-          body
-          style={
-            props.match.params.slug || props.match.params.tag
-              ? { marginTop: '2rem' }
-              : { marginTop: '-50px' }
-          }>
-          <Row>
-            <Col lg="8" sm="12">
-              <Switch>
-                <Route
-                  exact
-                  path={'/home' || '/posts'}
-                  render={() => <BlogPosts posts={posts} />}
-                />
-                <Route path={'/tags/:tag'} render={() => <BlogPosts posts={posts} />} />
-                <Route path={'/post/:slug'} render={() => <BlogPost post={posts[0]} />} />
-              </Switch>
-            </Col>
-            <Col lg="4" sm="12">
-              <SideBar author={site.owner.fields} />
-            </Col>
-          </Row>
-        </Card>
-      </Container>
-      <Footer site={site} author={site.owner.fields} />
+      <Header featured={featured || posts[0]} background={background} height={height}>
+        <Container className="main">
+          <Card body className="p-md-4 p-sm-1">
+            <Row>
+              <Col lg="8" sm="12">
+                <Switch>
+                  <Route
+                    exact
+                    path={'/home' || '/posts'}
+                    render={() => <BlogPosts posts={posts} />}
+                  />
+                  <Route path={'/tags/:tag'} render={() => <BlogPosts posts={posts} />} />
+                  <Route path={'/post/:slug'} render={() => <BlogPost post={posts[0]} />} />
+                </Switch>
+              </Col>
+              <Col lg="4" sm="12">
+                <SideBar author={site.owner.fields} />
+              </Col>
+            </Row>
+          </Card>
+        </Container>
+        <Footer site={site} author={site.owner.fields} />
+      </Header>
     </div>
   )
 }

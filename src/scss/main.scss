@@ -21,15 +21,6 @@ body,
   height: 100%;
 }
 
-.main {
-  padding-top: 56px;
-}
-@media (min-width: 768px) {
-  .main {
-    padding-top: 62px;
-  }
-}
-
 $bgcolor: #efefef;
 $font-size: 2.5rem;
 
@@ -152,11 +143,17 @@ a {
   top: 0;
 }
 
+@media (max-width: 768px) {
+  .main.container {
+    padding: 0;
+  }
+}
+
 @import './fonts';
 //@import './_header';
 @import './featured';
 @import './blog';
 @import './preloader';
 @import './offcanvas';
-@import './carousel';
+//@import './carousel';
 @import './Footer';
