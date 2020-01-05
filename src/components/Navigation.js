@@ -26,7 +26,7 @@ import {
   DiVisualstudio,
   */
 
-const NavComponent = (...props) => {
+const NavComponent = ({ ...author }) => {
   const { on, getTogglerProps } = useToggle()
   return (
     <div className="nav-width">
@@ -92,39 +92,38 @@ const NavComponent = (...props) => {
           </Link>
         </Nav>
 
-        <SocialComponent {...props} />
+        <SocialComponent {...author} />
       </div>
     </div>
   )
 }
 
-const SocialComponent = (...author) => (
-  <Nav className="ml-auto social">
-    <Nav.Link href={author.github} target="_blank">
-      <IoLogoGithub size={30} />
-    </Nav.Link>
-    <Nav.Link href={author.linkedIn} target="_blank">
-      <IoLogoLinkedin size={30} />
-    </Nav.Link>
-    <Nav.Link href={author.facebook} target="_blank">
-      <IoLogoFacebook size={30} />
-    </Nav.Link>
-  </Nav>
-)
+const SocialComponent = ({ ...author }) => {
+  return (
+    <Nav className="ml-auto social">
+      <Nav.Link href={author.github} target="_blank">
+        <IoLogoGithub size={30} />
+      </Nav.Link>
+      <Nav.Link href={author.linkedIn} target="_blank">
+        <IoLogoLinkedin size={30} />
+      </Nav.Link>
+      <Nav.Link href={author.facebook} target="_blank">
+        <IoLogoFacebook size={30} />
+      </Nav.Link>
+    </Nav>
+  )
+}
 
 const Navigation = (props) => {
-  const { site, author } = props
+  const { site, author, path } = props
+
   return (
     <Navbar variant="dark" expand="lg" fixed="top">
       <Container>
         <Navbar.Brand href={process.env.PUBLIC_URL || `https://${site.domain}`} className="p-0">
           <img src={site.logotype.fields.file.url} alt="QlikOwl" className="h-100 img-fluid" />
         </Navbar.Brand>
-        {props.path !== '/' ? (
-          <NavComponent author={author} />
-        ) : (
-          <SocialComponent author={author} />
-        )}
+        {path !== '/' ? <NavComponent {...author} /> : <SocialComponent {...author} />}
       </Container>
     </Navbar>
   )

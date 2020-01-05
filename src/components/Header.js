@@ -10,7 +10,6 @@ import CodeBlock from './CodeBlock'
 
 const Header = (props) => {
   const { pathname } = useLocation()
-  console.log('HEADER - PROPS', props)
 
   return (
     <div

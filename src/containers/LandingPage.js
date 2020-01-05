@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navigation from '../components/Navigation'
 import { IoLogoGithub, IoLogoFacebook, IoLogoLinkedin } from 'react-icons/io'
 import { MdChevronRight } from 'react-icons/md'
 import { Link, useLocation } from 'react-router-dom'
 import { trackPage } from '../services/gTracker'
 import Helmet from 'react-helmet'
+import client from '../services/contentful'
 
 import '../scss/_cover.scss'
 import Footer from '../components/Footer'
-import client from '../services/contentful'
-import Loading from '../components/Loading'
 
 const LandingPage = (props) => {
-  const [state, setState] = useState({})
+  const [state, setState] = useState()
   const { pathname } = useLocation()
-
   trackPage(props.match.url)
 
   useEffect(() => {
-    console.log('PROPS', props)
     const getData = async () => {
       try {
+        let author = await client.getEntry(process.env.REACT_APP_OWNER_ID)
         let site = await client.getEntry(process.env.REACT_APP_SITE_ID)
-        let bg = await (await client.getEntry(process.env.REACT_APP_BG_ID)).fields.image
+        let background = await client.getEntry(process.env.REACT_APP_BG_ID)
+        let bg = await background.fields.image
 
         setState({
-          slug: props.match.params.slug,
-          tag: props.match.params.tag,
+          author: author.fields,
           background: bg[Math.floor(Math.random() * +bg.length - 1)].fields.file.url,
           site: site.fields,
           loaded: true
@@ -36,14 +34,12 @@ const LandingPage = (props) => {
       }
     }
     getData()
-    window.scrollTo(0, 0)
   }, [props, pathname])
 
-  if (!state.loaded) {
-    return <Loading />
+  if (!state) {
+    return false
   }
-
-  const { site, background } = state
+  const { site, author, background } = state
 
   return (
     <div className="wrapper">
@@ -55,8 +51,15 @@ const LandingPage = (props) => {
           <title>{`QlikOwl will soon be available! - ${process.env.REACT_APP_TITLE}`}</title>
           <meta name="description" content={site.description} />
           <meta name="og:image" content={background} />
+          <meta property="og:url" content={process.env.PUBLIC_URL + props.match.url} />
+          <meta property="og:type" content="article" />
+          <meta
+            property="og:title"
+            content={`QlikOwl will soon be available! - ${process.env.REACT_APP_TITLE}`}
+          />
+          <meta property="og:description" content={site.description} />
         </Helmet>
-        <Navigation site={site} author={site.owner.fields} path={props.match.path} />
+        <Navigation site={site} author={author} path={props.match.url} />
         <div id="cover-page">
           <main role="main" className="cover">
             <div className="inner">

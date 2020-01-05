@@ -77,7 +77,6 @@ const BlogPost = (props) => {
   if (!props.post) {
     return <Loading />
   }
-  console.log(props)
   const { match, post } = props
   const fields = post.fields
   return (
@@ -85,7 +84,6 @@ const BlogPost = (props) => {
       <Helmet>
         <title>{`${fields.metaTitle} - ${process.env.REACT_APP_TITLE}`}</title>
         <meta name="description" content={fields.description} />
-
         <meta property="og:url" content={process.env.PUBLIC_URL + match.url} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={fields.metaTitle} />

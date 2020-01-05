@@ -12,17 +12,17 @@ import Loading from '../components/Loading'
 import { trackPage } from '../services/gTracker'
 
 const Blog = (props) => {
-  const [state, setState] = useState({})
+  const [state, setState] = useState()
   const { pathname } = useLocation()
 
   trackPage(props.match.url)
 
   useEffect(() => {
-    console.log('PROPS', props)
     const getData = async () => {
       try {
         let site = await client.getEntry(process.env.REACT_APP_SITE_ID)
         let background = await client.getEntry(process.env.REACT_APP_BG_ID)
+        let bg = await background.fields.image
 
         let posts = await client.getEntries({
           content_type: 'blogPost',
@@ -39,18 +39,16 @@ const Blog = (props) => {
           order: '-fields.publishDate'
         })
 
-        let bg = background.fields.image
-
         setState({
           slug: props.match.params.slug,
           tag: props.match.params.tag,
           background: bg[Math.floor(Math.random() * +bg.length - 1)].fields.file.url,
           posts: posts.items,
           site: site.fields,
-          loaded: true,
           height: window.innerHeight,
           width: window.innerWidth,
-          featured: featured.items[0]
+          featured: featured.items[0],
+          loaded: true
         })
       } catch (error) {
         console.log(error)
@@ -60,7 +58,7 @@ const Blog = (props) => {
     window.scrollTo(0, 0)
   }, [props, pathname])
 
-  if (!state.loaded || !state.posts) {
+  if (!state) {
     return <Loading />
   }
 
