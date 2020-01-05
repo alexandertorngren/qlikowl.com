@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Loading from './Loading'
+//import Loading from './Loading'
 import { MdChevronRight } from 'react-icons/md'
 import Helmet from 'react-helmet'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -10,11 +10,7 @@ import CodeBlock from './CodeBlock'
 
 const Header = (props) => {
   const { pathname } = useLocation()
-  if (!props) {
-    return <Loading />
-  }
-
-  console.log('PROPS HEADER: ', pathname)
+  console.log('HEADER - PROPS', props)
 
   return (
     <div
