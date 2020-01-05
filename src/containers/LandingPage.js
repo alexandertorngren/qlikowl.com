@@ -15,7 +15,7 @@ const LandingPage = (props) => {
   const [state, setState] = useState({})
   const { pathname } = useLocation()
 
-  trackPage(props.match.path)
+  trackPage(props.match.url)
 
   useEffect(() => {
     console.log('PROPS', props)

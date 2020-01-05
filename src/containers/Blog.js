@@ -15,7 +15,7 @@ const Blog = (props) => {
   const [state, setState] = useState({})
   const { pathname } = useLocation()
 
-  trackPage(props.match.path)
+  trackPage(props.match.url)
 
   useEffect(() => {
     console.log('PROPS', props)
@@ -81,7 +81,10 @@ const Blog = (props) => {
                     render={() => <BlogPosts posts={posts} />}
                   />
                   <Route path={'/tags/:tag'} render={() => <BlogPosts posts={posts} />} />
-                  <Route path={'/post/:slug'} render={() => <BlogPost post={posts[0]} />} />
+                  <Route
+                    path={'/post/:slug'}
+                    render={() => <BlogPost post={posts[0]} match={props.match.url} />}
+                  />
                 </Switch>
               </Col>
               <Col lg="4" sm="12">

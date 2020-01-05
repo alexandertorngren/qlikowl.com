@@ -77,13 +77,19 @@ const BlogPost = (props) => {
   if (!props.post) {
     return <Loading />
   }
-
-  const fields = props.post.fields
+  console.log(props)
+  const { match, post } = props
+  const fields = post.fields
   return (
     <div className="blog-post" key={fields.slug}>
       <Helmet>
         <title>{`${fields.metaTitle} - ${process.env.REACT_APP_TITLE}`}</title>
         <meta name="description" content={fields.description} />
+
+        <meta property="og:url" content={process.env.PUBLIC_URL + match.url} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={fields.metaTitle} />
+        <meta property="og:description" content={fields.description} />
         <meta name="og:image" content={fields.blogImage.fields.file.url} />
       </Helmet>
       <Row>
