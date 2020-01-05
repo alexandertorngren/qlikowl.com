@@ -20,12 +20,13 @@ const LandingPage = (props) => {
       try {
         let author = await client.getEntry(process.env.REACT_APP_OWNER_ID)
         let site = await client.getEntry(process.env.REACT_APP_SITE_ID)
-        let background = await client.getEntry(process.env.REACT_APP_BG_ID)
-        let bg = await background.fields.image
+        let bg = await client.getEntry(process.env.REACT_APP_BG_ID)
+        let img = await bg.fields.image
+        let background = await img[Math.floor(Math.random() * +img.length - 1)].fields.file.url
 
         setState({
           author: author.fields,
-          background: bg[Math.floor(Math.random() * +bg.length - 1)].fields.file.url,
+          background: background,
           site: site.fields,
           loaded: true
         })
