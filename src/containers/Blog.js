@@ -23,7 +23,7 @@ const Blog = (props) => {
         let site = await client.getEntry(process.env.REACT_APP_SITE_ID)
         let bg = await client.getEntry(process.env.REACT_APP_BG_ID)
         let img = await bg.fields.image
-        let background = await img[Math.floor(Math.random() * +img.length - 1)].fields.file.url
+        let background = await img[Math.floor(Math.random() * +img.length - 1)]
 
         let posts = await client.getEntries({
           content_type: 'blogPost',
@@ -43,7 +43,7 @@ const Blog = (props) => {
         setState({
           slug: props.match.params.slug,
           tag: props.match.params.tag,
-          background: background,
+          background: background.fields.file.url,
           posts: posts.items,
           site: site.fields,
           height: window.innerHeight,
