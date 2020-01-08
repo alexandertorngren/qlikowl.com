@@ -4,7 +4,7 @@
 
 > A blog about my journey with BI, Qlik and development, moving towards cloud and SAAS.
 >
-> This web app is powered by **_[React](https://reactjs.org)_** <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" height="20"> and **_[create-react-app](https://create-react-app.dev)_** [![Create React App @ NPM][npm-image]][npm-url]
+> This web app is powered by **_[React](https://reactjs.org)_** <img src="misc/ReactLogo.svg" height="20"> and **_[create-react-app](https://create-react-app.dev)_** [![Create React App @ NPM]][npm-image][npm-url]
 
 [![Netlify Status][netlify-img]][netlify-url]
 [![Github Tag][tag-img]][tag-url]
@@ -98,9 +98,9 @@ Distributed under the [![License][license-img]][license-url]. See [LICENSE][lice
 ## Contributing
 
 1. [Fork it][fork-url]
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
+2. Create your feature branch `$ git checkout -b feature/fooBar`
+3. Commit your changes `$ git commit -am 'Add some fooBar'`
+4. Push to the branch: `$ git push origin feature/fooBar`
 5. Create a new Pull Request
 
 <!-- Markdown link & img dfn's -->

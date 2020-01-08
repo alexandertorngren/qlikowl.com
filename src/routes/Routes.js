@@ -1,11 +1,10 @@
 import React from 'react'
 import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
-import { initReactGA } from '../services/gTracker'
+
 import LandingPage from '../containers/LandingPage'
 import { Blog } from '../containers/Blog'
 
-export default () => {
-  initReactGA()
+export default (props) => {
   return (
     <Router>
       <Switch>
