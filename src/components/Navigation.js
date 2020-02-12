@@ -27,7 +27,7 @@ import {
   */
 
 const NavComponent = ({ ...author }) => {
-  const { on, toggle, getTogglerProps } = useToggle()
+  const { on, toggle } = useToggle()
   const node = useRef()
   const toggler = useRef()
 
