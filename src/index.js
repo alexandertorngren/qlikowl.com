@@ -7,6 +7,9 @@ import Routes from './routes/Routes'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './scss/main.scss'
 
+const { NODE_ENV } = process.env
+console.log(NODE_ENV)
+
 initReactGA()
 
 ReactDOM.render(<Routes />, document.getElementById('root'))
@@ -15,17 +18,4 @@ ReactDOM.render(<Routes />, document.getElementById('root'))
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
-serviceWorker.unregister()
-
-/*
-switch (process.env.NODE_ENV) {
-  case 'production':
-    serviceWorker.unregister()
-    break
-  case 'development':
-    serviceWorker.unregister()
-    break
-  default:
-    serviceWorker.unregister()
-}
-*/
+NODE_ENV === 'production' ? serviceWorker.register() : serviceWorker.unregister()
