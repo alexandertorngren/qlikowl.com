@@ -46,7 +46,7 @@ const Blog = (props) => {
           background: background.fields.file.url,
           posts: posts.items,
           site: site.fields,
-          height: window.innerHeight,
+          height: window.innerHeight * 0.85,
           width: window.innerWidth,
           featured: featured.items[0],
           loaded: true
@@ -65,12 +65,18 @@ const Blog = (props) => {
 
   const { site, posts, featured, background, height } = state
 
+  let cardClass = ''
+
+  if (props.match.params.slug !== undefined || props.match.params.tag !== undefined) {
+    cardClass = 'card-xs-topmargin'
+  }
+
   return (
     <div>
       <Navigation site={site} author={site.owner.fields} />
       <Header featured={featured || posts[0]} background={background} height={height}>
         <Container className="main">
-          <Card body className="p-md-4 p-sm-1">
+          <Card body className={`p-md-3 p-xs-1 ${cardClass}`}>
             <Row>
               <Col lg="8" sm="12">
                 <Switch>

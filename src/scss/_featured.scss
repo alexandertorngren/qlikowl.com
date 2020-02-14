@@ -14,13 +14,12 @@
 }
 
 .header-fixed {
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-
   .header-overlay {
+    background-position: center;
+    background-size: cover;
     background-attachment: fixed;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-blend-mode: overlay;
+    background-color: rgba(33, 61, 104, 0.384);
 
     .header-container {
       padding-bottom: 4rem;
@@ -38,7 +37,7 @@
     @media (min-width: 768px) {
       .header-container {
         padding-bottom: 4rem;
-        min-height: 10%;
+        min-height: 75%;
         .featured {
           color: #fff;
           .display-4 {

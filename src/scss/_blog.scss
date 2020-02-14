@@ -1,5 +1,11 @@
 @import './colors';
 
+@media (max-width: 811px) {
+  .card-xs-topmargin {
+    margin-top: 10%;
+  }
+}
+
 /* stylelint-disable selector-list-comma-newline-after */
 .card-img-right {
   height: 100%;
