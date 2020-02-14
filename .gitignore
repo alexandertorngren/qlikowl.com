@@ -36,3 +36,6 @@ netlify.toml
 
 # Local folders containing backups, notes and media
 _*
+
+# All log files
+*.log

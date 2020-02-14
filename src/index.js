@@ -8,8 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './scss/main.scss'
 
 const { NODE_ENV } = process.env
-console.log(NODE_ENV)
-
 initReactGA()
 
 ReactDOM.render(<Routes />, document.getElementById('root'))

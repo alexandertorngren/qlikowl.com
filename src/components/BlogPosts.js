@@ -102,20 +102,24 @@ const BlogPost = (props) => {
             className="blog-post-body"
           />
 
-          <div className="blog-post-footer mt-4 d-flex justify-content-between">
-            <Link to={'/home'}>
-              <MdChevronLeft /> Back
-            </Link>
-            <span>
-              {fields.tags.map((item) => (
-                <Link to={`/tags/${item}`} key={item} className="mr-2 tags">
-                  <kbd>
-                    <FaHashtag />
-                    {item}
-                  </kbd>
-                </Link>
-              ))}
-            </span>
+          <div className="blog-post-footer mt-4">
+            <div className="d-flex flex-row justify-content-between">
+              <Link to={'/home'} className="d-none d-sm-block">
+                <MdChevronLeft /> Back
+              </Link>
+              <div className="d-flex flex-wrap justify-content-end align-items-end">
+                {fields.tags.map((item) => (
+                  <div className="m-1">
+                    <Link to={`/tags/${item}`} key={item} className="tags">
+                      <kbd>
+                        <FaHashtag />
+                        {item}
+                      </kbd>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </Col>
       </Row>
