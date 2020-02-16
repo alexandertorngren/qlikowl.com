@@ -13,6 +13,10 @@ import { trackPage } from '../services/gTracker'
 
 const Blog = (props) => {
   const [state, setState] = useState()
+  const [clientSize, setClientSize] = useState({
+    clientWidth: document.documentElement.clientWidth.toFixed(0),
+    clientHeight: (document.documentElement.clientHeight * 0.8).toFixed(0)
+  })
   const { pathname } = useLocation()
 
   trackPage(props.match.url)
@@ -46,8 +50,8 @@ const Blog = (props) => {
           background: background.fields.file.url,
           posts: posts.items,
           site: site.fields,
-          height: window.innerHeight * 0.85,
-          width: window.innerWidth,
+          //height: clientSize.clientHeight, //(window.innerHeight * 0.85).toFixed(0),
+          //width: clientSize.clientWidth, //window.innerWidth.toFixed(0),
           featured: featured.items[0],
           loaded: true
         })
@@ -55,15 +59,23 @@ const Blog = (props) => {
         console.log(error)
       }
     }
+
+    window.addEventListener('resize', () => {
+      setClientSize({
+        clientWidth: document.documentElement.clientWidth.toFixed(0),
+        clientHeight: (document.documentElement.clientHeight * 0.8).toFixed(0)
+      })
+    })
+
     getData()
     window.scrollTo(0, 0)
-  }, [props, pathname])
+  }, [props, pathname, clientSize])
 
   if (!state) {
     return <Loading />
   }
 
-  const { site, posts, featured, background, height } = state
+  const { site, posts, featured, background } = state
 
   let cardClass = ''
 
@@ -72,34 +84,37 @@ const Blog = (props) => {
   }
 
   return (
-    <div>
+    <div id="head-section">
       <Navigation site={site} author={site.owner.fields} />
-      <Header featured={featured || posts[0]} background={background} height={height}>
-        <Container className="main">
-          <Card body className={`p-md-3 p-xs-1 ${cardClass}`}>
-            <Row>
-              <Col lg="8" sm="12">
-                <Switch>
-                  <Route
-                    exact
-                    path={'/home' || '/posts'}
-                    render={() => <BlogPosts posts={posts} />}
-                  />
-                  <Route path={'/tags/:tag'} render={() => <BlogPosts posts={posts} />} />
-                  <Route
-                    path={'/post/:slug'}
-                    render={() => <BlogPost post={posts[0]} match={props.match.url} />}
-                  />
-                </Switch>
-              </Col>
-              <Col lg="4" sm="12">
-                <SideBar author={site.owner.fields} />
-              </Col>
-            </Row>
-          </Card>
-        </Container>
-        <Footer site={site} author={site.owner.fields} />
-      </Header>
+      <Header
+        featured={featured || posts[0]}
+        background={`${background}?fm=webp&fit=fill&f=bottom&w=${clientSize.clientWidth}&h=${clientSize.clientHeight}`}
+        {...clientSize}
+      />
+      <Container className="main">
+        <Card body className={`p-md-3 p-xs-1 ${cardClass}`} style={{ marginTop: '-100px' }}>
+          <Row>
+            <Col lg="8" sm="12">
+              <Switch>
+                <Route
+                  exact
+                  path={'/home' || '/posts'}
+                  render={() => <BlogPosts posts={posts} />}
+                />
+                <Route path={'/tags/:tag'} render={() => <BlogPosts posts={posts} />} />
+                <Route
+                  path={'/post/:slug'}
+                  render={() => <BlogPost post={posts[0]} match={props.match.url} />}
+                />
+              </Switch>
+            </Col>
+            <Col lg="4" sm="12">
+              <SideBar author={site.owner.fields} />
+            </Col>
+          </Row>
+        </Card>
+      </Container>
+      <Footer site={site} author={site.owner.fields} />
     </div>
   )
 }

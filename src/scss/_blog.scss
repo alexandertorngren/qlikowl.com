@@ -1,5 +1,9 @@
 @import './colors';
 
+.card-xs-topmargin {
+  margin-top: 0;
+}
+
 @media (max-width: 811px) {
   .card-xs-topmargin {
     margin-top: 10%;

@@ -10,35 +10,34 @@ import CodeBlock from './CodeBlock'
 
 const Header = (props) => {
   const { pathname } = useLocation()
-
+  console.log(props)
   return (
     <div
       className="header-fixed w-100"
-      style={{
-        height: props.height,
-        width: props.width
-      }}>
+      style={
+        pathname === '/home'
+          ? {
+              paddingTop: '56px',
+              height: `${props.clientHeight}px`,
+              width: `${props.clientWidth}px`
+              //paddingTop: props.height / 5
+            }
+          : {}
+      }>
       <div
         className="header-overlay"
-        style={{
-          backgroundImage: `url(${props.background})`,
-          height: props.height,
-          width: props.width
-        }}>
-        <Container
-          className="header-container d-flex justify-content-center"
-          style={
-            pathname === '/home'
-              ? {
-                  maxHeight: props.height,
-                  marginTop: '56px'
-
-                  //paddingTop: props.height / 5
-                }
-              : {}
-          }>
+        style={
+          pathname === '/home'
+            ? {
+                backgroundImage: `url(${props.background})`,
+                paddingTop: '56px',
+                height: '100%'
+              }
+            : { backgroundImage: `url(${props.background})`, paddingTop: '156px' }
+        }>
+        <Container className="header-container d-flex justify-content-center h-100">
           {pathname === '/home' ? (
-            <div className="featured d-flex flex-column align-self-center h-100">
+            <div className="featured d-flex flex-column align-self-center py-auto">
               <Helmet>
                 <title>{`${props.featured.fields.metaTitle} - ${process.env.REACT_APP_TITLE}`}</title>
                 <meta name="description" content={props.featured.fields.description} />

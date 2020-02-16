@@ -32,11 +32,11 @@ const renderImage = (image, slug) => {
 }
 
 const BlogPosts = (props) => {
-  const blogObject = props.posts.map((post) => {
+  const blogObject = props.posts.map((post, key) => {
     let fields = post.fields
 
     return (
-      <div className="blog-post" key={fields.slug}>
+      <div className="blog-post" key={key}>
         <Row>
           <Col lg={12} sm={12}>
             <h1 className="blog-post-title">

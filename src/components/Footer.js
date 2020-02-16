@@ -2,9 +2,7 @@ import React from 'react'
 import { DiReact } from 'react-icons/di'
 import Loading from './Loading'
 
-const DateFormated = (props) => (
-  <span>{new Date(props.date).toLocaleDateString().substr(0, 4)}</span>
-)
+const DateFormated = (props) => <span>{new Date().getFullYear()}</span>
 
 const Back = (props) => {
   return props.spc ? (
@@ -38,7 +36,9 @@ const Owner = ({ ...props }) => (
 )
 
 const FooterElement = ({ ...props }) => (
-  <footer className={props.className ? `blog-footer ${props.className}` : 'blog-footer'}>
+  <footer
+    id="main-footer"
+    className={props.className ? `blog-footer ${props.className}` : 'blog-footer'}>
     <p>
       {props.site.copyright ? '© Copyright ' : props.site.siteName}{' '}
       <DateFormated date={props.site.publishDate} /> <Owner {...props} /> |
@@ -52,8 +52,6 @@ const Footer = (props) => {
   if (!props) {
     return <Loading />
   }
-  // const { site, spc, scroll, className, copyright } = props
-  //const item = { site, spc, scroll, className, copyright }
 
   return <FooterElement {...props} />
 }

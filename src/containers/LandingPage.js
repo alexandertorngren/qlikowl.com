@@ -12,21 +12,25 @@ import Footer from '../components/Footer'
 
 const LandingPage = (props) => {
   const [state, setState] = useState()
+
+  const [clientSize, setClientSize] = useState({
+    clientWidth: document.documentElement.clientWidth.toFixed(0),
+    clientHeight: document.documentElement.clientHeight.toFixed(0)
+  })
+
   const { pathname } = useLocation()
+
   trackPage(props.match.url)
 
   useEffect(() => {
     const getData = async () => {
       try {
-        let author = await client.getEntry(process.env.REACT_APP_OWNER_ID)
         let site = await client.getEntry(process.env.REACT_APP_SITE_ID)
         let bg = await client.getEntry(process.env.REACT_APP_BG_ID)
         let img = await bg.fields.image
         let background = await img[Math.floor(Math.random() * +img.length - 1)]
-
         setState({
-          author: author.fields,
-          background: background.fields.file.url,
+          background: `${background.fields.file.url}?fm=webp`,
           site: site.fields,
           loaded: true
         })
@@ -34,6 +38,14 @@ const LandingPage = (props) => {
         console.log(error)
       }
     }
+
+    window.addEventListener('resize', () => {
+      setClientSize({
+        clientWidth: document.documentElement.clientWidth.toFixed(0),
+        clientHeight: document.documentElement.clientHeight.toFixed(0)
+      })
+    })
+
     getData()
   }, [props, pathname])
 
@@ -47,7 +59,9 @@ const LandingPage = (props) => {
       <div
         className="cover-container"
         id="cover-page-bg"
-        style={{ backgroundImage: `url(${background})` }}>
+        style={{
+          backgroundImage: `url(${background}&fit=fill&f=bottom&w=${clientSize.clientWidth}&h=${clientSize.clientHeight})`
+        }}>
         <Helmet>
           <title>{`QlikOwl will soon be available! - ${process.env.REACT_APP_TITLE}`}</title>
           <meta name="description" content={site.description} />
