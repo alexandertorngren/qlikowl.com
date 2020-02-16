@@ -84,6 +84,11 @@ const LandingPage = (props) => {
                 The page will soon be available with a lot of content
                 <br />
                 Debug: height {clientSize.clientHeight}, width {clientSize.clientWidth}
+                <br />
+                <a
+                  href={`${background}&fit=thumb&f=bottom&w=${clientSize.clientWidth}&h=${clientSize.clientHeight}`}>
+                  img
+                </a>
               </p>
               <div className="p-4">
                 <h4 className="font-italic">Get social with me</h4>
