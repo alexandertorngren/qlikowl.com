@@ -10,7 +10,7 @@ import CodeBlock from './CodeBlock'
 
 const Header = (props) => {
   const { pathname } = useLocation()
-  console.log(props)
+
   return (
     <div
       className="header-fixed w-100"

@@ -24,7 +24,7 @@
     }
   ],
   "start_url": "/",
-  "display": "minimal-ui",
+  "display": "standalone",
   "theme_color": "#192221",
   "background_color": "#192221",
   "author": "Alexander Torngren"
