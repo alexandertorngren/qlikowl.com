@@ -80,7 +80,11 @@ const LandingPage = (props) => {
           <main role="main" className="cover">
             <div className="inner">
               <h1 className="font-italic">Still under development!</h1>
-              <p className="lead">The page will soon be available with a lot of content</p>
+              <p className="lead">
+                The page will soon be available with a lot of content
+                <br />
+                Debug: height {clientSize.clientHeight}, width {clientSize.clientWidth}
+              </p>
               <div className="p-4">
                 <h4 className="font-italic">Get social with me</h4>
                 <div className="d-flex justify-content-around">
