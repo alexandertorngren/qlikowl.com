@@ -7,7 +7,6 @@ import Routes from './routes/Routes'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './scss/main.scss'
 
-const { NODE_ENV } = process.env
 initReactGA()
 
 ReactDOM.render(<Routes />, document.getElementById('root'))
