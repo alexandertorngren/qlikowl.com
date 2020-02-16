@@ -50,8 +50,6 @@ const Blog = (props) => {
           background: background.fields.file.url,
           posts: posts.items,
           site: site.fields,
-          //height: clientSize.clientHeight, //(window.innerHeight * 0.85).toFixed(0),
-          //width: clientSize.clientWidth, //window.innerWidth.toFixed(0),
           featured: featured.items[0],
           loaded: true
         })
@@ -88,7 +86,7 @@ const Blog = (props) => {
       <Navigation site={site} author={site.owner.fields} />
       <Header
         featured={featured || posts[0]}
-        background={`${background}?fm=webp&fit=fill&f=bottom&w=${clientSize.clientWidth}&h=${clientSize.clientHeight}`}
+        background={`${background}?fit=fill&f=bottom&w=${clientSize.clientWidth}&h=${clientSize.clientHeight}`}
         {...clientSize}
       />
       <Container className="main">

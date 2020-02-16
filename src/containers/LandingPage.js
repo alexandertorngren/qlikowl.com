@@ -30,7 +30,7 @@ const LandingPage = (props) => {
         let img = await bg.fields.image
         let background = await img[Math.floor(Math.random() * +img.length - 1)]
         setState({
-          background: `${background.fields.file.url}?fm=webp`,
+          background: `${background.fields.file.url}`,
           site: site.fields,
           loaded: true
         })
@@ -61,7 +61,7 @@ const LandingPage = (props) => {
         className="cover-container d-flex justify-content-center"
         id="cover-page-bg"
         style={{
-          backgroundImage: `url(${background}&fit=fill&f=bottom&w=${clientSize.clientWidth}&h=${clientSize.clientHeight})`
+          backgroundImage: `url(${background}?fit=fill&f=bottom&w=${clientSize.clientWidth}&h=${clientSize.clientHeight})`
         }}>
         <Helmet>
           <title>{`QlikOwl will soon be available! - ${process.env.REACT_APP_TITLE}`}</title>
