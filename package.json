@@ -1,7 +1,7 @@
 {
   "name": "qlikowl.com",
   "description": "QlikOwl.com | A blog by Alexander Torngren",
-  "version": "0.2.5",
+  "version": "0.8.0",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.4.0",
     "@contentful/rich-text-types": "^13.4.0",

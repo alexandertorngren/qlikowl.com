@@ -56,8 +56,9 @@ const LandingPage = (props) => {
 
   return (
     <div className="wrapper">
+      <Navigation site={site} author={author} path={props.match.url} />
       <div
-        className="cover-container"
+        className="cover-container d-flex justify-content-center"
         id="cover-page-bg"
         style={{
           backgroundImage: `url(${background}&fit=fill&f=bottom&w=${clientSize.clientWidth}&h=${clientSize.clientHeight})`
@@ -74,8 +75,8 @@ const LandingPage = (props) => {
           />
           <meta property="og:description" content={site.description} />
         </Helmet>
-        <Navigation site={site} author={author} path={props.match.url} />
-        <div id="cover-page">
+
+        <div id="cover-page" className="d-flex flex-column align-self-center py-auto">
           <main role="main" className="cover">
             <div className="inner">
               <h1 className="font-italic">Still under development!</h1>
@@ -122,8 +123,8 @@ const LandingPage = (props) => {
             </div>
           </main>
         </div>
-        <Footer site={site} author={site.owner.fields} spc={true} className="fixed-bottom" />
       </div>
+      <Footer site={site} author={site.owner.fields} spc={true} className="fixed-bottom" />
     </div>
   )
 }

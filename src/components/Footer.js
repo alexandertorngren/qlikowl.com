@@ -41,7 +41,7 @@ const FooterElement = ({ ...props }) => (
     className={props.className ? `blog-footer ${props.className}` : 'blog-footer'}>
     <p>
       {props.site.copyright ? '© Copyright ' : props.site.siteName}{' '}
-      <DateFormated date={props.site.publishDate} /> <Owner {...props} /> |
+      <DateFormated date={props.site.publishDate} /> <Owner {...props} /> | v0.8.0 |
       <PoweredBy />
     </p>
     <Back spc={props.spc} scroll={props.scroll} />
