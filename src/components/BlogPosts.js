@@ -25,7 +25,11 @@ const renderImage = (image, slug) => {
   if (image && image.fields.file) {
     return (
       <Link to={`/post/${slug}`}>
-        <img className="blog-post-image" src={image.fields.file.url} alt={image.fields.title} />
+        <img
+          className="blog-post-image"
+          src={`${image.fields.file.url}?fm=png&f=face&fit=thumb`}
+          alt={image.fields.title}
+        />
       </Link>
     )
   }

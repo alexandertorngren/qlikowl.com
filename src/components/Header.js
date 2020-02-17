@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-//import Loading from './Loading'
 import { MdChevronRight } from 'react-icons/md'
 import Helmet from 'react-helmet'
 import { Container } from 'react-bootstrap'
@@ -11,6 +10,9 @@ import CodeBlock from './CodeBlock'
 const Header = (props) => {
   const { pathname } = useLocation()
 
+  if (props.clientWidth <= 768) {
+    return null
+  }
   return (
     <div
       className="header-fixed w-100"
@@ -20,7 +22,6 @@ const Header = (props) => {
               paddingTop: '56px',
               height: `${props.clientHeight}px`,
               width: `${props.clientWidth}px`
-              //paddingTop: props.height / 5
             }
           : {}
       }>
@@ -30,7 +31,6 @@ const Header = (props) => {
           pathname === '/home'
             ? {
                 backgroundImage: `url(${props.background})`,
-                paddingTop: '56px',
                 height: '100%'
               }
             : { backgroundImage: `url(${props.background})`, paddingTop: '156px' }

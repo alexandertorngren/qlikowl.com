@@ -10,6 +10,7 @@ import { Switch, Route, useLocation } from 'react-router-dom'
 import client from '../services/contentful'
 import Loading from '../components/Loading'
 import { trackPage } from '../services/gTracker'
+//import _ from 'lodash'
 
 const Blog = (props) => {
   const [state, setState] = useState()
@@ -26,27 +27,27 @@ const Blog = (props) => {
       try {
         let site = await client.getEntry(process.env.REACT_APP_SITE_ID)
         let bg = await client.getEntry(process.env.REACT_APP_BG_ID)
-        let img = await bg.fields.image
-        let background = await img[Math.floor(Math.random() * +img.length - 1)]
+        let img = bg.fields.image
+        let background = img[Math.floor(Math.random() * +img.length - 1)]
 
         let posts = await client.getEntries({
           content_type: 'blogPost',
-          'fields.slug': props.match.params.slug,
-          'fields.tags': props.match.params.tag,
+          'fields.slug': props.match.params.slug || undefined,
+          'fields.tags': props.match.params.tag || undefined,
           order: '-fields.publishDate'
         })
 
         let featured = await client.getEntries({
           content_type: 'blogPost',
-          'fields.slug': props.match.params.slug,
-          'fields.tags': props.match.params.tag,
+          'fields.slug': props.match.params.slug || undefined,
+          'fields.tags': props.match.params.tag || undefined,
           'fields.featured': true,
           order: '-fields.publishDate'
         })
 
-        setState({
-          slug: props.match.params.slug,
-          tag: props.match.params.tag,
+        return setState({
+          slug: props.match.params.slug || undefined,
+          tag: props.match.params.tag || undefined,
           background: background.fields.file.url,
           posts: posts.items,
           site: site.fields,
@@ -74,7 +75,6 @@ const Blog = (props) => {
   }
 
   const { site, posts, featured, background } = state
-
   let cardClass = ''
 
   if (props.match.params.slug !== undefined || props.match.params.tag !== undefined) {
@@ -90,7 +90,10 @@ const Blog = (props) => {
         {...clientSize}
       />
       <Container className="main">
-        <Card body className={`p-md-3 p-xs-1 ${cardClass}`} style={{ marginTop: '-100px' }}>
+        <Card
+          body
+          className={`p-md-3 p-xs-1 ${cardClass}`}
+          style={clientSize.clientWidth >= 768 ? { marginTop: '-100px' } : { marginTop: '56px' }}>
           <Row>
             <Col lg="8" sm="12">
               <Switch>
@@ -107,7 +110,7 @@ const Blog = (props) => {
               </Switch>
             </Col>
             <Col lg="4" sm="12">
-              <SideBar author={site.owner.fields} />
+              <SideBar author={site.owner.fields} posts={posts} />
             </Col>
           </Row>
         </Card>
