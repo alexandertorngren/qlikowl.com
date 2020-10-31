@@ -15,7 +15,6 @@
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-bootstrap-easy-dialog": "^0.3.3",
-    "react-bootstrap-select": "^0.14.0",
     "react-bootstrap-sweetalert": "^5.1.9",
     "react-dom": "^16.12.0",
     "react-ga": "^2.7.0",
@@ -56,8 +55,8 @@
   "devDependencies": {
     "babel-plugin-prismjs": "^1.1.1",
     "dotenv": "^8.2.0",
-    "eslint-plugin-flowtype": "^4.6.0",
-    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-flowtype": "^4.7.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
     "prettier": "1.18.2"
   },
   "repository": "github:alexandertorngren/qlikowl.com.git",
