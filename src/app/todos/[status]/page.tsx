@@ -1,3 +1,3 @@
-export default function Page() {
-  return <></>
+export default function StatusPage() {
+  return <div>Status Page</div>
 }
