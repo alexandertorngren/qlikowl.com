@@ -1,0 +1,51 @@
+name: Build and Deploy to Linode
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.LINODE_SSH_KEY }}
+
+      - name: Deploy to Linode
+        env:
+          LINODE_HOST: ${{ secrets.LINODE_HOST }}
+          LINODE_USER: ${{ secrets.LINODE_USER }}
+          LINODE_PASSWORD: ${{ secrets.LINODE_PASSWORD }}
+          LINODE_SSH_KEY: ${{ secrets.LINODE_SSH_KEY }}
+          ROOT_PATH: /opt/devops
+        run: |
+          echo "$LINODE_SSH_KEY" > private_key.pem
+          chmod 600 private_key.pem
+          sshpass -p "$LINODE_PASSWORD" scp -r ./build $LINODE_USER@$LINODE_HOST:$ROOT_PATH/$LINODE_HOST
+          sshpass -p "$LINODE_PASSWORD" ssh $LINODE_USER@$LINODE_HOST << 'EOF'
+            cd $ROOT_PATH/$LINODE_HOST
+            npm install --production
+            pm2 restart all
+          EOF
