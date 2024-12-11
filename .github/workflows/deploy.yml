@@ -28,6 +28,13 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Add SSH known hosts
+        env: 
+          LINODE_HOST: ${{ secrets.LINODE_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H $LINODE_HOST >> ~/.ssh/known_hosts
+
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.7.0
         with:
@@ -37,12 +44,12 @@ jobs:
         env:
           LINODE_HOST: ${{ secrets.LINODE_HOST }}
           LINODE_USER: ${{ secrets.LINODE_USER }}
-          LINODE_PASSWORD: ${{ secrets.LINODE_PASSWORD }}
+          LINODE_PASS: ${{ secrets.LINODE_PASS }}
           LINODE_SSH_KEY: ${{ secrets.LINODE_SSH_KEY }}
           ROOT_PATH: /opt/devops
         run: |
-          sshpass -p "$LINODE_PASSWORD" scp -r . $LINODE_USER@$LINODE_HOST:$ROOT_PATH/$LINODE_HOST
-          sshpass -p "$LINODE_PASSWORD" ssh $LINODE_USER@$LINODE_HOST << 'EOF'
+          sshpass -p "$LINODE_PASS" scp -r . $LINODE_USER@$LINODE_HOST:$ROOT_PATH/$LINODE_HOST
+          sshpass -p "$LINODE_PASS" ssh $LINODE_USER@$LINODE_HOST << 'EOF'
             cd $ROOT_PATH/$LINODE_HOST
             npm install --production
             pm2 restart all
