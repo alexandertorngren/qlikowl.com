@@ -41,8 +41,6 @@ jobs:
           LINODE_SSH_KEY: ${{ secrets.LINODE_SSH_KEY }}
           ROOT_PATH: /opt/devops
         run: |
-          echo "$LINODE_SSH_KEY" > private_key.pem
-          chmod 600 private_key.pem
           sshpass -p "$LINODE_PASSWORD" scp -r . $LINODE_USER@$LINODE_HOST:$ROOT_PATH/$LINODE_HOST
           sshpass -p "$LINODE_PASSWORD" ssh $LINODE_USER@$LINODE_HOST << 'EOF'
             cd $ROOT_PATH/$LINODE_HOST
