@@ -1,7 +1,7 @@
 import { combineSlices, configureStore } from '@reduxjs/toolkit'
-import { todoSlice } from '@/lib/todos/todoSlice'
-import { notificationSlice } from './notifications/notificationSlice'
 import { todoApiSlice } from './todos/todoApiSlice'
+import { notificationSlice } from './notifications/notificationSlice'
+import { todoSlice } from '@/lib/todos/todoSlice'
 
 const rootReducer = combineSlices(todoSlice, todoApiSlice, notificationSlice)
 export type RootState = ReturnType<typeof rootReducer>

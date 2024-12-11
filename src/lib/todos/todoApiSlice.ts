@@ -21,8 +21,8 @@ export const todoApiSlice = createApi({
   tagTypes: ['Todos'],
   endpoints: (build) => ({
     apiGetTodos: build.query<TodoStatus, number>({
-      query: (limir = 10) => 'todos?_limit=${limit}',
-      providesTags: (result, error, id) => [{ type: 'Todos', id }],
+      query: (_limit = 10) => 'todos?_limit=${limit}',
+      providesTags: (_result, _error, id) => [{ type: 'Todos', id }],
     }),
 
     apiAddTodo: build.mutation<Todo, Todo>({

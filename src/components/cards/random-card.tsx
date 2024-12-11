@@ -13,16 +13,16 @@ export const RandomCard: React.FC<RandomCardProps> = ({ ...props }) => {
     <Card className={styles.card}>
       <CardBody className={styles.cardBody}>
         <CircularProgress
+          aria-label={'progress'}
           classNames={{
             svg: 'w-36 h-36 drop-shadow-md',
             indicator: 'stroke-white/80',
             track: 'stroke-white/20',
             value: 'text-3xl font-semibold',
           }}
-          value={progress}
-          strokeWidth={4}
           showValueLabel={true}
-          aria-label={'progress'}
+          strokeWidth={4}
+          value={progress}
         />
       </CardBody>
     </Card>

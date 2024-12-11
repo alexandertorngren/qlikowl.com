@@ -27,16 +27,16 @@ export default function Home() {
           <Button color="primary" variant="bordered">
             Button
           </Button>
-          <Button radius="sm" color="secondary" variant="bordered">
+          <Button color="secondary" radius="sm" variant="bordered">
             Button
           </Button>
-          <Button radius="md" color="success" variant="bordered">
+          <Button color="success" radius="md" variant="bordered">
             Button
           </Button>
-          <Button radius="full" color="warning" variant="bordered">
+          <Button color="warning" radius="full" variant="bordered">
             Button
           </Button>
-          <Button radius="none" color="danger" variant="bordered">
+          <Button color="danger" radius="none" variant="bordered">
             Button
           </Button>
           <Button isDisabled color="danger" variant="bordered">
@@ -200,14 +200,14 @@ export default function Home() {
         </div>
 
         <Image
-          src="/covers/cover-3.webp"
           alt="TippaVM"
-          width={540}
           height={540}
           sizes="(max-width: 840px) 100vw, (max-width: 840px) 50vw, 33vw"
+          src="/covers/cover-3.webp"
+          width={540}
         />
       </main>
-      <footer className="row-start-3"></footer>
+      <footer className="row-start-3" />
     </div>
   )
 }

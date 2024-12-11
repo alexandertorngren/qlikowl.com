@@ -200,9 +200,9 @@ export const NextUILogo: React.FC<IconSvgProps> = ({
   return (
     <svg
       fill="none"
-      height={height}
+      height={height || size}
       viewBox="0 0 161 32"
-      width={width}
+      width={width || size}
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >

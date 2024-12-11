@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next'
+import clsx from 'clsx'
 import { Providers } from '@/app/providers'
 import { siteConfig } from '@/config/site'
 import { fontSans } from '@/config/fonts'
-import clsx from 'clsx'
+
 import '@/styles/globals.css'
 
 export const metadata: Metadata = {

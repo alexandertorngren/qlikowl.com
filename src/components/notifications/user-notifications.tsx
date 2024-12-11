@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from '@/hooks/useAppStore'
+import { useAppSelector } from '@/hooks/useAppStore'
 import { selectAllNotifications } from '@/lib/notifications/notificationSlice'
 
 export const UserNotifications = () => {
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
   const notifications = useAppSelector(selectAllNotifications)
 
   return (

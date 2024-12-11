@@ -1,13 +1,13 @@
 'use client'
 import React, { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '@/hooks/useAppStore'
+import { Todo } from '@/components/todos/todo'
 import { getTodos } from '@/lib/todos/todoSlice'
-import { Todo } from './todo'
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppStore'
 
 export const TodosList = () => {
   const todos = useAppSelector((state) => getTodos(state.todos))
   const dispatch = useAppDispatch()
-  const status = 'active'
+
   const [isLoading, setIsLoading] = React.useState(true)
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export const TodosList = () => {
     const fetchTodos = async () => {
       const response = await fetch('https://jsonplaceholder.typicode.com/todos')
       const data = await response.json()
-      console.log(data)
+
       return data
     }
 

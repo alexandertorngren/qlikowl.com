@@ -5,8 +5,8 @@ import { NextUIProvider } from '@nextui-org/system'
 import { useRouter } from 'next/navigation'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { Provider } from 'react-redux'
-import { AppStore, makeStore } from '@/lib/store'
 import { setupListeners } from '@reduxjs/toolkit/query'
+import { AppStore, makeStore } from '@/lib/store'
 
 export interface ProvidersProps {
   children: React.ReactNode
